@@ -1,0 +1,47 @@
+# Caña_azucar
+
+directorio="C:/Users/Asus/Desktop/Dane/proyecto2/Automatizacion CABYS/Automatizacion/Formato_carpetas"
+mes=7
+anio=2023
+f_Caña_azucar<-function(directorio,mes,anio){
+  
+  
+  library(readxl)
+  library(dplyr)
+  
+  
+  carpeta=nombre_carpeta(mes,anio)
+  # Especifica la ruta del archivo de Excel
+  Caña_azucar <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/EMMET/EMMET Base Temática preliminar ",nombres_siglas[mes],anio,".xlsx"), 
+                       sheet = "COMPLETO")
+  # Seleccionar solo las columnas que necesitas
+  Caña_azucar_tabla <- Caña_azucar[, c("anio", "mes", "Clase_CIIU4", "ProduccionRealPond")]
+  Caña_azucar_tabla=Caña_azucar_tabla %>%
+    group_by(anio,mes)%>%
+    filter(Clase_CIIU4==1071)%>%
+    summarise(suma=sum(ProduccionRealPond))
+  
+  Valor_Caña_azucar=as.numeric((tail(Caña_azucar_tabla$suma,1))/
+                            (sum(tail(lag(Caña_azucar_tabla$suma,12),1)))*100-100 )
+  
+  
+
+# Valor_anterior ----------------------------------------------------------
+if(mes==1){
+  anio_mes=(anio-1)
+}else{
+  anio_mes=anio
+}
+  
+  Caña_anterior <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Caña de azucar y panela/Azucar/Balance azucarero ",tolower(nombres_meses[mes-1]), " de ",anio_mes,".xlsx"), 
+                        sheet = paste0("Azúcar - Alcohol ",anio),startRow = 4)
+  n_fila1=which(Caña_anterior=="Caña Molida (toneladas)",arr.ind = TRUE)[,"row"]
+  n_fila2=which(Caña_anterior=="Acumulado",arr.ind = TRUE)[,"row"]
+  
+  n_col=which(grepl("Caña Molida",Caña_anterior))
+  
+  Valor_anterior=as.numeric(Caña_anterior[(n_fila1+1):(n_fila2-1),n_col])
+  
+  
+  return(list(variacion = Valor_Caña_azucar, vector = Valor_anterior))
+}
