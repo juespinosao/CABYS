@@ -1,5 +1,5 @@
 #' @export
-# Huevos
+
 
 
 f_Huevos<-function(directorio,mes,anio){
