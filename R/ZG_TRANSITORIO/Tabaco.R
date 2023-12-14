@@ -1,18 +1,16 @@
 # Tabaco
 
-directorio="C:/Users/Asus/Desktop/Dane/proyecto2/Automatizacion CABYS/Automatizacion/Formato_carpetas"
-mes=7
-anio=2023
+
 f_Tabaco<-function(directorio,mes,anio){
-  
-  
+
+
   library(readxl)
   library(dplyr)
-  
-  
+
+
   carpeta=nombre_carpeta(mes,anio)
   # Especifica la ruta del archivo de Excel
-  Tabaco <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/EMMET/EMMET Base Temática preliminar ",nombres_siglas[mes],anio,".xlsX"), 
+  Tabaco <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/EMMET/EMMET Base Temática preliminar ",nombres_siglas[mes],anio,".xlsX"),
                        sheet = "COMPLETO")
   # Seleccionar solo las columnas que necesitas
   Tabaco_tabla <- Tabaco[, c("anio", "mes", "Clase_CIIU4", "ProduccionRealPond")]
@@ -24,8 +22,8 @@ f_Tabaco<-function(directorio,mes,anio){
 
   fila=which(Tabaco_tabla==(anio-1),arr.ind = TRUE)[,"row"]
   Tabaco_tabla$anterior=lag(Tabaco_tabla$suma,12)
-  Tabaco_tabla$Estado <- "" 
-  
+  Tabaco_tabla$Estado <- ""
+
   for (i in seq(fila[1]+2, nrow(Tabaco_tabla), by = 3)) {
     if(sum(Tabaco_tabla$anterior[(i-2):i])==0){
       Tabaco_tabla$Estado[i]=0

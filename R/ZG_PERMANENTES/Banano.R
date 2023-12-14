@@ -1,46 +1,44 @@
 # Banano
 # Cargar la biblioteca readxl
-directorio="C:/Users/Asus/OneDrive - dane.gov.co/proyecto2/Automatizacion CABYS/Automatizacion/Formato_carpetas"
-mes=7
-anio=2023
+
 f_Banano<-function(directorio,mes,anio){
-  
+
   #Cargar librerias
   library(readxl)
   library(dplyr)
   library(openxlsx)
   library(zoo)
-  
+
   #identificar la carpeta
   carpeta=nombre_carpeta(mes,anio)
-  
-  
-  
+
+
+
   # Exportaciones ------------------------------------------------------------------
-  
-  
-  
+
+
+
   # Especifica la ruta del archivo de Excel
   archivos=list.files(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE"))
   elementos_seleccionados <- archivos[grepl("Expos e", archivos) ]
   # Especifica la ruta del archivo de Excel
-  Banano <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Exportaciones ",mes_0[mes],"-",anio," - copia.xlsx"), 
+  Banano <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Exportaciones ",mes_0[mes],"-",anio," - copia.xlsx"),
                           sheet = "TOTAL EXPO_KTES")
-  
-  
+
+
   n_fila=which(Banano == "010401",arr.ind = TRUE)[,"row"]
   n_col1=which(Banano== paste0(anio-2," 1"),arr.ind = TRUE)[,"col"]
   n_col2=which(Banano== paste0(anio," ",mes),arr.ind = TRUE)[,"col"]
-  
-  
-  
+
+
+
   #Tomar el valor que nos interesa
   Valor_exportaciones=as.numeric(Banano[n_fila[1],(n_col1[1]:n_col2[1])])
-  
 
-  
-  
-  
+
+
+
+
 
 # Consumo interno ---------------------------------------------------------
 
@@ -53,6 +51,6 @@ f_Banano<-function(directorio,mes,anio){
 # Agrupar datos -----------------------------------------------------------
 
 
-  
+
 return(list(exportaciones=Valor_exportaciones,consumo_interno=Valor_interno))
 }

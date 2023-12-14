@@ -1,8 +1,9 @@
-directorio="C:/Users/Asus/OneDrive - dane.gov.co/proyecto2/Automatizacion CABYS/Automatizacion/Formato_carpetas"
-mes=7
-anio=2023
 
-#Cargar librerias  
+
+
+Reporte_coyuntura<-function(directorio,mes,anio){
+
+#Cargar librerias
 library(openxlsx)
 
 #Crear el nombre de las carpetas del mes anterior y el actual
@@ -94,7 +95,7 @@ tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero_precios+5,':B',ultima_fila_pr
                   paste('IFERROR(SUM(N',fila_enero_precios+5,':N',ultima_fila_precios+6,')/SUM(N',fila_enero_ant_precios+5,':N',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
                   paste('IFERROR(SUM(O',fila_enero_precios+5,':O',ultima_fila_precios+6,')/SUM(O',fila_enero_ant_precios+5,':O',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
                   paste('IFERROR(SUM(P',fila_enero_precios+5,':P',ultima_fila_precios+6,')/SUM(P',fila_enero_ant_precios+5,':P',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = "")
-                  
+
                   )
 
 for (i in 44:58) {
@@ -117,11 +118,11 @@ if (mes %in% c(3,6,9,12)){
                       paste('IFERROR(SUM(N',ultima_fila_precios+4,':N',ultima_fila_precios+6,')/SUM(N',fila_anterior_precios+3,':N',fila_anterior_precios+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(P',ultima_fila_precios+4,':P',ultima_fila_precios+6,')/SUM(P',fila_anterior_precios+3,':P',fila_anterior_precios+5,')*100-100,','"*")',sep = ""),
   )
-  
+
   for (i in 60:73) {
     writeFormula(wb, sheet ="Precios" , x = tasa_trimestre[i-59] ,startCol = i, startRow = ultima_fila_precios+6)
   }
-  
+
 }else{
   cat("Este mes no se actualiza trimestre")
 }
@@ -207,7 +208,7 @@ if (mes %in% c(3,6,9,12)){
     writeFormula(wb, sheet ="Bovino kilo en pie" , x = tasa_trimestre[i-39] ,startCol = i, startRow = ultima_fila+7)
   }
   addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 40:48)
-  
+
 }else{
   cat("Este mes no se actualiza trimestre")
 }
@@ -301,12 +302,12 @@ if (mes %in% c(3,6,9,12)){
                       paste('IFERROR(SUM(H',ultima_fila+4,':H',ultima_fila+6,')/SUM(H',fila_anterior+3,':H',fila_anterior+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(I',ultima_fila+4,':I',ultima_fila+6,')/SUM(I',fila_anterior+3,':I',fila_anterior+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(J',ultima_fila+4,':J',ultima_fila+6,')/SUM(J',fila_anterior+3,':J',fila_anterior+5,')*100-100,','"*")',sep = ""))
-  
+
   for (i in 38:46) {
     writeFormula(wb, sheet ="Bovino cabezas" , x = tasa_trimestre[i-37] ,startCol = i, startRow = ultima_fila+6)
   }
   addStyle(wb, sheet = "Bovino cabezas",style=cbn2,rows = (ultima_fila+6),cols = 38:46)
-  
+
 }else{
   cat("Este mes no se actualiza trimestre")
 }
@@ -415,7 +416,7 @@ if (mes %in% c(3,6,9,12)){
                       paste('IFERROR(SUM(K',ultima_fila+4,':K',ultima_fila+6,')/SUM(K',fila_anterior+3,':K',fila_anterior+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(L',ultima_fila+4,':L',ultima_fila+6,')/SUM(L',fila_anterior+3,':L',fila_anterior+5,')*100-100,','"*")',sep = "")
                       )
-  
+
   for (i in 48:58) {
     writeFormula(wb, sheet ="CI_Carne" , x = tasa_trimestre[i-47] ,startCol = i, startRow = ultima_fila+6)
   }
@@ -454,15 +455,15 @@ addStyle(wb, sheet = "Leche",style=cbn3,rows = (ultima_fila+6),cols = 2)
 addStyle(wb, sheet = "Leche",style=cbn,rows = (ultima_fila+6),cols = 3:10)
 
 for (i in 1:sum(is.na(Prod_leche[,2]))) {
-  
+
 writeFormula(wb, sheet ="Leche" , x = paste0("AVERAGE(C",(fila_enero[1]+5),":C",ultima_fila+6-i,")") ,startCol = "C", startRow = (ultima_fila+7-i))
-  
+
 }
 
 for (i in 1:sum(is.na(Prod_leche[,3]))) {
-  
+
   writeFormula(wb, sheet ="Leche" , x = paste0("AVERAGE(D",(fila_enero[1]+5),":D",ultima_fila+6-i,")") ,startCol = "D", startRow = (ultima_fila+7-i))
-  
+
 }
 
 #Añadir formulas
@@ -515,11 +516,11 @@ if (mes %in% c(3,6,9,12)){
                       paste('IFERROR(SUM(I',ultima_fila+4,':I',ultima_fila+6,')/SUM(I',fila_anterior+3,':I',fila_anterior+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(J',ultima_fila+4,':J',ultima_fila+6,')/SUM(J',fila_anterior+3,':J',fila_anterior+5,')*100-100,','"*")',sep = "")
   )
-  
+
   for (i in 32:40) {
     writeFormula(wb, sheet ="Leche" , x = tasa_trimestre[i-31] ,startCol = i, startRow = ultima_fila+6)
   }
-  
+
 }else{
   cat("Este mes no se actualiza trimestre")
 }
@@ -594,12 +595,12 @@ if (mes %in% c(3,6,9,12)){
                       paste('IFERROR(SUM(F',ultima_fila+4,':F',ultima_fila+6,')/SUM(F',fila_anterior+4,':F',fila_anterior+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(G',ultima_fila+4,':G',ultima_fila+6,')/SUM(G',fila_anterior+4,':G',fila_anterior+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(H',ultima_fila+4,':H',ultima_fila+6,')/SUM(H',fila_anterior+4,':H',fila_anterior+5,')*100-100,','"*")',sep = ""))
-  
+
   for (i in 30:36) {
     writeFormula(wb, sheet ="Porcino kilo en pie" , x = tasa_trimestre[i-29] ,startCol = i, startRow = ultima_fila+6)
   }
   addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 30:36)
-  
+
 }else{
   cat("Este mes no se actualiza trimestre")
 }
@@ -661,12 +662,12 @@ if (mes %in% c(3,6,9,12)){
                       paste('IFERROR(SUM(C',ultima_fila+4,':C',ultima_fila+6,')/SUM(C',fila_anterior+3,':C',fila_anterior+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(D',ultima_fila+4,':D',ultima_fila+6,')/SUM(D',fila_anterior+3,':D',fila_anterior+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(E',ultima_fila+4,':E',ultima_fila+6,')/SUM(E',fila_anterior+3,':E',fila_anterior+5,')*100-100,','"*")',sep = ""))
-  
+
   for (i in 21:24) {
     writeFormula(wb, sheet ="Porcino en cabezas"  , x = tasa_trimestre[i-20] ,startCol = i, startRow = ultima_fila+6)
   }
   addStyle(wb, sheet = "Porcino en cabezas" ,style=cbn2,rows = (ultima_fila+6),cols = 21:24)
-  
+
 }else{
   cat("Este mes no se actualiza trimestre")
 }
@@ -768,12 +769,12 @@ if (mes %in% c(3,6,9,12)){
                       paste('IFERROR(SUM(L',ultima_fila+4,':L',ultima_fila+6,')/SUM(L',fila_anterior+3,':L',fila_anterior+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(M',ultima_fila+4,':M',ultima_fila+6,')/SUM(M',fila_anterior+3,':M',fila_anterior+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(N',ultima_fila+4,':N',ultima_fila+6,')/SUM(N',fila_anterior+3,':N',fila_anterior+5,')*100-100,','"*")',sep = ""))
-  
+
   for (i in 54:66) {
     writeFormula(wb, sheet ="Pollo_Huevo" , x = tasa_trimestre[i-54] ,startCol = i, startRow = ultima_fila+6)
   }
   addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 54:66)
-  
+
 }else{
   cat("Este mes no se actualiza trimestre")
 }
@@ -793,12 +794,12 @@ if (mes==12){
                       paste('IFERROR(SUM(L',ultima_fila-5,':L',ultima_fila+6,')/SUM(L',fila_anterior-6,':L',fila_anterior+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(M',ultima_fila-5,':M',ultima_fila+6,')/SUM(M',fila_anterior-6,':M',fila_anterior+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(N',ultima_fila-5,':N',ultima_fila+6,')/SUM(N',fila_anterior-6,':N',fila_anterior+5,')*100-100,','"*")',sep = ""))
-  
+
   for (i in 68:80) {
     writeFormula(wb, sheet ="Pollo_Huevo" , x = tasa_anual_trimestre[i-67] ,startCol = i, startRow = ultima_fila+6)
   }
   addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 68:80)
-  
+
 }else{
   cat("Este mes no se actualiza trimestre")
 }
@@ -870,8 +871,8 @@ Valores_totales<-matrix(c(paste0("'Bovino kilo en pie'!S",fila_anterior+6),
 
 for (i in 1:6) {
 for (j in 1:6) {
-  writeFormula(wb, sheet ="CUADROS BOVINO" , x = Valores_totales[i,j] ,startCol = j+3, startRow = i+6) 
-}  
+  writeFormula(wb, sheet ="CUADROS BOVINO" , x = Valores_totales[i,j] ,startCol = j+3, startRow = i+6)
+}
 }
 
 Valores_consumo<-matrix(c(paste0("'CI_Carne'!X",fila_anterior+5),
@@ -902,8 +903,8 @@ Valores_consumo<-matrix(c(paste0("'CI_Carne'!X",fila_anterior+5),
 
 for (i in 1:4) {
   for (j in 1:6) {
-    writeFormula(wb, sheet ="CUADROS BOVINO" , x = Valores_consumo[i,j] ,startCol = j+3, startRow = i+13) 
-  }  
+    writeFormula(wb, sheet ="CUADROS BOVINO" , x = Valores_consumo[i,j] ,startCol = j+3, startRow = i+13)
+  }
 }
 
 
@@ -920,13 +921,13 @@ Valores_precios<-matrix(c(paste0("'Precios'!AB",fila_anterior_precios+5),
                           paste0("'Precios'!BI",fila_anterior_precios+5),
                           paste0("'Precios'!BH",ultima_fila_precios+6),
                           paste0("'Precios'!BI",ultima_fila_precios+6)
-                          
+
 ),nrow=2,ncol=6,byrow = FALSE)
 
 for (i in 1:2) {
   for (j in 1:6) {
-    writeFormula(wb, sheet ="CUADROS BOVINO" , x = Valores_precios[i,j] ,startCol = j+3, startRow = i+18) 
-  }  
+    writeFormula(wb, sheet ="CUADROS BOVINO" , x = Valores_precios[i,j] ,startCol = j+3, startRow = i+18)
+  }
 }
 
 
@@ -942,21 +943,21 @@ Valores_exportaciones<-matrix(c(paste0("'Bovino kilo en pie'!X",fila_anterior+6)
                                 paste0("'Bovino kilo en pie'!AU",fila_anterior+6),
                                 paste0("'Bovino kilo en pie'!AS",ultima_fila+7),
                                 paste0("'Bovino kilo en pie'!AU",ultima_fila+7)
-                          
+
 ),nrow=2,ncol=6,byrow = FALSE)
 
 for (i in 1:2) {
   for (j in 1:6) {
-    writeFormula(wb, sheet ="CUADROS BOVINO" , x = Valores_exportaciones[i,j] ,startCol = j+3, startRow = i+24) 
-  }  
+    writeFormula(wb, sheet ="CUADROS BOVINO" , x = Valores_exportaciones[i,j] ,startCol = j+3, startRow = i+24)
+  }
 }
 
-writeFormula(wb, sheet ="CUADROS BOVINO" , x = paste0("'Bovino kilo en pie'!AA",fila_anterior+6) ,startCol = "D", startRow =29 ) 
-writeFormula(wb, sheet ="CUADROS BOVINO" , x = paste0("'Bovino kilo en pie'!AA",ultima_fila+7) ,startCol = "E", startRow =29 ) 
-writeFormula(wb, sheet ="CUADROS BOVINO" , x = paste0("'Bovino kilo en pie'!AK",fila_anterior+6) ,startCol = "F", startRow =29 ) 
-writeFormula(wb, sheet ="CUADROS BOVINO" , x = paste0("'Bovino kilo en pie'!AK",ultima_fila+7) ,startCol = "G", startRow =29 ) 
-writeFormula(wb, sheet ="CUADROS BOVINO" , x = paste0("'Bovino kilo en pie'!AV",fila_anterior+6) ,startCol = "H", startRow =29 ) 
-writeFormula(wb, sheet ="CUADROS BOVINO" , x = paste0("'Bovino kilo en pie'!AV",ultima_fila+7) ,startCol = "I", startRow =29 ) 
+writeFormula(wb, sheet ="CUADROS BOVINO" , x = paste0("'Bovino kilo en pie'!AA",fila_anterior+6) ,startCol = "D", startRow =29 )
+writeFormula(wb, sheet ="CUADROS BOVINO" , x = paste0("'Bovino kilo en pie'!AA",ultima_fila+7) ,startCol = "E", startRow =29 )
+writeFormula(wb, sheet ="CUADROS BOVINO" , x = paste0("'Bovino kilo en pie'!AK",fila_anterior+6) ,startCol = "F", startRow =29 )
+writeFormula(wb, sheet ="CUADROS BOVINO" , x = paste0("'Bovino kilo en pie'!AK",ultima_fila+7) ,startCol = "G", startRow =29 )
+writeFormula(wb, sheet ="CUADROS BOVINO" , x = paste0("'Bovino kilo en pie'!AV",fila_anterior+6) ,startCol = "H", startRow =29 )
+writeFormula(wb, sheet ="CUADROS BOVINO" , x = paste0("'Bovino kilo en pie'!AV",ultima_fila+7) ,startCol = "I", startRow =29 )
 
 setRowHeights(wb,sheet ="CUADROS BOVINO",rows = c(21,22,28),heights = 0)
 
@@ -988,8 +989,8 @@ Valores_variaciones<-matrix(c(paste0("'Leche'!L",fila_anterior+5),
 
 for (i in 1:3) {
   for (j in 1:4) {
-    writeFormula(wb, sheet ="CUADROS LECHE" , x = Valores_totales[i,j] ,startCol = j+3, startRow = i+6) 
-  }  
+    writeFormula(wb, sheet ="CUADROS LECHE" , x = Valores_totales[i,j] ,startCol = j+3, startRow = i+6)
+  }
 }
 
 
@@ -1003,31 +1004,31 @@ Valores_precios<-matrix(c(paste0("'Precios'!AJ",fila_anterior_precios+5),
                           paste0("'Precios'!BO",fila_anterior_precios+5),
                           paste0("'Precios'!BP",ultima_fila_precios+6),
                           paste0("'Precios'!BO",ultima_fila_precios+6)
-                          
+
 ),nrow=2,ncol=4,byrow = FALSE)
 
 for (i in 1:2) {
   for (j in 1:4) {
-    writeFormula(wb, sheet ="CUADROS LECHE" , x = Valores_precios[i,j] ,startCol = j+3, startRow = i+10) 
-  }  
+    writeFormula(wb, sheet ="CUADROS LECHE" , x = Valores_precios[i,j] ,startCol = j+3, startRow = i+10)
+  }
 }
 
 
 
 #IMPORTACIONES
-writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!O",fila_anterior+5) ,startCol = "D", startRow =14 ) 
-writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!O",ultima_fila+6) ,startCol = "E", startRow =14 ) 
-writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!AK",fila_anterior+5) ,startCol = "F", startRow =14 ) 
-writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!AK",ultima_fila+6) ,startCol = "G", startRow =14 ) 
+writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!O",fila_anterior+5) ,startCol = "D", startRow =14 )
+writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!O",ultima_fila+6) ,startCol = "E", startRow =14 )
+writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!AK",fila_anterior+5) ,startCol = "F", startRow =14 )
+writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!AK",ultima_fila+6) ,startCol = "G", startRow =14 )
 
 
 
 
 #EXPORTACIONES
-writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!R",fila_anterior+5) ,startCol = "D", startRow =16 ) 
-writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!R",ultima_fila+6) ,startCol = "E", startRow =16 ) 
-writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!AL",fila_anterior+5) ,startCol = "F", startRow =16 ) 
-writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!AL",ultima_fila+6) ,startCol = "G", startRow =16 ) 
+writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!R",fila_anterior+5) ,startCol = "D", startRow =16 )
+writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!R",ultima_fila+6) ,startCol = "E", startRow =16 )
+writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!AL",fila_anterior+5) ,startCol = "F", startRow =16 )
+writeFormula(wb, sheet ="CUADROS LECHE" , x = paste0("'Leche'!AL",ultima_fila+6) ,startCol = "G", startRow =16 )
 
 
 
@@ -1083,8 +1084,8 @@ Valores_totales<-matrix(c(paste0("'Porcino kilo en pie'!N",fila_anterior+5),
 
 for (i in 1:4) {
   for (j in 1:6) {
-    writeFormula(wb, sheet ="CUADROS PORCINO" , x = Valores_totales[i,j] ,startCol = j+3, startRow = i+6) 
-  }  
+    writeFormula(wb, sheet ="CUADROS PORCINO" , x = Valores_totales[i,j] ,startCol = j+3, startRow = i+6)
+  }
 }
 
 Valores_consumo<-matrix(c(paste0("'CI_Carne'!AD",fila_anterior+5),
@@ -1115,8 +1116,8 @@ Valores_consumo<-matrix(c(paste0("'CI_Carne'!AD",fila_anterior+5),
 
 for (i in 1:4) {
   for (j in 1:6) {
-    writeFormula(wb, sheet ="CUADROS PORCINO" , x = Valores_consumo[i,j] ,startCol = j+3, startRow = i+12) 
-  }  
+    writeFormula(wb, sheet ="CUADROS PORCINO" , x = Valores_consumo[i,j] ,startCol = j+3, startRow = i+12)
+  }
 }
 
 
@@ -1144,24 +1145,24 @@ Valores_precios<-matrix(c(paste0("'Precios'!AF",fila_anterior_precios+5),
                           paste0("'Precios'!BM",ultima_fila_precios+5),
                           paste0("'Precios'!BJ",ultima_fila_precios+5),
                           paste0("'Precios'!BK",ultima_fila_precios+5)
-                          
+
 ),nrow=4,ncol=6,byrow = FALSE)
 
 for (i in 1:4) {
   for (j in 1:6) {
-    writeFormula(wb, sheet ="CUADROS PORCINO" , x = Valores_precios[i,j] ,startCol = j+3, startRow = i+17) 
-  }  
+    writeFormula(wb, sheet ="CUADROS PORCINO" , x = Valores_precios[i,j] ,startCol = j+3, startRow = i+17)
+  }
 }
 
 
 #IMPORTACIONES
 
-writeFormula(wb, sheet ="CUADROS PORCINO" , x = paste0("'PORCINO kilo en pie'!R",fila_anterior+5) ,startCol = "D", startRow =27 ) 
-writeFormula(wb, sheet ="CUADROS PORCINO" , x = paste0("'PORCINO kilo en pie'!R",ultima_fila+6) ,startCol = "E", startRow =27 ) 
-writeFormula(wb, sheet ="CUADROS PORCINO" , x = paste0("'PORCINO kilo en pie'!Z",fila_anterior+5) ,startCol = "F", startRow =27 ) 
-writeFormula(wb, sheet ="CUADROS PORCINO" , x = paste0("'PORCINO kilo en pie'!Z",ultima_fila+6) ,startCol = "G", startRow =27 ) 
-writeFormula(wb, sheet ="CUADROS PORCINO" , x = paste0("'PORCINO kilo en pie'!AH",fila_anterior+5) ,startCol = "H", startRow =27 ) 
-writeFormula(wb, sheet ="CUADROS PORCINO" , x = paste0("'PORCINO kilo en pie'!AH",ultima_fila+6) ,startCol = "I", startRow =27 ) 
+writeFormula(wb, sheet ="CUADROS PORCINO" , x = paste0("'PORCINO kilo en pie'!R",fila_anterior+5) ,startCol = "D", startRow =27 )
+writeFormula(wb, sheet ="CUADROS PORCINO" , x = paste0("'PORCINO kilo en pie'!R",ultima_fila+6) ,startCol = "E", startRow =27 )
+writeFormula(wb, sheet ="CUADROS PORCINO" , x = paste0("'PORCINO kilo en pie'!Z",fila_anterior+5) ,startCol = "F", startRow =27 )
+writeFormula(wb, sheet ="CUADROS PORCINO" , x = paste0("'PORCINO kilo en pie'!Z",ultima_fila+6) ,startCol = "G", startRow =27 )
+writeFormula(wb, sheet ="CUADROS PORCINO" , x = paste0("'PORCINO kilo en pie'!AH",fila_anterior+5) ,startCol = "H", startRow =27 )
+writeFormula(wb, sheet ="CUADROS PORCINO" , x = paste0("'PORCINO kilo en pie'!AH",ultima_fila+6) ,startCol = "I", startRow =27 )
 
 setRowHeights(wb,sheet ="CUADROS PORCINO",rows = c(11,23:26),heights = 0)
 
@@ -1219,8 +1220,8 @@ Valores_totales<-matrix(c(paste0("'Pollo_Huevo'!AA",fila_anterior+5),
 
 for (i in 1:4) {
   for (j in 1:6) {
-    writeFormula(wb, sheet ="CUADROS AVICULTURA" , x = Valores_totales[i,j] ,startCol = j+3, startRow = i+6) 
-  }  
+    writeFormula(wb, sheet ="CUADROS AVICULTURA" , x = Valores_totales[i,j] ,startCol = j+3, startRow = i+6)
+  }
 }
 
 Valores_precios<-matrix(c(paste0("'Precios'!AK",fila_anterior_precios+5),
@@ -1247,13 +1248,13 @@ Valores_precios<-matrix(c(paste0("'Precios'!AK",fila_anterior_precios+5),
                           paste0("'Precios'!BS",ultima_fila_precios+5),
                           paste0("'Precios'!BU",ultima_fila_precios+5),
                           paste0("'Precios'!BT",ultima_fila_precios+5)
-                          
+
 ),nrow=4,ncol=6,byrow = FALSE)
 
 for (i in 1:4) {
   for (j in 1:6) {
-    writeFormula(wb, sheet ="CUADROS AVICULTURA" , x = Valores_precios[i,j] ,startCol = j+3, startRow = i+11) 
-  }  
+    writeFormula(wb, sheet ="CUADROS AVICULTURA" , x = Valores_precios[i,j] ,startCol = j+3, startRow = i+11)
+  }
 }
 
 
@@ -1281,8 +1282,8 @@ Valores_exterior<-matrix(c(paste0("'Pollo_Huevo'!AG",fila_anterior+5),
 
 for (i in 1:3) {
   for (j in 1:6) {
-    writeFormula(wb, sheet ="CUADROS AVICULTURA" , x = Valores_exterior[i,j] ,startCol = j+3, startRow = i+16) 
-  }  
+    writeFormula(wb, sheet ="CUADROS AVICULTURA" , x = Valores_exterior[i,j] ,startCol = j+3, startRow = i+16)
+  }
 }
 
 
@@ -1293,4 +1294,5 @@ if (!file.exists(salida)) {
   saveWorkbook(wb, file = salida)
 } else {
   saveWorkbook(wb, file = salida,overwrite= TRUE)
+}
 }

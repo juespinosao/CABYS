@@ -1,11 +1,8 @@
 ### pecuario
-directorio="C:/Users/Asus/Desktop/Dane/proyecto2/Automatizacion CABYS/Automatizacion/Formato_carpetas"
-mes=7
-anio=2023
 
 ZG_pecuario=function(directorio,mes,anio){
-  
-#Cargar librerias  
+
+#Cargar librerias
 library(openxlsx)
 #utils
 
@@ -41,7 +38,7 @@ valor_Bovino=f_Bovino(directorio,mes,anio)
 valor_Bovino=valor_Bovino[,1]
 valor_Bovino=as.data.frame(valor_Bovino)
 valor_Bovino$anterior=tail(lag(data$Ganado.bovino.Kilos,11),mes)
-valor_Bovino$Estado <- "" 
+valor_Bovino$Estado <- ""
 
 for (i in seq(3, nrow(valor_Bovino), by = 3)) {
   valor_Bovino$Estado[i] <- (sum(valor_Bovino$valor_Bovino[(i-2):i]) / sum(valor_Bovino$anterior[(i-2):i]))*100-100  # Realiza la suma y división
@@ -58,7 +55,7 @@ nuevos_datos <- data.frame(
   Variacion.Anual=valor_Bovino$valor_Bovino/tail(lag(data$Ganado.bovino.Kilos,11),mes)*100-100,
   Estado=as.numeric(valor_Bovino$Estado),
   observaciones=if (mes==12) {
-    c(rep("",11),sum(valor_Bovino$valor_Bovino)/sum(valor_Bovino$anterior)*100-100)  
+    c(rep("",11),sum(valor_Bovino$valor_Bovino)/sum(valor_Bovino$anterior)*100-100)
   } else {
     rep("",mes)
   },
@@ -90,12 +87,12 @@ ultima_fila=nrow(data)
 valor_Pollos=f_Pollos(directorio,mes,anio)
 valor_Pollos=as.data.frame(valor_Pollos)
 valor_Pollos$anterior=c(data[data$Año==(anio-2),"Pollos.Toneladas"],valor_Pollos[1:mes,"valor_Pollos"])
-valor_Pollos$Estado <- "" 
+valor_Pollos$Estado <- ""
 
 for (i in seq(3, nrow(valor_Pollos), by = 3)) {
   valor_Pollos$Estado[i] <- (sum(valor_Pollos$valor_Pollos[(i-2):i]) / sum(valor_Pollos$anterior[(i-2):i]))*100-100  # Realiza la suma y división
 }
-valor_Pollos$Observaciones <- "" 
+valor_Pollos$Observaciones <- ""
 
 for (i in seq(12, nrow(valor_Pollos), by = 12)) {
   valor_Pollos$Observaciones[i] <- (sum(valor_Pollos$valor_Pollos[(i-11):i]) / sum(valor_Pollos$anterior[(i-11):i]))*100-100  # Realiza la suma y división
@@ -116,7 +113,7 @@ nuevos_datos <- data.frame(
 
 
 
-# Escribe los datos en la hoja "Pollos" 
+# Escribe los datos en la hoja "Pollos"
 writeData(wb, sheet = "Pollos", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
 #Añadir estilos de celda
@@ -139,7 +136,7 @@ valor_Porcino=f_Porcino(directorio,mes,anio)
 valor_Porcino=valor_Porcino[,1]
 valor_Porcino=as.data.frame(valor_Porcino)
 valor_Porcino$anterior=tail(lag(data$Porcino.Kilos,11),mes)
-valor_Porcino$Estado <- "" 
+valor_Porcino$Estado <- ""
 
 for (i in seq(3, nrow(valor_Porcino), by = 3)) {
   valor_Porcino$Estado[i] <- (sum(valor_Porcino$valor_Porcino[(i-2):i]) / sum(valor_Porcino$anterior[(i-2):i]))*100-100  # Realiza la suma y división
@@ -156,7 +153,7 @@ nuevos_datos <- data.frame(
   Variacion.Anual=valor_Porcino$valor_Porcino/tail(lag(data$Porcino.Kilos,11),mes)*100-100,
   Estado=as.numeric(valor_Porcino$Estado),
   observaciones=if (mes==12) {
-    c(rep("",11),sum(valor_Porcino$valor_Porcino)/sum(valor_Porcino$anterior)*100-100)  
+    c(rep("",11),sum(valor_Porcino$valor_Porcino)/sum(valor_Porcino$anterior)*100-100)
   } else {
     rep("",mes)
   },
@@ -190,7 +187,7 @@ ultima_fila=nrow(data)
 valor_Leche=f_Leche(directorio,mes,anio)
 valor_Leche=as.data.frame(valor_Leche)
 valor_Leche$anterior=tail(lag(data$Leche.sin.elaborar.Volumen,11),mes)
-valor_Leche$Estado <- "" 
+valor_Leche$Estado <- ""
 
 for (i in seq(3, nrow(valor_Leche), by = 3)) {
   valor_Leche$Estado[i] <- (sum(valor_Leche$valor_Leche[(i-2):i]) / sum(valor_Leche$anterior[(i-2):i]))*100-100  # Realiza la suma y división
@@ -207,7 +204,7 @@ nuevos_datos <- data.frame(
   Variacion.Anual=valor_Leche$valor_Leche/tail(lag(data$Leche.sin.elaborar.Volumen,11),mes)*100-100,
   Estado=as.numeric(valor_Leche$Estado),
   observaciones=if (mes==12) {
-    c(rep("",11),sum(valor_Porcino$valor_Porcino)/sum(valor_Porcino$anterior)*100-100)  
+    c(rep("",11),sum(valor_Porcino$valor_Porcino)/sum(valor_Porcino$anterior)*100-100)
   } else {
     rep("",mes)
   },
@@ -217,7 +214,7 @@ nuevos_datos <- data.frame(
 
 
 
-# Escribe los datos en la hoja "Leche" 
+# Escribe los datos en la hoja "Leche"
 writeData(wb, sheet = "Leche", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
 
@@ -246,13 +243,13 @@ ultima_fila=nrow(data)
 valor_Huevos=f_Huevos(directorio,mes,anio)
 valor_Huevos=as.data.frame(valor_Huevos)
 valor_Huevos$anterior=c(data[data$Año==(anio-2),"Huevos.Unidades"],valor_Huevos[1:mes,"valor_Huevos"])
-valor_Huevos$Estado <- "" 
+valor_Huevos$Estado <- ""
 
 for (i in seq(3, nrow(valor_Huevos), by = 3)) {
   valor_Huevos$Estado[i] <- (sum(valor_Huevos$valor_Huevos[(i-2):i]) / sum(valor_Huevos$anterior[(i-2):i]))*100-100  # Realiza la suma y división
 }
 
-valor_Huevos$Observaciones <- "" 
+valor_Huevos$Observaciones <- ""
 
 for (i in seq(12, nrow(valor_Huevos), by = 12)) {
   valor_Huevos$Observaciones[i] <- (sum(valor_Huevos$valor_Huevos[(i-11):i]) / sum(valor_Huevos$anterior[(i-11):i]))*100-100  # Realiza la suma y división
@@ -313,7 +310,7 @@ nuevos_datos <- data.frame(
   Variacion.Anual=valor_trimestre$valor_trimestre/tail(lag(data$Ovino.y.Caprino,3),tamaño)*100-100,
   Estado=if (trimestre==4) {
     c(rep("",3),(valor_trimestre+sum(filter(data, Año == anio)[["Ovino.y.Caprino"]]))/
-      (sum(tail(lag(data$Ovino.y.Caprino,3),4)))*100-100 ) 
+      (sum(tail(lag(data$Ovino.y.Caprino,3),4)))*100-100 )
   } else {
     rep("",tamaño)
   },

@@ -1,10 +1,8 @@
 # Ganado_Bovino_kilo en pie
 # Cargar la biblioteca readxl
-directorio="C:/Users/Asus/OneDrive - dane.gov.co/proyecto2/Automatizacion CABYS/Automatizacion/Formato_carpetas"
-mes=7
-anio=2023
+
 f_Bovino<-function(directorio,mes,anio){
-  
+
 #Cargar librerias
 library(readxl)
 library(dplyr)
@@ -14,7 +12,7 @@ library(zoo)
 carpeta=nombre_carpeta(mes,anio)
 
 # Especifica la ruta del archivo de Excel
-Ganado_Bovino <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/ESAG/censo-Sacrificio-total-nacional-",nombres_meses[mes],"-",anio,".xls"), 
+Ganado_Bovino <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/ESAG/censo-Sacrificio-total-nacional-",nombres_meses[mes],"-",anio,".xls"),
                             sheet = "Cuadro_1")
 
 
@@ -59,7 +57,7 @@ Valor_Bovino=as.data.frame(Ganado_Bovino[fila:(fila+mes-1),c(columnaf1,columnaf2
 archivos=list.files(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE"))
 elementos_seleccionados <- archivos[grepl("Expos e", archivos) ]
 # Especifica la ruta del archivo de Excel
-Bovino <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Exportaciones ",mes_0[mes],"-",anio," - copia.xlsx"), 
+Bovino <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Exportaciones ",mes_0[mes],"-",anio," - copia.xlsx"),
                     sheet = "PNK")
 
 
@@ -84,7 +82,7 @@ Valor_exportaciones=Valor_exportaciones %>%
 
 dos_digitos <- anio %% 100
 # Especifica la ruta del archivo de Excel
-Impor <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Importaciones ",mes_0[mes],"_",dos_digitos," - copia.xlsx"), 
+Impor <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Importaciones ",mes_0[mes],"_",dos_digitos," - copia.xlsx"),
                         sheet = "PNK")
 n_fila=which(Impor== "020100",arr.ind = TRUE)[,"row"]
 n_col1=which(Impor== paste0((anio)," 01"),arr.ind = TRUE)[,"col"]

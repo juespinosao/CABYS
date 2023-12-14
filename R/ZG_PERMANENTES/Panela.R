@@ -1,17 +1,15 @@
 # Panela
 
-directorio="C:/Users/Asus/OneDrive - dane.gov.co/proyecto2/Automatizacion CABYS/Automatizacion/Formato_carpetas"
-mes=7
-anio=2023
+
 f_Panela<-function(directorio,mes,anio){
-  
-  
+
+
 library(readxl)
 library(dplyr)
 library(zoo)
 
-  
-  
+
+
 #Crear el nombre de las carpetas del mes anterior y el actual
 if(mes==1){
   carpeta_anterior=nombre_carpeta(12,(anio-1))

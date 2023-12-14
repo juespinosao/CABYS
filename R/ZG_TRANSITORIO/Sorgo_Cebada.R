@@ -1,28 +1,26 @@
 # Sorgo
 
-directorio="C:/Users/Asus/Desktop/Dane/proyecto2/Automatizacion CABYS/Automatizacion/Formato_carpetas"
-mes=7
-anio=2023
+
 f_Sorgo_Cebada<-function(directorio,mes,anio){
-  
+
   #archivos=list.files(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/FENALCE"))
   library(readxl)
   library(dplyr)
   #utils
-  
+
   carpeta=nombre_carpeta(mes,anio)
   semestre=f_semestre(mes)
   letra=ifelse(semestre==1,"A","B")
   # Especifica la ruta del archivo de Excel
   Sorgo <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/FENALCE/APR- 2005 A ",anio,letra," - DANE.xlsx"),
                     sheet = "Historico APR",startRow = 5)
-  
+
   Sorgo_valor <- Sorgo %>%
     filter(AÑO == anio | AÑO == (anio-1), grepl("Sorgo", PRODUCTO)) %>%
     group_by(AÑO,SEMESTRE) %>%
     summarize(suma_produccion = sum(PRODUCCIÓN))%>%
     arrange(AÑO,SEMESTRE)
-  
+
   Cebada_valor <- Sorgo %>%
     filter(AÑO == anio | AÑO == (anio-1), grepl("Cebada", PRODUCTO)) %>%
     group_by(AÑO,SEMESTRE) %>%
@@ -38,6 +36,6 @@ f_Sorgo_Cebada<-function(directorio,mes,anio){
   Cebada_final=Cebada_indice2015/2*Cebada_Participacion/100
   indicador_final=Sorgo_final+Cebada_final
 
-  
+
   return(indicador_final$suma_produccion/2)
 }

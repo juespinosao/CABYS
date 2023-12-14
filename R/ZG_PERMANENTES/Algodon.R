@@ -1,19 +1,17 @@
 # Algodon
 
-directorio="C:/Users/Asus/OneDrive - dane.gov.co/proyecto2/Automatizacion CABYS/Automatizacion/Formato_carpetas"
-mes=7
-anio=2023
+
 f_Algodon<-function(directorio,mes,anio){
-  
-  
+
+
   library(readxl)
   library(dplyr)
   library(zoo)
-  
+
   carpeta=nombre_carpeta(mes,anio)
   semestre=f_semestre(mes)
   Algodon<-read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Algodón/INFORMACION DANE ",toupper(nombres_meses[mes+1])," ",anio,".xlsx"),colNames = FALSE)
-  
+
  if (semestre==1){
  n_fila1=which(grepl("COSTA",as.data.frame(t(Algodon))))
  n_fila2=which(Algodon=="PRODUCCION ALGODÓN CAMPO: TONELADAS",arr.ind = TRUE)[,"row"]
@@ -35,9 +33,9 @@ f_Algodon<-function(directorio,mes,anio){
    n_fila2=which(Algodon=="PRODUCCION ALGODÓN CAMPO: TONELADAS",arr.ind = TRUE)[,"row"]
    n_filaf=n_fila2[min(which(n_fila2>n_fila1))]
    Algodon_anterior=Algodon_pasado[n_filaf,3]
-   variacion=Algodon_actual/Algodon_anterior*100-100  
+   variacion=Algodon_actual/Algodon_anterior*100-100
  }
-  
- 
+
+
 return(variacion)
 }

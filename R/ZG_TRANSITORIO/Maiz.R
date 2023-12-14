@@ -1,15 +1,13 @@
 # Maiz
 
-directorio="C:/Users/Asus/Desktop/Dane/proyecto2/Automatizacion CABYS/Automatizacion/Formato_carpetas"
-mes=7
-anio=2023
+
 f_Maiz<-function(directorio,mes,anio){
-  
+
   #archivos=list.files(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/FENALCE"))
   library(readxl)
   library(dplyr)
   #utils
-  
+
   carpeta=nombre_carpeta(mes,anio)
   semestre=f_semestre(mes)
   letra=ifelse(semestre==1,"A","B")
@@ -22,7 +20,7 @@ f_Maiz<-function(directorio,mes,anio){
                 group_by(AÑO,SEMESTRE) %>%
                 summarize(suma_produccion = sum(PRODUCCIÓN))%>%
                 arrange(AÑO)
-  
+
     variacion <- (Maiz_tabla$suma_produccion / lag(Maiz_tabla$suma_produccion,2) * 100) - 100
 
     variacion=variacion[!is.na(variacion)]
