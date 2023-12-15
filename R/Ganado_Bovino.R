@@ -2,7 +2,7 @@
 
 
 # Ganado_Bovino_kilo en pie
-# Cargar la biblioteca readxl
+
 
 f_Bovino<-function(directorio,mes,anio){
 
