@@ -1,3 +1,5 @@
+#' @export
+#'
 # Ganado_Bovino_kilo en pie
 # Cargar la biblioteca readxl
 

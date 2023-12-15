@@ -1,3 +1,5 @@
+#' @export
+
 ### pecuario
 
 ZG_pecuario=function(directorio,mes,anio){

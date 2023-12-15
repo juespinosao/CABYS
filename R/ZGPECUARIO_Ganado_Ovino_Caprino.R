@@ -1,3 +1,4 @@
+#' @export
 # Ganado_Ovino y caprino
 # Cargar la biblioteca readxl
 

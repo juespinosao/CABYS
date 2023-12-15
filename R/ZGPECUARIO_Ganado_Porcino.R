@@ -1,3 +1,4 @@
+#' @export
 # Ganado_porcino
 # Cargar la biblioteca readxl
 
