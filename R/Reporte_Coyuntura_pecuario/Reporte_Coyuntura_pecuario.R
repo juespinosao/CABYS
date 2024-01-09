@@ -989,7 +989,7 @@ Valores_variaciones<-matrix(c(paste0("'Leche'!L",fila_anterior+5),
 
 for (i in 1:3) {
   for (j in 1:4) {
-    writeFormula(wb, sheet ="CUADROS LECHE" , x = Valores_totales[i,j] ,startCol = j+3, startRow = i+6)
+    writeFormula(wb, sheet ="CUADROS LECHE" , x = Valores_variaciones[i,j] ,startCol = j+3, startRow = i+6)
   }
 }
 
