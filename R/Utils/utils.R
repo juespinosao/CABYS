@@ -24,6 +24,7 @@ trimestre <- case_when(
   mes %in% 10:12 ~ 4,
   TRUE ~ NA
 )
+return(trimestre)
 }
 
 f_trim_rom=function(mes){
@@ -34,6 +35,7 @@ f_trim_rom=function(mes){
     mes %in% 10:12 ~ "IV",
     TRUE ~ NA
   )
+  return(trimestre)
 }
 
 f_semestre=function(mes){
@@ -41,7 +43,8 @@ semestre <- case_when(
   mes %in% 1:6 ~ 1,
   mes %in% 7:12 ~ 2,
   TRUE ~ NA
-)}
+)
+return(semestre)}
 
 
 
@@ -52,7 +55,7 @@ col1<- createStyle(
   fontSize = 11,
   fontColour = "black",  # Puedes ajustar el color de fuente según tu preferencia
   border = "Top: thin, Left: thin, Right: thin",
-  borderColour = "#A6A6A6", 
+  borderColour = "#A6A6A6",
   halign = "center"
 )
 
@@ -168,7 +171,7 @@ col9 <- createStyle(
   borderColour = "#A6A6A6",
   numFmt = "0"
 )
- 
+
 
 
 
