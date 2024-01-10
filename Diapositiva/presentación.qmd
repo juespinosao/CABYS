@@ -1,0 +1,58 @@
+---
+title: "Presentación Consolidación Agro"
+format:
+  pptx:
+    reference-doc: template.pptx
+params:
+  month: 7
+  year: 2023
+  month_b: Noviembre
+  trim: II
+  fecha_publicacion: 14 de Diciembre de 2022
+  directorio: C:/Users/Asus/OneDrive - dane.gov.co/proyecto2/Automatizacion CABYS/Automatizacion/Formato_carpetas
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(scales)
+library(lubridate)
+library(formattable)
+library(plotly)
+library(gt)
+library(gtExtras)
+library(purrr)
+library(knitr)
+library(tinytex)
+library(webshot2)
+
+meses <- c("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic")
+meses_b <- c("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre")
+
+
+```
+
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
