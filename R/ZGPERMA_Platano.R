@@ -1,3 +1,4 @@
+#' @export
 # Platano
 # Cargar la biblioteca readxl
 

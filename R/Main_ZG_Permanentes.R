@@ -1,3 +1,4 @@
+#' @export
 ### pecuario
 
 ZG_Permanentes=function(directorio,mes,anio){

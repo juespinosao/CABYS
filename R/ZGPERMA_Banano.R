@@ -1,3 +1,4 @@
+#' @export
 # Banano
 # Cargar la biblioteca readxl
 

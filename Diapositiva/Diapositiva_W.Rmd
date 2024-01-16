@@ -61,11 +61,9 @@ library(purrr)
 library(knitr)
 library(tinytex)
 library(webshot2)
-
+source("https://raw.githubusercontent.com/juespinosao/CABYS_AGRO/master/R/utils.R")
 meses <- c("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic")
 meses_b <- c("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre")
-
-
 ```
 
 
@@ -124,16 +122,66 @@ medios, exceptuando las corrientes de la Orinoquia que se espera presenten nivel
 • Se recomienda mantener activos los planes de contingencia por posibles ocurrencias de deslizamiento en
 zonas inestables.
 
-## Indicadores de precios
+### Indicadores de precios
 
 ```{r}
-  carpeta=nombre_carpeta(mes,anio)
-  IPP <- read.xlsx(paste0(params$directorio,"/",params$year,"/",carpeta,"/consolidado_ISE/Precios/anex-IPP-",tolower(nombres_siglas[params$month]),params$year,".xlsx"),
+  carpeta=nombre_carpeta(params$month,params$year)
+  IPP_total <- read.xlsx(paste0(params$directorio,"/",params$year,"/",carpeta,"/consolidado_ISE/Precios/anex-IPP-",tolower(nombres_siglas[params$month]),params$year,".xlsx"),
                         sheet = "1.1")
-  IPC <- read.xlsx(paste0(params$directorio,"/",params$year,"/",carpeta,"/consolidado_ISE/Precios/anex-IPC-",tolower(nombres_siglas[params$month]),params$year,".xlsx"),
+  IPC_total <- read.xlsx(paste0(params$directorio,"/",params$year,"/",carpeta,"/consolidado_ISE/Precios/anex-IPC-",tolower(nombres_siglas[params$month]),params$year,".xlsx"),
                      sheet = "8")
-
 ```
+
+*GRAFICO TOTAL*
+
+Para el mes de `r paste0(tolower(meses_b[params$month])," ",params$year)` el IPP total nacional presentó una variación anual de `r paste0()`\%, en paralelo presentó una variación `r paste0(if(4>0){"positiva"}else{"negativa"})` de  `r paste0()`\% respecto al mes inmediatamente anterior (`r if(params$month==1){paste0(tolower(meses_b[12])," ",(params$year)-1)}else{paste0(tolower(meses_b[(params$month)-1])," ",params$year)}`).
+
+Para el mes de `r paste0(tolower(meses_b[params$month])," ",params$year)` el IPC total nacional en su variación anual registró un valor de `r paste0()`\% en comparación con el mismo periodo del año `r paste0((params$year)-1)` y una variación de `r paste0()`\% respecto al mes anterior (`r if(params$month==1){paste0(tolower(meses_b[12])," ",(params$year)-1)}else{paste0(tolower(meses_b[(params$month)-1])," ",params$year)}`).
+
+
+*GRAFICO 2*
+
+El IPP* de la división de agricultura ganadería, caza silvicultura y pesca para el mes de `r paste0(tolower(meses_b[params$month])," ",params$year)` presento un crecimiento anual de `r paste0()`\%
+
+El IPC de la división de alimentos y bebidas no alcohólicas en el mes de `r paste0(tolower(meses_b[params$month]))`, presentó un crecimiento anual de `r paste0()`\%
+
+*GRAFICO 3*
+
+El IPP de la división de agricultura ganadería, caza silvicultura y pesca, en el mes de `r paste0(tolower(meses_b[params$month]))` presentó un crecimiento anual de `r paste0()`\%
+
+El IPP de Importados de Abonos y Plaguicidas presentó en el mes de `r paste0(tolower(meses_b[params$month]))` un crecimiento anual de `r paste0()`\%
+
+El IPP de Importados de Fabricación de sustancias químicas básicas presentó en el mes de `r paste0(tolower(meses_b[params$month]))` un crecimiento anual de `r paste0()`\%
+
+### Indicadores de insumos
+
+*GRAFICO TOTAL*
+
+En los bovinos, la variación mensual fue `r paste0(if(4>0){"positiva"}else{"negativa"})`, de `r paste0()`\%; en `r paste0(tolower(meses_b[params$month])," de ",(params$year)-1)` se presentó un valor de `r paste0()`\%. Entre enero y `r paste0(tolower(meses_b[params$month]))` del `r paste0(params$year)` la variación acumulada es de `r paste0()`\%; en tanto que, para el mismo periodo del `r paste0((params$year)-1)`, el `r paste0(if(4>0){"incremento"}else{"decrecimiento"})` fue de `r paste0()`\%. En los últimos 12 meses, se observan `r paste0(if(4>0){"incrementos"}else{"decrecimientos"})` de `r paste0()`\%; mientras que entre `r if(params$month==12){paste0(tolower(meses_b[1])," del ",(params$year)-2," y ",tolower(meses_b[(params$month)])," de ",params$year) }else{paste0(tolower(meses_b[params$month+1])," del ",(params$year)-2, " y ",tolower(meses_b[(params$month)])," de ",params$year-1) }` el `r paste0(if(4>0){"aumento"}else{"reducción"})` fue de `r paste0()`\%.
+
+En la porcicultura, también se observó una `r paste0(if(4>0){"aumento"}else{"reducción"})` en los precios promedio de `r paste0()`\% respecto al mes anterior. En lo corrido del año, los precios han `r paste0(if(4>0){"aumentado"}else{"reducido"})` `r paste0()`\% para este segmento, en tanto que, para el mismo periodo del `r paste0((params$year)-1)`, `r paste0(if(4>0){"aumentaron"}else{"reducieron"})` `r paste0()`\%. En los últimos 12 meses, las variaciones acumuladas de los precios alcanzan `r paste0()`\%; para el año inmediatamente anterior, este valor fue `r paste0()`\%. 
+
+En la avicultura, los precios mensuales promedio `r paste0(if(4>0){"subieron"}else{"bajaron"})` `r paste0()`\%. La variación acumulada entre enero y `r paste0(tolower(meses_b[params$month]))` del `r paste0(params$year)` es `r paste0()`\%, mientras que para el mismo periodo del `r paste0((params$year)-1)` el comportamiento fue opuesto, con `r paste0(if(4>0){"incrementos"}else{"decrecimientos"})` de `r paste0()`\%. En los últimos 12 meses, el `r paste0(if(4>0){"incremento"}else{"decrecimiento"})` acumulado es de `r paste0()`\%, en tanto que, entre `r if(params$month==12){paste0(tolower(meses_b[1])," del ",(params$year)-2," y ",tolower(meses_b[(params$month)])," de ",params$year) }else{paste0(tolower(meses_b[params$month+1])," del ",(params$year)-2, " y ",tolower(meses_b[(params$month)])," de ",params$year-1) }` el `r paste0(if(4>0){"aumento"}else{"reducción"})`, fue de `r paste0()`\%.
+
+En la acuicultura, la variación mensual es de `r paste0()`\%; la variación acumulada en lo corrido del año es `r paste0()`\%, para el mismo periodo del `r paste0((params$year)-1)` hubo un `r paste0(if(4>0){"incremento"}else{"decrecimiento"})` de `r paste0()`\%. La variación promedio acumulada en los últimos 12 meses es `r paste0()`\%; entre `r if(params$month==12){paste0(tolower(meses_b[1])," del ",(params$year)-2," y ",tolower(meses_b[(params$month)])," de ",params$year) }else{paste0(tolower(meses_b[params$month+1])," del ",(params$year)-2, " y ",tolower(meses_b[(params$month)])," de ",params$year-1) }`, el `r paste0(if(4>0){"incremento"}else{"decrecimiento"})` fue de `r paste0()`\%,
+
+
+### Indicadores de oferta agroalimentaria
+
+*GRAFICO TOTAL*
+
+En el mes de `r paste0(tolower(meses_b[params$month]))` de `r paste0(params$year)` ingresaron `r paste0()` toneladas lo que refleja un comportamiento `r paste0(if(4>0){"positivo"}else{"negativo"})` de `r paste0()`\% con respecto al ingreso reportado en el mismo mes del año anterior.
+
+Son los grupos de; **poner los 3 primeros grupos**, que contribuyen de manera más `r paste0(if(4>0){"positiva"}else{"negativa"})` a la variación con `r paste0()`p.p., `r paste0()`p.p. y `r paste0()`p.p. respectivamente.
+
+Solamente contrarresta este comportamiento positivo el grupo de **poner los grupos negativos** con variaciones negativas de `r paste0()`\%
+
+## Actualizaciones
+
+**insertar grafico**
+
+## Resultados Consolidados
+
 
 \newpage
 <!--

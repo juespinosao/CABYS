@@ -1,3 +1,4 @@
+#' @export
 # Cacao
 # Cargar la biblioteca readxl
 

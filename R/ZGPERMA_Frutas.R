@@ -1,3 +1,4 @@
+#' @export
 # Frutas
 # Cargar la biblioteca readxl
 

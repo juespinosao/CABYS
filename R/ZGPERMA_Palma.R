@@ -1,3 +1,4 @@
+#' @export
 # Palma
 # Cargar la biblioteca readxl
 

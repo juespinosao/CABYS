@@ -1,3 +1,4 @@
+#' @export
 # Cafetos
 # Cargar la biblioteca readxl
 
