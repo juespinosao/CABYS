@@ -832,6 +832,7 @@ ZG_Permanentes=function(directorio,mes,anio){
   #Correr la funcion Palma
   valor_Algodon=f_Algodon(directorio,mes,anio)
   trimestre=f_trimestre(mes)
+  semestre=f_semestre(mes)
   if (trimestre %in% c(1,3)){
     valor_trimestre=tail(lag(data$Algodón,3),1)*(1+valor_Algodon/100)
 
