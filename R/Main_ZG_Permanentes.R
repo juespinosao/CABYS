@@ -27,7 +27,7 @@ ZG_Permanentes=function(directorio,mes,anio){
   # Cafe_Pergamino ------------------------------------------------------------------
 
     #Leer solo la hoja de Cafe_Pergamino
-    data <- read.xlsx(entrada, sheet = "Cafe Pergamino", colNames = TRUE,startRow = 9)
+    data <- read.xlsx(wb, sheet = "Cafe Pergamino", colNames = TRUE,startRow = 9)
 
 
     ultima_fila=nrow(data)
@@ -492,7 +492,7 @@ ZG_Permanentes=function(directorio,mes,anio){
   addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col3,rows = (ultima_fila+12),cols = 12:18)
   addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 19:21)
 
-
+  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Total(Expos+Interno)'!K",ultima_fila+12) ,startCol = "G", startRow = ultima_fila+13)
 
   # Fruto de Palma ------------------------------------------------------------------
 
@@ -544,6 +544,9 @@ ZG_Permanentes=function(directorio,mes,anio){
   addStyle(wb, sheet = "Fruto de Palma",style=col4,rows = (ultima_fila+10),cols = 5:6)
   addStyle(wb, sheet = "Fruto de Palma",style=col3,rows = (ultima_fila+10),cols = 7)
   addStyle(wb, sheet = "Fruto de Palma",style=col6,rows = (ultima_fila+10),cols = 8)
+
+
+  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Fruto de Palma'!E",ultima_fila+10) ,startCol = "E", startRow = ultima_fila+13)
 
 
   # Aceite de Palma ------------------------------------------------------------------
@@ -655,6 +658,8 @@ ZG_Permanentes=function(directorio,mes,anio){
   addStyle(wb, sheet = "Cacao",style=col4,rows = (ultima_fila+10),cols = c(6:7,9))
   addStyle(wb, sheet = "Cacao",style=col3,rows = (ultima_fila+10),cols = 8)
 
+  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Cacao'!E",ultima_fila+10) ,startCol = "H", startRow = ultima_fila+13)
+
 
   # Flores ------------------------------------------------------------------
 
@@ -760,6 +765,8 @@ ZG_Permanentes=function(directorio,mes,anio){
   addStyle(wb, sheet = "Caña de Azúcar",style=col1,rows = (ultima_fila+10),cols = 1:4)
   addStyle(wb, sheet = "Caña de Azúcar",style=col7,rows = (ultima_fila+10),cols = 5)
   addStyle(wb, sheet = "Caña de Azúcar",style=col4,rows = (ultima_fila+10),cols = 6:8)
+
+  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Caña de Azúcar'!E",ultima_fila+10) ,startCol = "F", startRow = ultima_fila+13)
 
 
   # Panela ------------------------------------------------------------------
@@ -890,6 +897,46 @@ ZG_Permanentes=function(directorio,mes,anio){
   addStyle(wb, sheet = "Algodón Trimestral",style=col1,rows = (ultima_fila+12),cols = 1:4)
   addStyle(wb, sheet = "Algodón Trimestral",style=col4,rows = (ultima_fila+12),cols = 5:7)
 
+
+
+# Areas en desarrollo -----------------------------------------------------
+
+data <- read.xlsx(wb, sheet = "Áreas en desarrollo", colNames = TRUE,startRow = 12)
+
+
+ultima_fila=nrow(data)
+fila_ant=which(data$Año==(anio-1) & data$Periodicidad==mes)
+
+nuevos_datos <- data.frame(
+  Consecutivo = data[ultima_fila,1]+1,
+  Año = anio,
+  Periodicidad=mes,
+  Descripcion="hectáreas"
+)
+
+
+# Escribe los datos en la hoja "Flores"
+writeData(wb, sheet="Áreas en desarrollo", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila+13))
+
+
+
+formulas <- c(paste0("E",ultima_fila+13,"/(SUM(E133:E144)/12)*100"),
+                   paste0("F",ultima_fila+13,"/(SUM(F133:F144)/12)*100"),
+                   paste0("G",ultima_fila+13),
+                   paste0("H",ultima_fila+13,"/(SUM(H133:H144)/12)*100"),
+                   paste0("(I",ultima_fila+13,"*I10)+(J",ultima_fila+13,"*J10)+(K",ultima_fila+13,"*K10)+(L",ultima_fila+13,"*L10)"),
+                   paste0("M",ultima_fila+13,"/M",fila_ant+12,"*100-100")) ## skip header row
+
+for (i in 9:14) {
+  writeFormula(wb, sheet ="Áreas en desarrollo" , x = formulas[i-8] ,startCol = i, startRow = ultima_fila+13)
+}
+if (mes %in% c(3,6,9,12)){
+  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("SUM(M",ultima_fila+11,":M",ultima_fila+13,")/SUM(M",fila_ant+10,":M",fila_ant+10,")*100-100") ,startCol = "O", startRow = ultima_fila+13)
+}
+
+addStyle(wb, sheet = "Áreas en desarrollo",style=col1,rows = (ultima_fila+13),cols = 1:4)
+addStyle(wb, sheet = "Áreas en desarrollo",style=col7,rows = (ultima_fila+13),cols = 5:13)
+addStyle(wb, sheet = "Áreas en desarrollo",style=col4,rows = (ultima_fila+13),cols = 14:15)
 
   # Guardar el libro --------------------------------------------------------
 
