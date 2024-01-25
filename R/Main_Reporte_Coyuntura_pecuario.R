@@ -1287,6 +1287,16 @@ for (i in 1:3) {
 }
 
 
+
+
+if(mes %in% c(3,6,9,12)){
+
+}else{
+  setColWidths(wb,sheet ="CUADROS BOVINO",cols = c(8,9),widths = 0)
+  setColWidths(wb,sheet ="CUADROS LECHE",cols = c(6,7),widths = 0)
+  setColWidths(wb,sheet ="CUADROS PORCINO",cols = c(8,9),widths = 0)
+  setColWidths(wb,sheet ="CUADROS AVICULTURA",cols = c(8,9),widths = 0)
+}
 # Guardar el libro --------------------------------------------------------
 
 
