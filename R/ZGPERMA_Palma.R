@@ -17,13 +17,11 @@ f_Palma<-function(directorio,mes,anio){
 
   # Fruto de palma ------------------------------------------------------------------
 
-
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Palma","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel
-  archivos=list.files(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Palma"))
-  elementos_seleccionados <- archivos[grepl("Produccion - ", archivos) ]
-  # Especifica la ruta del archivo de Excel
-  Palma <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Palma/",elementos_seleccionados),colNames = FALSE)
+  Palma <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Palma/",archivo),colNames = FALSE)
 
 
   n_fila1=which(grepl(paste0("FRUTO.*",anio-1),as.data.frame(t(Palma))))

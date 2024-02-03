@@ -10,8 +10,13 @@ f_Pollos<-function(directorio,mes,anio){
   #utils
 
   carpeta=nombre_carpeta(mes,anio)
+
+
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="FENAVI1","NOMBRE"]
+
   # Especifica la ruta del archivo de Excel
-  Pollos <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/FENAVI/Produccion_mensual_",nombres_meses[mes],"_",anio,".xlsx"))
+  Pollos <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/FENAVI/",archivo))
   dos_digitos <- anio %% 100
   n_fila=which(Pollos == "Producto",arr.ind = TRUE)[, "row"]
   fila_tabla=as.numeric(which(Pollos == "POLLO (Toneladas)",arr.ind = TRUE)[, "row"])

@@ -10,8 +10,11 @@ f_Caña_azucar<-function(directorio,mes,anio){
 
 
   carpeta=nombre_carpeta(mes,anio)
+
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="EMMET","NOMBRE"]
   # Especifica la ruta del archivo de Excel
-  Caña_azucar <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/EMMET/EMMET Base Temática preliminar ",nombres_siglas[mes],anio,".xlsx"),
+  Caña_azucar <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/EMMET/",archivo),
                        sheet = "COMPLETO")
   # Seleccionar solo las columnas que necesitas
   Caña_azucar_tabla <- Caña_azucar[, c("anio", "mes", "Clase_CIIU4", "ProduccionRealPond")]
@@ -32,7 +35,9 @@ if(mes==1){
   anio_mes=anio
 }
 
-  Caña_anterior <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Caña de azucar y panela/Azucar/Balance azucarero ",tolower(nombres_meses[mes-1]), " de ",anio_mes,".xlsx"),
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Azucar","NOMBRE"]
+
+  Caña_anterior <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Caña de azucar y panela/Azucar/",archivo),
                         sheet = paste0("Azúcar - Alcohol ",anio),startRow = 4)
   n_fila1=which(Caña_anterior=="Caña Molida (toneladas)",arr.ind = TRUE)[,"row"]
   n_fila2=which(Caña_anterior=="Acumulado",arr.ind = TRUE)[,"row"]

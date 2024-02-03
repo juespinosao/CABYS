@@ -16,11 +16,12 @@ f_Cafetos<-function(directorio,mes,anio){
 
 
   # STOCKS cafe verde ------------------------------------------------------------------
-
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Cafetos","NOMBRE"]
 
 
   # Especifica la ruta del archivo de Excel
-  Cafetos <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/CAFÉ/Area sembrada en cafe y renovaciones ",anio,".xlsX"),
+  Cafetos <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/CAFÉ/",archivo),
                            sheet = "Renovaciones")
 
 

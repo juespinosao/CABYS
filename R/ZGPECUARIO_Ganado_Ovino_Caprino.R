@@ -12,10 +12,13 @@ f_Ovino_Caprino<-function(directorio,mes,anio){
 #Identificar la carpeta del mes actual
   carpeta=nombre_carpeta(mes,anio)
 
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="ESAG1","NOMBRE"]
+
 # Especifica la ruta del archivo de Excel
-  Ganado_Ovino<- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/ESAG/censo-Sacrificio-total-nacional-",nombres_meses[mes],"-",anio,".xls"),
+  Ganado_Ovino<- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/ESAG/",archivo),
                                sheet = "Cuadro_7")
-  Ganado_Caprino<- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/ESAG/censo-Sacrificio-total-nacional-",nombres_meses[mes],"-",anio,".xls"),
+  Ganado_Caprino<- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/ESAG/",archivo),
                             sheet = "Cuadro_6")
 
 #Identificar la fila donde esta la palabra Periodo

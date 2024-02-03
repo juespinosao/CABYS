@@ -11,7 +11,11 @@ f_Tabaco<-function(directorio,mes,anio){
 
   carpeta=nombre_carpeta(mes,anio)
   # Especifica la ruta del archivo de Excel
-  Tabaco <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/EMMET/EMMET Base Temática preliminar ",nombres_siglas[mes],anio,".xlsX"),
+
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="EMMET","NOMBRE"]
+
+  Tabaco <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/EMMET/",archivo),
                        sheet = "COMPLETO")
   # Seleccionar solo las columnas que necesitas
   Tabaco_tabla <- Tabaco[, c("anio", "mes", "Clase_CIIU4", "ProduccionRealPond")]

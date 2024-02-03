@@ -13,10 +13,11 @@ f_Fenavi<-function(directorio,mes,anio){
 
 # Encasetamiento ----------------------------------------------------------
 
-
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="FENAVI2","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel
-  Encasetamiento_pollito <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/FENAVI/Encasetamiento",anio,".xlsx"),sheet = "POLLITO")
+  Encasetamiento_pollito <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/FENAVI/",archivo),sheet = "POLLITO")
 
   n_fila=which(Encasetamiento_pollito == "MES",arr.ind = TRUE)[, "row"]
   fila_tabla1=as.numeric(which(Encasetamiento_pollito == "ENERO",arr.ind = TRUE)[, "row"])
@@ -25,7 +26,7 @@ f_Fenavi<-function(directorio,mes,anio){
   Tabla1=as.numeric(Encasetamiento_pollito[fila_tabla1:(fila_tabla2-1),columna])
 
 
-  Encasetamiento_pollita <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/FENAVI/Encasetamiento",anio,".xlsx"),sheet = "POLLITA")
+  Encasetamiento_pollita <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/FENAVI/",archivo),sheet = "POLLITA")
 
   n_fila=which(Encasetamiento_pollita == "MES",arr.ind = TRUE)[, "row"]
   fila_tabla1=as.numeric(which(Encasetamiento_pollita == "ENERO",arr.ind = TRUE)[, "row"])
@@ -37,10 +38,10 @@ f_Fenavi<-function(directorio,mes,anio){
 
 # Aves de postura ---------------------------------------------------------
 
-
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="FENAVI2","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel
-  Postura <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/FENAVI/Invetarios-de-aves-",tolower(nombres_siglas[mes]),"-",anio,".xlsx"))
+  Postura <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/FENAVI/Invetarios-de-aves-",tolower(nombres_siglas[mes]),"-",anio,".xlsx"))
  fila_col=which(grepl("Mes",as.data.frame(t(Postura))),arr.ind = TRUE)
   n_fila=which(grepl("postura",as.data.frame(t(Postura))),arr.ind = TRUE)
   fila_tabla=as.numeric(which(Postura == "Ene",arr.ind = TRUE)[, "row"])
@@ -71,13 +72,13 @@ f_Fenavi<-function(directorio,mes,anio){
 
   # Importaciones -----------------------------------------------------------
 
-  archivos=list.files(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE"))
+  archivos=list.files(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE"))
   elementos_seleccionados <- archivos[grepl("Expos e", archivos) ]
 
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Importaciones","NOMBRE"]
 
-  dos_digitos <- anio %% 100
   # Especifica la ruta del archivo de Excel
-  Impor <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Importaciones ",mes_0[mes],"_",dos_digitos," - copia.xlsx"),
+  Impor <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
                      sheet = "PNK")
 
   n_col1=which(Impor== paste0((anio)," 01"),arr.ind = TRUE)[,"col"]
@@ -98,11 +99,9 @@ f_Fenavi<-function(directorio,mes,anio){
 
   # Exportaciones -----------------------------------------------------------
 
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Exportaciones","NOMBRE"]
 
-
-  # Especifica la ruta del archivo de Excel
-  # Especifica la ruta del archivo de Excel
-  Expor <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Exportaciones ",mes_0[mes],"-",anio," - copia.xlsx"),
+  Expor <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
                       sheet = "PNK")
 
 

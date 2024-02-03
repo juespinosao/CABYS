@@ -10,7 +10,11 @@ f_Legumbres<-function(directorio,mes,anio){
 
   carpeta=nombre_carpeta(mes,anio)
   # Especifica la ruta del archivo de Excel
-  Legumbres <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Mensualización_lejumbres/1.mensualizacion_legumbres a ",anio,".xlsX"))
+
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Legumbres","NOMBRE"]
+
+  Legumbres <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Mensualización_lejumbres/",archivo))
 
   fila=which(Legumbres$Año==anio)+(mes-1)
 

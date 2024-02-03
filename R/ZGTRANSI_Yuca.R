@@ -11,7 +11,11 @@ f_Yuca<-function(directorio,mes,anio){
 
   carpeta=nombre_carpeta(mes,anio)
   # Especifica la ruta del archivo de Excel
-  Yuca <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/Datos_SIPSA/Base_EB_SIPSA.xlsx"))
+
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
+
+  Yuca <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
 
   fila1=which(Yuca==anio,arr.ind = TRUE)[,"row"]
   fila2=which(Yuca==mes,arr.ind = TRUE)[,"row"]

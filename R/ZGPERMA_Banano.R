@@ -16,14 +16,15 @@ f_Banano<-function(directorio,mes,anio){
 
 
   # Exportaciones ------------------------------------------------------------------
-
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Exportaciones","NOMBRE"]
 
 
   # Especifica la ruta del archivo de Excel
-  archivos=list.files(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE"))
+  archivos=list.files(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE"))
   elementos_seleccionados <- archivos[grepl("Expos e", archivos) ]
   # Especifica la ruta del archivo de Excel
-  Banano <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Exportaciones ",mes_0[mes],"-",anio," - copia.xlsx"),
+  Banano <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
                           sheet = "TOTAL EXPO_KTES")
 
 
@@ -42,8 +43,9 @@ f_Banano<-function(directorio,mes,anio){
 
 
 # Consumo interno ---------------------------------------------------------
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
 
-  Banano <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/Datos_SIPSA/Base_EB_SIPSA.xlsx"))
+  Banano <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/Base_EB_SIPSA.xlsx"))
   fila_i=which(Banano$year==(anio-2) & Banano$month==1,arr.ind = TRUE)
   fila1=which(Banano==anio,arr.ind = TRUE)[,"row"]
   fila2=which(Banano==mes,arr.ind = TRUE)[,"row"]

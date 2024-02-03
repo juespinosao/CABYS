@@ -17,10 +17,11 @@ f_Cafe_verde_pergamino<-function(directorio,mes,anio){
 
 # STOCKS cafe verde ------------------------------------------------------------------
 
-
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Cafe","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel
-  Cafe_verde <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/CAFÉ/7. Información ",nombres_meses[mes]," ",anio,".xlsX"),
+  Cafe_verde <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/CAFÉ/",archivo),
                               sheet = "Inventarios")
 
 
@@ -48,10 +49,10 @@ f_Cafe_verde_pergamino<-function(directorio,mes,anio){
 
 # Exportaciones cafe verde -----------------------------------------------------------
 
-
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Exportaciones","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel
-  Cafe_verde <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/CAFÉ/7. Información ",nombres_meses[mes]," ",anio,".xlsx"),
+  Cafe_verde <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/CAFÉ/",archivo),
                            sheet = "Info exportaciones",startRow = 6)
   Cafe_verde[,1]= as.Date(Cafe_verde[,1], origin = "1899-12-30")
 
@@ -67,11 +68,12 @@ f_Cafe_verde_pergamino<-function(directorio,mes,anio){
   total_exportaciones=as.numeric(exportaciones$total_exportaciones)
 
 # IMPORTACIONES cafe verde -----------------------------------------------------------
-  archivos=list.files(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE"))
+  archivos=list.files(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE"))
   elementos_seleccionados <- archivos[grepl("Expos e", archivos) ]
-  dos_digitos <- anio %% 100
+
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Importaciones","NOMBRE"]
   # Especifica la ruta del archivo de Excel
-  Cafe_verde <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Importaciones ",mes_0[mes],"_",dos_digitos," - copia.xlsx"),
+  Cafe_verde <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
                            sheet = "PNK")
   n_fila=which(Cafe_verde== "230801",arr.ind = TRUE)[,"row"]
   n_col1=which(Cafe_verde== paste0((anio-2)," 01"),arr.ind = TRUE)[,"col"]
@@ -85,10 +87,10 @@ importaciones=(as.numeric(Cafe_verde[n_fila,n_col1:n_col2])/60)/1000
 
 # Consumo interno cafe verde ---------------------------------------------------------
 
-
+archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Cafe trillado","NOMBRE"]
 
 # Especifica la ruta del archivo de Excel
-Cafe_verde <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/CAFÉ/1. EMMET Consumo café trillado ",tolower(nombres_meses[mes])," ",anio,"..xlsx"),
+Cafe_verde <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/CAFÉ/",archivo),
                         sheet = "Consumo Total ")
 tabla=Cafe_verde %>%
       filter(CAFÉ.TRILLADO.CONSUMIDO.POR.LA.INDUSTRIA.TORREFACTORA.NACIONAL>=(anio-2))
@@ -117,9 +119,9 @@ produccion_equivalente_pergamino=valor_produccion/valor_denominador
 
 
 # Inventarios pergamino ---------------------------------------------------
-
+archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Cafe","NOMBRE"]
 # Especifica la ruta del archivo de Excel
-Cafe_pergamino <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/CAFÉ/7. Información ",nombres_meses[mes]," ",anio,".xlsX"),
+Cafe_pergamino <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/CAFÉ/",archivo),
                          sheet = "Inventarios")
 
 

@@ -18,8 +18,8 @@ carpeta_anterior=nombre_carpeta(mes-1,anio)
 carpeta_actual=nombre_carpeta(mes,anio)
 
 #Dirección de entrada del archivo ZG_pecuario del mes anterior y donde se va a guardar el siguiente
-entrada=paste0(directorio,"/",anio,"/",carpeta_anterior,"/consolidado_ISE/ZG2_Pecuario_ISE_",nombres_meses[mes-1],"_",anio,".xlsx")
-salida=paste0(directorio,"/",anio,"/",carpeta_actual,"/consolidado_ISE/ZG2_Pecuario_ISE_",nombres_meses[mes],"_",anio,".xlsx")
+entrada=paste0(directorio,"/",anio,"/",carpeta_anterior,"/Results/ZG2_Pecuario_ISE_",nombres_meses[mes-1],"_",anio,".xlsx")
+salida=paste0(directorio,"/",anio,"/",carpeta_actual,"/Results/ZG2_Pecuario_ISE_",nombres_meses[mes],"_",anio,".xlsx")
 
 # Cargar el archivo de entrada
 wb <- loadWorkbook(entrada)

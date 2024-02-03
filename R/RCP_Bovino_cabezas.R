@@ -12,8 +12,10 @@ f_Bovino_cabezas<-function(directorio,mes,anio){
   #identificar la carpeta
   carpeta=nombre_carpeta(mes,anio)
 
+nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+archivo=nombre_archivos[nombre_archivos$PRODUCTO=="ESAG1","NOMBRE"]
   # Especifica la ruta del archivo de Excel
-  Ganado_Bovino <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/ESAG/censo-Sacrificio-total-nacional-",nombres_meses[mes],"-",anio,".xls"),
+  Ganado_Bovino <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/Data/consolidado_ISE/ESAG/",archivo),
                               sheet = "Cuadro_1")
 
 

@@ -20,8 +20,10 @@ if(mes==1){
 carpeta=nombre_carpeta(mes,anio)
 
 
+nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Panela","NOMBRE"]
 
-Panela<-read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Caña de azucar y panela/Panela/P1 AREAS FIN ",anio-1," Y PRLI ",anio,".xlsx"),colNames = FALSE)
+Panela<-read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Caña de azucar y panela/Panela/",archivo),colNames = FALSE)
 
 n_fila=which(grepl("AREAS",as.data.frame(t(Panela))))
 Panela[n_fila, ] <- na.locf0(Panela[n_fila,])
@@ -36,7 +38,7 @@ n_fila=which(Panela=="Total general",arr.ind = TRUE)[,"row"]
 Valor_actual=as.numeric(Panela[n_fila[[1]],columnaf_act])
 
 
-Panela_Historico<- read.xlsx(paste0(directorio,"/",anio,"/",carpeta_anterior,"/consolidado_ISE/Caña de azucar y panela/Panela/Historico_panela_",nombres_meses[mes-1], "_",anio,".xlsx"))
+Panela_Historico<- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_anterior,"/Data/consolidado_ISE/Caña de azucar y panela/Panela/Historico_panela_",nombres_meses[mes-1], "_",anio,".xlsx"))
 fila_ant=which(Panela_Historico==(anio-1),arr.ind = TRUE)[,"row"]
 preliminar_actual=Panela_Historico[fila_ant,3]*(1+(Valor_actual/Panela_Historico[fila_ant,2]*100-100)/100)
 fila_año=which(Panela_Historico==anio,arr.ind = TRUE)[,"row"]
@@ -46,6 +48,6 @@ if(length(fila_año)==0){
 }else{
   Panela_Historico[fila_año,]=nuevos_datos
 }
-write.xlsx(Panela_Historico,paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Caña de azucar y panela/Panela/Historico_panela_",nombres_meses[mes], "_",anio,".xlsx"))
+write.xlsx(Panela_Historico,paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Caña de azucar y panela/Panela/Historico_panela_",nombres_meses[mes], "_",anio,".xlsx"))
 return(preliminar_actual)
 }

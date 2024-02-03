@@ -13,8 +13,10 @@ library(zoo)
 #identificar la carpeta
 carpeta=nombre_carpeta(mes,anio)
 
+nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+archivo=nombre_archivos[nombre_archivos$PRODUCTO=="ESAG1","NOMBRE"]
 # Especifica la ruta del archivo de Excel
-Ganado_Bovino <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/ESAG/censo-Sacrificio-total-nacional-",nombres_meses[mes],"-",anio,".xls"),
+Ganado_Bovino <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/ESAG/",archivo),
                             sheet = "Cuadro_1")
 
 
@@ -53,13 +55,13 @@ Valor_Bovino=as.data.frame(Ganado_Bovino[fila:(fila+mes-1),c(columnaf1,columnaf2
 
 # Exportaciones -----------------------------------------------------------
 
-
+archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Exportaciones","NOMBRE"]
 
 # Especifica la ruta del archivo de Excel
-archivos=list.files(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE"))
+archivos=list.files(paste0(directorio,"/ISE/",anio,"/",carpeta,"/consolidado_ISE"))
 elementos_seleccionados <- archivos[grepl("Expos e", archivos) ]
 # Especifica la ruta del archivo de Excel
-Bovino <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Exportaciones ",mes_0[mes],"-",anio," - copia.xlsx"),
+Bovino <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
                     sheet = "PNK")
 
 
@@ -80,11 +82,11 @@ Valor_exportaciones=Valor_exportaciones %>%
 
 # Importaciones -----------------------------------------------------------
 
-
+archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Importaciones","NOMBRE"]
 
 dos_digitos <- anio %% 100
 # Especifica la ruta del archivo de Excel
-Impor <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Importaciones ",mes_0[mes],"_",dos_digitos," - copia.xlsx"),
+Impor <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
                         sheet = "PNK")
 n_fila=which(Impor== "020100",arr.ind = TRUE)[,"row"]
 n_col1=which(Impor== paste0((anio)," 01"),arr.ind = TRUE)[,"col"]

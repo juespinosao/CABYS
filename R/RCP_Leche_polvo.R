@@ -12,9 +12,11 @@ f_Leche_polvo<-function(directorio,mes,anio){
 
   # Leche_sipsa -------------------------------------------------------------
 
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Leche_SIPSA","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel
-  Leche <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Leche/SIPSA/LECHE_CRUDA_EST_",nombres_meses[mes],"_",anio,".xlsx"),
+  Leche <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Leche/SIPSA/",archivo),
                       sheet = "LecheDANE")
 
   Valor_Leche=as.data.frame(Leche[Leche[,"Año"] == anio | Leche[,"Año"] == (anio-1),"PRODUCCION LECHE CRUDA DANE"])
@@ -24,7 +26,9 @@ f_Leche_polvo<-function(directorio,mes,anio){
 
 # Leche_cruda -------------------------------------------------------------
 
-  Leche_cruda <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Leche/USP/Volumen de Acopio Total - Res 0017 de 2012.xlsx"),sheet = "VOLUMEN NACIONAL")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Leche_USP1","NOMBRE"]
+
+  Leche_cruda <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Leche/USP/",archivo),sheet = "VOLUMEN NACIONAL")
   fila_fuente=which(grepl("Fuente",as.data.frame(t(Leche_cruda))))
   col_per=which(Leche_cruda=="Periodo",arr.ind = TRUE)[,"col"]
   col_vol=which(Leche_cruda=="Volumen (lt)",arr.ind = TRUE)[,"col"]
@@ -40,9 +44,9 @@ f_Leche_polvo<-function(directorio,mes,anio){
 
 # leche en polvo ----------------------------------------------------------
 
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Leche_USP2","NOMBRE"]
 
-
-  Leche_polvo <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Leche/USP/Inventarios Cuadro principal.xlsx"),
+  Leche_polvo <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Leche/USP/",archivo),
                      sheet = "INVENTARIOS CUADRO PRINCIPAL",startRow = 4)
 
   fila_fuente=which(grepl("Fuente",as.data.frame(t(Leche_polvo))))
@@ -70,13 +74,12 @@ f_Leche_polvo<-function(directorio,mes,anio){
 
   # Importaciones -----------------------------------------------------------
 
-  archivos=list.files(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE"))
+  archivos=list.files(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE"))
   elementos_seleccionados <- archivos[grepl("Expos e", archivos) ]
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Importaciones","NOMBRE"]
 
-
-  dos_digitos <- anio %% 100
   # Especifica la ruta del archivo de Excel
-  Impor <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Importaciones ",mes_0[mes],"_",dos_digitos," - copia.xlsx"),
+  Impor <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
                      sheet = "PNK")
 
   n_col1=which(Impor== paste0((anio)," 01"),arr.ind = TRUE)[,"col"]
@@ -94,11 +97,11 @@ f_Leche_polvo<-function(directorio,mes,anio){
 
   # Exportaciones -----------------------------------------------------------
 
-
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Exportaciones","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel
   # Especifica la ruta del archivo de Excel
-  Expor <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Exportaciones ",mes_0[mes],"-",anio," - copia.xlsx"),
+  Expor <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
                      sheet = "PNK")
 
 

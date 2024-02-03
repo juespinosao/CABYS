@@ -16,14 +16,15 @@ f_Frutas<-function(directorio,mes,anio){
 
 
   # Exportaciones ------------------------------------------------------------------
-
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Exportaciones","NOMBRE"]
 
 
   # Especifica la ruta del archivo de Excel
-  archivos=list.files(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE"))
+  archivos=list.files(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE"))
   elementos_seleccionados <- archivos[grepl("Expos e", archivos) ]
   # Especifica la ruta del archivo de Excel
-  Frutas <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/",elementos_seleccionados,"/Resumen Exportaciones ",mes_0[mes],"-",anio," - copia.xlsx"),
+  Frutas <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
                        sheet = "TOTAL EXPO_KTES")
 
 
@@ -42,8 +43,8 @@ f_Frutas<-function(directorio,mes,anio){
 
 
   # Consumo interno ---------------------------------------------------------
-
-  Frutas <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/Datos_SIPSA/Base_EB_SIPSA.xlsx"))
+archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
+  Frutas <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/Base_EB_SIPSA.xlsx"))
 
   fila1=which(Frutas==anio,arr.ind = TRUE)[,"row"]
   fila2=which(Frutas==mes,arr.ind = TRUE)[,"row"]

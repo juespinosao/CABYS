@@ -12,8 +12,10 @@ f_Consumo_vacuno<-function(directorio,mes,anio){
   #identificar la carpeta
   carpeta=nombre_carpeta(mes,anio)
 
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="ESAG2","NOMBRE"]
   # Especifica la ruta del archivo de Excel
-  Consumo_Vacuno <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/ESAG/Destino CTAS2016_",anio,".xlsx"),
+  Consumo_Vacuno <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/ESAG/",archivo),
                               sheet = "VACU",startRow = 2)
 
 

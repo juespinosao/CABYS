@@ -16,11 +16,10 @@ f_Precios<-function(directorio,mes,anio){
 
 # IPP ---------------------------------------------------------------------
 
-  dos_digitos <- anio %% 100
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="IPP","NOMBRE"]
 
-
-
-  Precios <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Precios/anex-IPP-",tolower(nombres_siglas[mes]),anio,".xlsx"),
+  Precios <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Precios/",archivo),
                         sheet = "1.1")
 
   #Identificar la fila donde esta la palabra Periodo
@@ -53,12 +52,10 @@ f_Precios<-function(directorio,mes,anio){
 
 # Porkcolombia ------------------------------------------------------------
 
-  archivos=list.files(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Porkcolombia"))
-  elementos_seleccionados <- archivos[grepl(paste0(anio,"_",mes_0[mes+1]), archivos) ]
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="PorkColombia","NOMBRE"]
 
 
-
-    Porkcol_pie <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Porkcolombia/",elementos_seleccionados),
+    Porkcol_pie <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Porkcolombia/",archivo),
                                sheet = "Precio nacional pie ")
 
   #Identificar la fila donde esta la palabra Periodo
@@ -72,7 +69,7 @@ f_Precios<-function(directorio,mes,anio){
   fila1=which(Porkcol_pie[,ubi[2]]=="Ene",arr.ind = TRUE)[,"row"]
    #Filtrar la fila del mes de interes
 
-  Porkcol_canal <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Porkcolombia/",elementos_seleccionados),
+  Porkcol_canal <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Porkcolombia/",archivo),
                             sheet = "Precio nacional canal caliente")
 
   #Identificar la fila donde esta la palabra Periodo
@@ -98,8 +95,9 @@ f_Precios<-function(directorio,mes,anio){
 
   # USP -----------------------------------------------------------
 
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Leche_USP3","NOMBRE"]
 
-  Precio_sinbon <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Leche/USP/PRECIO_PAGADO_AL_PRODUCTOR_2_-_RES_0017_DE_2012.xlsx"),
+  Precio_sinbon <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Leche/USP/",archivo),
                             sheet = "PRECIO SIN BONIF Res 0017-12")
 
   fila_fuente=which(grepl("Fuente",as.data.frame(t(Precio_sinbon))))
@@ -115,7 +113,7 @@ f_Precios<-function(directorio,mes,anio){
 
 
 
-  Precio_total <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Leche/USP/PRECIO_PAGADO_AL_PRODUCTOR_2_-_RES_0017_DE_2012.xlsx"),
+  Precio_total <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Leche/USP/",archivo),
                            sheet = "PRECIO ($) TOTAL Res 0017-2012")
 
   fila_fuente=which(grepl("Fuente",as.data.frame(t(Precio_total))))
@@ -136,10 +134,10 @@ valor_usp=as.data.frame(lapply(valor_usp, as.numeric))
   # IPC -----------------------------------------------------------
 
 
+archivo=nombre_archivos[nombre_archivos$PRODUCTO=="IPC","NOMBRE"]
 
 
-
-IPC <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Precios/anex-IPC-",tolower(nombres_siglas[mes]),anio,".xlsx"),
+IPC <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Precios/",archivo),
                      sheet = "8")
 
 #Identificar la fila donde esta la palabra Periodo

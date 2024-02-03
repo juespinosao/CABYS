@@ -11,7 +11,11 @@ f_Hortalizas<-function(directorio,mes,anio){
 
   carpeta=nombre_carpeta(mes,anio)
   # Especifica la ruta del archivo de Excel
-  Hortalizas <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/Datos_SIPSA/Base_EB_SIPSA.xlsx"))
+
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
+
+  Hortalizas <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
   fila1=which(Hortalizas==anio,arr.ind = TRUE)[,"row"]
   fila2=which(Hortalizas==mes,arr.ind = TRUE)[,"row"]
   fila_f=intersect(fila1,fila2)

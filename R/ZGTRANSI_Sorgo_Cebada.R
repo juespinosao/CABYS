@@ -13,7 +13,11 @@ f_Sorgo_Cebada<-function(directorio,mes,anio){
   semestre=f_semestre(mes)
   letra=ifelse(semestre==1,"A","B")
   # Especifica la ruta del archivo de Excel
-  Sorgo <- read.xlsx(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/FENALCE/APR- 2005 A ",anio,letra," - DANE.xlsx"),
+
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="EMMET","NOMBRE"]
+
+  Sorgo <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/FENALCE/",archivo),
                     sheet = "Historico APR",startRow = 5)
 
   Sorgo_valor <- Sorgo %>%

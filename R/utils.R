@@ -7,11 +7,7 @@ nombres_siglas <- c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep
 mes_0=c("01","02","03","04","05","06","07","08","09",10,11,12)
 #Crear la funcion con el nombre de la carpeta segun año y mes
 nombre_carpeta=function(mes,anio){
-  if(mes<10){
-    carpeta=paste0(0,mes," ",nombres_meses[mes],"_ISE_",anio)
-  }else{
-    carpeta=paste0(mes," ",nombres_meses[mes],"_ISE_",anio)
-  }
+    carpeta=paste0(mes_0[mes],nombres_meses[mes])
 }
 
 
@@ -237,3 +233,5 @@ cbn4 <- createStyle(
   fontColour = "black",
   numFmt = "_(* #,##0.00_);_(* \\(#,##0.00\\);_(* \"-\"??_);_(@_)"
 )
+
+

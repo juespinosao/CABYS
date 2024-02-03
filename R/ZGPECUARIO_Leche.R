@@ -14,17 +14,14 @@ f_Leche<-function(directorio,mes,anio){
 
 # Leche_sipsa -------------------------------------------------------------
 
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Leche_SIPSA","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel
-  Leche <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Leche/SIPSA/LECHE_CRUDA_EST_",nombres_meses[mes],"_",anio,".xlsx"),
+  Leche <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Leche/SIPSA/",archivo),
                        sheet = "LecheDANE")
 
   Valor_Leche=as.data.frame(Leche[Leche[,"Año"] == anio,"PRODUCCION LECHE CRUDA DANE"])
-
-
-
-# Leche cruda
-
 
 
 

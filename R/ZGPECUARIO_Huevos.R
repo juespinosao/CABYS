@@ -10,8 +10,12 @@ f_Huevos<-function(directorio,mes,anio){
 
 
   carpeta=nombre_carpeta(mes,anio)
+
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="FENAVI1","NOMBRE"]
+
   # Especifica la ruta del archivo de Excel
-  Huevos <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/FENAVI/Produccion_mensual_",nombres_meses[mes],"_",anio,".xlsx"))
+  Huevos <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/FENAVI/",archivo))
   dos_digitos <- anio %% 100
   n_fila=which(Huevos == "Producto",arr.ind = TRUE)[, "row"]
   fila_tabla=as.numeric(which(Huevos == "HUEVOS (millones de Unidades)",arr.ind = TRUE)[, "row"])
