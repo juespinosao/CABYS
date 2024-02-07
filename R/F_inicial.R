@@ -24,6 +24,8 @@
 #' 7 S7_boletin:\code{\link{f8_boletin}}
 #'
 #' @examples f0_inicial(directorio="Documents/DANE/Procesos DIMPE /PilotoEMMET")
+#'
+#' @export
 
 
 f0_inicial<-function(directorio,mes,anio){

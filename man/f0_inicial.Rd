@@ -34,4 +34,5 @@ en total se crearán siete carpetas, para cada una de las funciones que genera a
 }
 \examples{
 f0_inicial(directorio="Documents/DANE/Procesos DIMPE /PilotoEMMET")
+
 }
