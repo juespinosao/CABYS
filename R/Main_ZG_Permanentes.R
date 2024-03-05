@@ -827,77 +827,77 @@ ZG_Permanentes=function(directorio,mes,anio){
   addStyle(wb, sheet = "Panela",style=col4,rows = (ultima_fila+10),cols = 6:8)
 
 
-  # Algodon ------------------------------------------------------------------
-
-  #Leer solo la hoja de Palma
-  data <- read.xlsx(wb, sheet = "Algodón Trimestral", colNames = TRUE,startRow = 11)
-
-  ultima_fila=nrow(data)
-
-
-
-  #Correr la funcion Palma
-  valor_Algodon=f_Algodon(directorio,mes,anio)
-  trimestre=f_trimestre(mes)
-  semestre=f_semestre(mes)
-  if (trimestre %in% c(1,3)){
-    valor_trimestre=tail(lag(data$Algodón,3),1)*(1+valor_Algodon/100)
-
-    nuevos_datos <- data.frame(
-      Consecutivo = (data[ultima_fila, "consecutivo"] + 1),
-      Año = anio,
-      Periodicidad=trimestre,
-      Descripcion="Toneladas",
-      Palma.Toneladas=valor_trimestre,
-      Variacion.Anual=valor_trimestre/tail(lag(data$Algodón,3),1)*100-100,
-      Estado=if (semestre==4) {
-        (valor_trimestre+sum(filter(data, Año == anio)[["Algodón"]]))/
-          (sum(tail(lag(data$Algodón,3),4)))*100-100
-      } else {
-        ""
-      },
-      observaciones="",
-      Tipo=""
-    )
-
-  }else{
-
-    valor_trimestre=tail(lag(data$Algodón,3),2)*(1+valor_Algodon/100)
-
-    nuevos_datos <- data.frame(
-      Consecutivo = c(data[ultima_fila, "consecutivo"],data[ultima_fila, "consecutivo"] + 1),
-      Año = c(data[ultima_fila, "Año"],anio),
-      Periodicidad=c(data[ultima_fila, "Periodicidad"],trimestre),
-      Descripcion=c(data[ultima_fila, "Descripcion"],"Toneladas"),
-      Palma.Toneladas=valor_trimestre,
-      Variacion.Anual=valor_trimestre/tail(lag(data$Algodón,3),2)*100-100,
-      Estado=if (semestre==4) {
-        (valor_trimestre+sum(filter(data, Año == anio)[["Algodón"]]))/
-          (sum(tail(lag(data$Algodón,3),4)))*100-100
-      } else {
-        ""
-      },
-      observaciones=rep("",2),
-      Tipo=rep("",2)
-    )
-  }
-
-
-
-  #Crear la nueva fila
-
-
-
-
-
-  # Escribe los datos en la hoja "Algodón Trimestral"
-  writeData(wb, sheet = "Algodón Trimestral", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila+12))
-
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Algodón Trimestral",style=col1,rows = (ultima_fila+12),cols = 1:4)
-  addStyle(wb, sheet = "Algodón Trimestral",style=col4,rows = (ultima_fila+12),cols = 5:7)
-
-
+#  # Algodon ------------------------------------------------------------------
+#
+#  #Leer solo la hoja de Palma
+#  data <- read.xlsx(wb, sheet = "Algodón Trimestral", colNames = TRUE,startRow = 11)
+#
+#  ultima_fila=nrow(data)
+#
+#
+#
+#  #Correr la funcion Palma
+#  valor_Algodon=f_Algodon(directorio,mes,anio)
+#  trimestre=f_trimestre(mes)
+#  semestre=f_semestre(mes)
+#  if (trimestre %in% c(1,3)){
+#    valor_trimestre=tail(lag(data$Algodón,3),1)*(1+valor_Algodon/100)
+#
+#    nuevos_datos <- data.frame(
+#      Consecutivo = (data[ultima_fila, "consecutivo"] + 1),
+#      Año = anio,
+#      Periodicidad=trimestre,
+#      Descripcion="Toneladas",
+#      Palma.Toneladas=valor_trimestre,
+#      Variacion.Anual=valor_trimestre/tail(lag(data$Algodón,3),1)*100-100,
+#      Estado=if (semestre==4) {
+#        (valor_trimestre+sum(filter(data, Año == anio)[["Algodón"]]))/
+#          (sum(tail(lag(data$Algodón,3),4)))*100-100
+#      } else {
+#        ""
+#      },
+#      observaciones="",
+#      Tipo=""
+#    )
+#
+#  }else{
+#
+#    valor_trimestre=tail(lag(data$Algodón,3),2)*(1+valor_Algodon/100)
+#
+#    nuevos_datos <- data.frame(
+#      Consecutivo = c(data[ultima_fila, "consecutivo"],data[ultima_fila, "consecutivo"] + 1),
+#      Año = c(data[ultima_fila, "Año"],anio),
+#      Periodicidad=c(data[ultima_fila, "Periodicidad"],trimestre),
+#      Descripcion=c(data[ultima_fila, "Descripcion"],"Toneladas"),
+#      Palma.Toneladas=valor_trimestre,
+#      Variacion.Anual=valor_trimestre/tail(lag(data$Algodón,3),2)*100-100,
+#      Estado=if (semestre==4) {
+#        (valor_trimestre+sum(filter(data, Año == anio)[["Algodón"]]))/
+#          (sum(tail(lag(data$Algodón,3),4)))*100-100
+#      } else {
+#        ""
+#      },
+#      observaciones=rep("",2),
+#      Tipo=rep("",2)
+#    )
+#  }
+#
+#
+#
+#  #Crear la nueva fila
+#
+#
+#
+#
+#
+#  # Escribe los datos en la hoja "Algodón Trimestral"
+#  writeData(wb, sheet = "Algodón Trimestral", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila+12))
+#
+#  #Añadir estilos de celda
+#  addStyle(wb, sheet = "Algodón Trimestral",style=col1,rows = (ultima_fila+12),cols = 1:4)
+#  addStyle(wb, sheet = "Algodón Trimestral",style=col4,rows = (ultima_fila+12),cols = 5:7)
+#
+#
 
 # Areas en desarrollo -----------------------------------------------------
 

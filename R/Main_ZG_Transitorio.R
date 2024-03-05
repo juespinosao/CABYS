@@ -255,182 +255,182 @@ ZG_Transitorio=function(directorio,mes,anio){
 
 
 
-  # Trigo ------------------------------------------------------------------
+# # Trigo ------------------------------------------------------------------
 
 
-  #Realizar solo el proceso para los trimestres
-  if (mes %in% c(3, 6, 9, 12)){
+# #Realizar solo el proceso para los trimestres
+# if (mes %in% c(3, 6, 9, 12)){
 
-    #Leer solo la hoja de Huevos
-    data <- read.xlsx(entrada, sheet = "Trigo trimestral", colNames = TRUE,startRow = 10)
+#   #Leer solo la hoja de Huevos
+#   data <- read.xlsx(entrada, sheet = "Trigo trimestral", colNames = TRUE,startRow = 10)
 
-    ultima_fila=nrow(data)
-    fila=which(data$Año==(anio-1))
-
-
-    #Correr la funcion Ovino_Caprino
-    valor_Trigo=f_Trigo(directorio,mes,anio)
-    valor_Trigo=rep(valor_Trigo,each=2)
-    trimestre=f_trimestre(mes)
-    valor_actual=NULL
-    valor_anterior=as.numeric(data[data$Año==(anio-2),"Trigo"])
-    for(i in 1:(4+trimestre)){
-    valor_actual[i]=as.numeric(valor_anterior[i]*(1+valor_Trigo[i]/100))
-    valor_anterior=c(valor_anterior,valor_actual[i])
-    }
-    tamaño=length(valor_actual)
-    tabla_trigo=cbind(valor_actual,valor_anterior[1:tamaño])
-    tabla_trigo=as.data.frame(tabla_trigo)
-    colnames(tabla_trigo)=c("valor_actual","valor_anterior")
-    tabla_trigo$variacion_anual=tabla_trigo$valor_actual/tabla_trigo$valor_anterior*100-100
-    #Identificar el numero de trimestre
-    trimestre=f_trimestre(mes)
-    tabla_trigo$estado <-  ""
-    for (i in seq(4, nrow(tabla_trigo), by = 4)) {
-      tabla_trigo$estado[i] <- (sum(tabla_trigo$valor_actual[(i-3):i]) / sum(tabla_trigo$valor_anterior[(i-3):i]))*100-100  # Realiza la suma y división
-    }
+#   ultima_fila=nrow(data)
+#   fila=which(data$Año==(anio-1))
 
 
-    nuevos_datos <- data.frame(
-      Consecutivo =c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
-      Año = c(data[fila[1]:ultima_fila,"Año"],anio),
-      Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],trimestre),
-      Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"Toneladas"),
-      Trigo_valor=tabla_trigo$valor_actual,
-      Variacion.Anual=tabla_trigo$variacion_anual,
-      Estado=as.numeric(tabla_trigo$estado),
-      observaciones=rep("",tamaño),
-      Tipo=rep("",tamaño)
-    )
-
-    # Escribe los datos en la hoja "Ovino y Caprino trimestral"
-    writeData(wb, sheet = "Trigo trimestral", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
-
-    #Añadir estilos de celda
-    addStyle(wb, sheet = "Trigo trimestral",style=col1,rows = (ultima_fila+11),cols = 1:4)
-    addStyle(wb, sheet = "Trigo trimestral",style=col3,rows = (ultima_fila+11),cols = 5)
-    addStyle(wb, sheet = "Trigo trimestral",style=col5,rows = (ultima_fila+11),cols = 6:7)
-
-  }else{
-    print("Este mes no se actualiza la hoja de Trigo")
-  }
+#   #Correr la funcion Ovino_Caprino
+#   valor_Trigo=f_Trigo(directorio,mes,anio)
+#   valor_Trigo=rep(valor_Trigo,each=2)
+#   trimestre=f_trimestre(mes)
+#   valor_actual=NULL
+#   valor_anterior=as.numeric(data[data$Año==(anio-2),"Trigo"])
+#   for(i in 1:(4+trimestre)){
+#   valor_actual[i]=as.numeric(valor_anterior[i]*(1+valor_Trigo[i]/100))
+#   valor_anterior=c(valor_anterior,valor_actual[i])
+#   }
+#   tamaño=length(valor_actual)
+#   tabla_trigo=cbind(valor_actual,valor_anterior[1:tamaño])
+#   tabla_trigo=as.data.frame(tabla_trigo)
+#   colnames(tabla_trigo)=c("valor_actual","valor_anterior")
+#   tabla_trigo$variacion_anual=tabla_trigo$valor_actual/tabla_trigo$valor_anterior*100-100
+#   #Identificar el numero de trimestre
+#   trimestre=f_trimestre(mes)
+#   tabla_trigo$estado <-  ""
+#   for (i in seq(4, nrow(tabla_trigo), by = 4)) {
+#     tabla_trigo$estado[i] <- (sum(tabla_trigo$valor_actual[(i-3):i]) / sum(tabla_trigo$valor_anterior[(i-3):i]))*100-100  # Realiza la suma y división
+#   }
 
 
-  # Sorgo y Cebada ------------------------------------------------------------------
+#   nuevos_datos <- data.frame(
+#     Consecutivo =c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
+#     Año = c(data[fila[1]:ultima_fila,"Año"],anio),
+#     Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],trimestre),
+#     Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"Toneladas"),
+#     Trigo_valor=tabla_trigo$valor_actual,
+#     Variacion.Anual=tabla_trigo$variacion_anual,
+#     Estado=as.numeric(tabla_trigo$estado),
+#     observaciones=rep("",tamaño),
+#     Tipo=rep("",tamaño)
+#   )
+
+#   # Escribe los datos en la hoja "Ovino y Caprino trimestral"
+#   writeData(wb, sheet = "Trigo trimestral", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
+
+#   #Añadir estilos de celda
+#   addStyle(wb, sheet = "Trigo trimestral",style=col1,rows = (ultima_fila+11),cols = 1:4)
+#   addStyle(wb, sheet = "Trigo trimestral",style=col3,rows = (ultima_fila+11),cols = 5)
+#   addStyle(wb, sheet = "Trigo trimestral",style=col5,rows = (ultima_fila+11),cols = 6:7)
+
+# }else{
+#   print("Este mes no se actualiza la hoja de Trigo")
+# }
+#
+#
+# # Sorgo y Cebada ------------------------------------------------------------------
 
 
-  #Realizar solo el proceso para los trimestres
-  if (mes %in% c(3, 6, 9, 12)){
+# #Realizar solo el proceso para los trimestres
+# if (mes %in% c(3, 6, 9, 12)){
 
-    #Leer solo la hoja de Huevos
-    data <- read.xlsx(entrada, sheet = "Sorgo y Cebada trimestral", colNames = TRUE,startRow = 10)
+#   #Leer solo la hoja de Huevos
+#   data <- read.xlsx(entrada, sheet = "Sorgo y Cebada trimestral", colNames = TRUE,startRow = 10)
 
-    ultima_fila=nrow(data)
-    fila=which(data$Año==(anio-1))
-
-
-    #Correr la funcion Ovino_Caprino
-    valor_sorgo=f_Sorgo_Cebada(directorio,mes,anio)
-    valor_sorgo=rep(valor_sorgo,each=2)
-    trimestre=f_trimestre(mes)
-    tamaño=length(valor_actual)
-    valor_anterior=c(data[data$Año==(anio-2),"Sorgo.y.Cebada"],valor_sorgo[1:trimestre])
-    tamaño=length(valor_anterior)
-    tabla_sorgo=cbind(valor_sorgo[1:tamaño],valor_anterior)
-    tabla_sorgo=as.data.frame(tabla_sorgo)
-    colnames(tabla_sorgo)=c("valor_actual","valor_anterior")
-    tabla_sorgo$variacion_anual=tabla_sorgo$valor_actual/tabla_sorgo$valor_anterior*100-100
-    #Identificar el numero de trimestre
-    trimestre=f_trimestre(mes)
-    tabla_sorgo$estado <-  ""
-    for (i in seq(4, nrow(tabla_sorgo), by = 4)) {
-      tabla_sorgo$estado[i] <- (sum(tabla_sorgo$valor_actual[(i-3):i]) / sum(tabla_sorgo$valor_anterior[(i-3):i]))*100-100  # Realiza la suma y división
-    }
+#   ultima_fila=nrow(data)
+#   fila=which(data$Año==(anio-1))
 
 
-    nuevos_datos <- data.frame(
-      Consecutivo =c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
-      Año = c(data[fila[1]:ultima_fila,"Año"],anio),
-      Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],trimestre),
-      Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"Toneladas"),
-      sorgo_valor=tabla_sorgo$valor_actual,
-      Variacion.Anual=tabla_sorgo$variacion_anual,
-      Estado=as.numeric(tabla_sorgo$estado),
-      observaciones=rep("",tamaño),
-      Tipo=rep("",tamaño)
-    )
-      # Escribe los datos en la hoja "Ovino y Caprino trimestral"
-      writeData(wb, sheet = "Sorgo y Cebada trimestral", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
-
-      #Añadir estilos de celda
-      addStyle(wb, sheet = "Sorgo y Cebada trimestral",style=col1,rows = (ultima_fila+11),cols = 1:4)
-      addStyle(wb, sheet = "Sorgo y Cebada trimestral",style=col3,rows = (ultima_fila+11),cols = 5)
-      addStyle(wb, sheet = "Sorgo y Cebada trimestral",style=col5,rows = (ultima_fila+11),cols = 6:7)
-
-  }else{
-    print("Este mes no se actualiza la hoja de Sorgo y Cebada")
-  }
+#   #Correr la funcion Ovino_Caprino
+#   valor_sorgo=f_Sorgo_Cebada(directorio,mes,anio)
+#   valor_sorgo=rep(valor_sorgo,each=2)
+#   trimestre=f_trimestre(mes)
+#   tamaño=length(valor_actual)
+#   valor_anterior=c(data[data$Año==(anio-2),"Sorgo.y.Cebada"],valor_sorgo[1:trimestre])
+#   tamaño=length(valor_anterior)
+#   tabla_sorgo=cbind(valor_sorgo[1:tamaño],valor_anterior)
+#   tabla_sorgo=as.data.frame(tabla_sorgo)
+#   colnames(tabla_sorgo)=c("valor_actual","valor_anterior")
+#   tabla_sorgo$variacion_anual=tabla_sorgo$valor_actual/tabla_sorgo$valor_anterior*100-100
+#   #Identificar el numero de trimestre
+#   trimestre=f_trimestre(mes)
+#   tabla_sorgo$estado <-  ""
+#   for (i in seq(4, nrow(tabla_sorgo), by = 4)) {
+#     tabla_sorgo$estado[i] <- (sum(tabla_sorgo$valor_actual[(i-3):i]) / sum(tabla_sorgo$valor_anterior[(i-3):i]))*100-100  # Realiza la suma y división
+#   }
 
 
+#   nuevos_datos <- data.frame(
+#     Consecutivo =c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
+#     Año = c(data[fila[1]:ultima_fila,"Año"],anio),
+#     Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],trimestre),
+#     Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"Toneladas"),
+#     sorgo_valor=tabla_sorgo$valor_actual,
+#     Variacion.Anual=tabla_sorgo$variacion_anual,
+#     Estado=as.numeric(tabla_sorgo$estado),
+#     observaciones=rep("",tamaño),
+#     Tipo=rep("",tamaño)
+#   )
+#     # Escribe los datos en la hoja "Ovino y Caprino trimestral"
+#     writeData(wb, sheet = "Sorgo y Cebada trimestral", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
-  # Tabaco ------------------------------------------------------------------
+#     #Añadir estilos de celda
+#     addStyle(wb, sheet = "Sorgo y Cebada trimestral",style=col1,rows = (ultima_fila+11),cols = 1:4)
+#     addStyle(wb, sheet = "Sorgo y Cebada trimestral",style=col3,rows = (ultima_fila+11),cols = 5)
+#     addStyle(wb, sheet = "Sorgo y Cebada trimestral",style=col5,rows = (ultima_fila+11),cols = 6:7)
 
+# }else{
+#   print("Este mes no se actualiza la hoja de Sorgo y Cebada")
+# }
+#
+#
 
-  #Realizar solo el proceso para los trimestres
-  if (mes %in% c(3, 6, 9, 12)){
-
-    #Leer solo la hoja de Huevos
-    data <- read.xlsx(entrada, sheet = "Tabaco trimestral", colNames = TRUE,startRow = 10)
-
-    ultima_fila=nrow(data)
-    fila=which(data$Año==(anio-1))
-
-    #Correr la funcion Ovino_Caprino
-    valor_Tabaco=f_Tabaco(directorio,mes,anio)
-    trimestre=f_trimestre(mes)
-    valor_actual=NULL
-    valor_anterior=as.numeric(data[data$Año==(anio-2),"Tabaco"])
-    for(i in 1:(4+trimestre)){
-      valor_actual[i]=as.numeric(valor_anterior[i]*(1+valor_Tabaco[i]/100))
-      valor_anterior=c(valor_anterior,valor_actual[i])
-    }
-    tamaño=length(valor_actual)
-    tabla_Tabaco=cbind(valor_actual,valor_anterior[1:tamaño])
-    tabla_Tabaco=as.data.frame(tabla_Tabaco)
-    colnames(tabla_Tabaco)=c("valor_actual","valor_anterior")
-    tabla_Tabaco$variacion_anual=tabla_Tabaco$valor_actual/tabla_Tabaco$valor_anterior*100-100
-    #Identificar el numero de trimestre
-    tabla_Tabaco$estado <-  ""
-    for (i in seq(2, nrow(tabla_Tabaco), by = 2)) {
-      tabla_Tabaco$estado[i] <- (sum(tabla_Tabaco$valor_actual[(i-1):i]) / sum(tabla_Tabaco$valor_anterior[(i-1):i]))*100-100  # Realiza la suma y división
-    }
+ ## Tabaco ------------------------------------------------------------------
 
 
-    nuevos_datos <- data.frame(
-      Consecutivo =c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
-      Año = c(data[fila[1]:ultima_fila,"Año"],anio),
-      Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],trimestre),
-      Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"Toneladas"),
-      Tabaco_valor=tabla_Tabaco$valor_actual,
-      Variacion.Anual=tabla_Tabaco$variacion_anual,
-      Estado=as.numeric(tabla_Tabaco$estado),
-      observaciones=rep("",tamaño),
-      Tipo=rep("",tamaño)
-    )
-    # Escribe los datos en la hoja "Tabaco trimestral"
-    writeData(wb, sheet = "Tabaco trimestral", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
+ ##Realizar solo el proceso para los trimestres
+ #if (mes %in% c(3, 6, 9, 12)){
 
-    #Añadir estilos de celda
-    addStyle(wb, sheet = "Tabaco trimestral",style=col1,rows = (ultima_fila+11),cols = 1:4)
-    addStyle(wb, sheet = "Tabaco trimestral",style=col3,rows = (ultima_fila+11),cols = 5)
-    addStyle(wb, sheet = "Tabaco trimestral",style=col5,rows = (ultima_fila+11),cols = 6:7)
+ #  #Leer solo la hoja de Huevos
+ #  data <- read.xlsx(entrada, sheet = "Tabaco trimestral", colNames = TRUE,startRow = 10)
+
+ #  ultima_fila=nrow(data)
+ #  fila=which(data$Año==(anio-1))
+
+ #  #Correr la funcion Ovino_Caprino
+ #  valor_Tabaco=f_Tabaco(directorio,mes,anio)
+ #  trimestre=f_trimestre(mes)
+ #  valor_actual=NULL
+ #  valor_anterior=as.numeric(data[data$Año==(anio-2),"Tabaco"])
+ #  for(i in 1:(4+trimestre)){
+ #    valor_actual[i]=as.numeric(valor_anterior[i]*(1+valor_Tabaco[i]/100))
+ #    valor_anterior=c(valor_anterior,valor_actual[i])
+ #  }
+ #  tamaño=length(valor_actual)
+ #  tabla_Tabaco=cbind(valor_actual,valor_anterior[1:tamaño])
+ #  tabla_Tabaco=as.data.frame(tabla_Tabaco)
+ #  colnames(tabla_Tabaco)=c("valor_actual","valor_anterior")
+ #  tabla_Tabaco$variacion_anual=tabla_Tabaco$valor_actual/tabla_Tabaco$valor_anterior*100-100
+ #  #Identificar el numero de trimestre
+ #  tabla_Tabaco$estado <-  ""
+ #  for (i in seq(2, nrow(tabla_Tabaco), by = 2)) {
+ #    tabla_Tabaco$estado[i] <- (sum(tabla_Tabaco$valor_actual[(i-1):i]) / sum(tabla_Tabaco$valor_anterior[(i-1):i]))*100-100  # Realiza la suma y división
+ #  }
 
 
-  }else{
-    print("Este mes no se actualiza la hoja de Tabaco")
-  }
+ #  nuevos_datos <- data.frame(
+ #    Consecutivo =c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
+ #    Año = c(data[fila[1]:ultima_fila,"Año"],anio),
+ #    Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],trimestre),
+ #    Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"Toneladas"),
+ #    Tabaco_valor=tabla_Tabaco$valor_actual,
+ #    Variacion.Anual=tabla_Tabaco$variacion_anual,
+ #    Estado=as.numeric(tabla_Tabaco$estado),
+ #    observaciones=rep("",tamaño),
+ #    Tipo=rep("",tamaño)
+ #  )
+ #  # Escribe los datos en la hoja "Tabaco trimestral"
+ #  writeData(wb, sheet = "Tabaco trimestral", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
+
+ #  #Añadir estilos de celda
+ #  addStyle(wb, sheet = "Tabaco trimestral",style=col1,rows = (ultima_fila+11),cols = 1:4)
+ #  addStyle(wb, sheet = "Tabaco trimestral",style=col3,rows = (ultima_fila+11),cols = 5)
+ #  addStyle(wb, sheet = "Tabaco trimestral",style=col5,rows = (ultima_fila+11),cols = 6:7)
 
 
+ #}else{
+ #  print("Este mes no se actualiza la hoja de Tabaco")
+ #}
+#
+#
 
   # Papa ------------------------------------------------------------------
 
