@@ -49,7 +49,7 @@ f_Cafe_verde_pergamino<-function(directorio,mes,anio){
 
 # Exportaciones cafe verde -----------------------------------------------------------
 
-  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Exportaciones","NOMBRE"]
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Cafe","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel
   Cafe_verde <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/CAFÉ/",archivo),
