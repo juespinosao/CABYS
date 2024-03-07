@@ -1,3 +1,5 @@
+
+Tablas_presentacion<-function(directorio,mes,anio){
 library(gt)
 library(dplyr)
 library(gtExtras)
@@ -546,3 +548,4 @@ tabla %>%
 #tabla=rbind(tabla,c("Pesca",valor_ant,valor_act))
 #
 
+}
