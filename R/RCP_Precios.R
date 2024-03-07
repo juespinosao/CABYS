@@ -25,7 +25,7 @@ f_Precios<-function(directorio,mes,anio){
   #Identificar la fila donde esta la palabra Periodo
   n_col=which(Precios == "CODIGO",arr.ind = TRUE)[, "col"]
 
-
+ dos_digitos=anio %% 100
   #identificar las columna donde dice total general y peso en pie
   #identificar las columna donde dice total general y peso en pie
   columna1=which(grepl(paste0(nombres_siglas[mes-1],"-",dos_digitos),Precios),arr.ind = TRUE)

@@ -18,7 +18,7 @@ f_Arroz<-function(directorio,mes,anio){
   Arroz <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Arroz/",archivo))
 
 
-  columna=which(grepl("No.Tn",Arroz),arr.ind = TRUE)
+  columna=which(grepl("TONELADAS",Arroz),arr.ind = TRUE)
   filas=which(Arroz== (anio-1) | Arroz== anio,arr.ind = TRUE)[,"row"]
 
   Valor_Arroz=as.data.frame(Arroz[filas,columna])

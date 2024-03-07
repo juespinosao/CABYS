@@ -38,10 +38,10 @@ f_Fenavi<-function(directorio,mes,anio){
 
 # Aves de postura ---------------------------------------------------------
 
-  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="FENAVI2","NOMBRE"]
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="FENAVI3","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel
-  Postura <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/FENAVI/Invetarios-de-aves-",tolower(nombres_siglas[mes]),"-",anio,".xlsx"))
+  Postura <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/FENAVI/",archivo))
  fila_col=which(grepl("Mes",as.data.frame(t(Postura))),arr.ind = TRUE)
   n_fila=which(grepl("postura",as.data.frame(t(Postura))),arr.ind = TRUE)
   fila_tabla=as.numeric(which(Postura == "Ene",arr.ind = TRUE)[, "row"])
