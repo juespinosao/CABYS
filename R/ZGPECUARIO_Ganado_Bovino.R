@@ -58,7 +58,7 @@ Valor_Bovino=as.data.frame(Ganado_Bovino[fila:(fila+mes-1),c(columnaf1,columnaf2
 archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Exportaciones","NOMBRE"]
 
 # Especifica la ruta del archivo de Excel
-archivos=list.files(paste0(directorio,"/ISE/",anio,"/",carpeta,"/consolidado_ISE"))
+archivos=list.files(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE"))
 elementos_seleccionados <- archivos[grepl("Expos e", archivos) ]
 # Especifica la ruta del archivo de Excel
 Bovino <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
