@@ -97,4 +97,5 @@ f0_inicial<-function(directorio,mes,anio){
   }
 
   print(paste0("Se creo el archivo Nombres_archivos_",nombres_meses[mes]," en ",directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc"))
-}
+  close(wb)
+  }
