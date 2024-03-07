@@ -14,7 +14,7 @@ f_Leche<-function(directorio,mes,anio){
 
 # Leche_sipsa -------------------------------------------------------------
 
-  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Leche_SIPSA","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel

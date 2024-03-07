@@ -11,14 +11,17 @@ library(openxlsx)
 #Crear el nombre de las carpetas del mes anterior y el actual
 if(mes==1){
 carpeta_anterior=nombre_carpeta(12,(anio-1))
+entrada=paste0(directorio,"/ISE/",anio-1,"/",carpeta_anterior,"/Results/ZG2_Pecuario_ISE_",nombres_meses[mes-1],"_",anio,".xlsx")
+
 }else{
 carpeta_anterior=nombre_carpeta(mes-1,anio)
+entrada=paste0(directorio,"/ISE/",anio,"/",carpeta_anterior,"/Results/ZG2_Pecuario_ISE_",nombres_meses[mes-1],"_",anio,".xlsx")
+
 }
 
 carpeta_actual=nombre_carpeta(mes,anio)
 
 #Dirección de entrada del archivo ZG_pecuario del mes anterior y donde se va a guardar el siguiente
-entrada=paste0(directorio,"/ISE/",anio,"/",carpeta_anterior,"/Results/ZG2_Pecuario_ISE_",nombres_meses[mes-1],"_",anio,".xlsx")
 salida=paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Results/ZG2_Pecuario_ISE_",nombres_meses[mes],"_",anio,".xlsx")
 
 # Cargar el archivo de entrada

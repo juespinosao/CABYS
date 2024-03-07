@@ -16,7 +16,7 @@ f_Precios<-function(directorio,mes,anio){
 
 # IPP ---------------------------------------------------------------------
 
-  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="IPP","NOMBRE"]
 
   Precios <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Precios/",archivo),

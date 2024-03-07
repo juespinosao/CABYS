@@ -11,7 +11,7 @@ f_Huevos<-function(directorio,mes,anio){
 
   carpeta=nombre_carpeta(mes,anio)
 
-  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="FENAVI1","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel

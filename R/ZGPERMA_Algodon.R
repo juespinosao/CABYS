@@ -13,7 +13,7 @@ f_Algodon<-function(directorio,mes,anio){
   semestre=f_semestre(mes)
 
 
-  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Algodon","NOMBRE"]
 
   Algodon<-read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Algodón/",archivo),colNames = FALSE)

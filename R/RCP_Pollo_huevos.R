@@ -13,7 +13,7 @@ f_Fenavi<-function(directorio,mes,anio){
 
 # Encasetamiento ----------------------------------------------------------
 
-  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="FENAVI2","NOMBRE"]
 
   # Especifica la ruta del archivo de Excel

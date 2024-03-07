@@ -12,7 +12,7 @@ f_Papa<-function(directorio,mes,anio){
   carpeta=nombre_carpeta(mes,anio)
   # Especifica la ruta del archivo de Excel
 
-  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Papa","NOMBRE"]
 
   Papa <- read_excel(paste0(directorio,"/",anio,"/",carpeta,"/consolidado_ISE/Mensualización_papa/",archivo))
