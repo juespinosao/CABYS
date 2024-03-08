@@ -45,8 +45,9 @@ Valor_actual=as.numeric(Panela[n_fila[[1]],columnaf_act])
 fila_ant=which(Panela_Historico==(anio-1),arr.ind = TRUE)[,"row"]
 preliminar_actual=Panela_Historico[fila_ant,3]*(1+(Valor_actual/Panela_Historico[fila_ant,2]*100-100)/100)
 fila_año=which(Panela_Historico==anio,arr.ind = TRUE)[,"row"]
+nuevos_datos=c(anio,Valor_actual,preliminar_actual)
 if(length(fila_año)==0){
-  nuevos_datos=c(anio,Valor_actual,preliminar_actual)
+
   Panela_Historico=rbind(Panela_Historico,nuevos_datos)
 }else{
   Panela_Historico[fila_año,]=nuevos_datos
