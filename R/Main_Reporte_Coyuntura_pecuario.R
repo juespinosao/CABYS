@@ -53,8 +53,13 @@ writeData(wb, sheet = "Precios", x = USP,colNames = FALSE,startCol = "H", startR
 writeData(wb, sheet = "Precios", x = IPP[,5:8],colNames = FALSE,startCol = "J", startRow = (ultima_fila_precios+5))
 writeData(wb, sheet = "Precios", x = IPC,colNames = FALSE,startCol = "N", startRow = (ultima_fila_precios+6))
 writeData(wb, sheet = "Precios", x = IPP[,9],colNames = FALSE,startCol = "P", startRow = (ultima_fila_precios+5))
+if(mes-length(USP$Valor_sinbon)>0){
+for (i in 1:(mes-length(USP$Valor_sinbon))) {
 
+  writeFormula(wb, sheet ="Precios" , x = paste0("AVERAGE(H",(fila_enero_precios[1]+5),":H",ultima_fila_precios+6-i,")") ,startCol = "H", startRow = (ultima_fila_precios+7-i))
 
+}
+}
 addStyle(wb, sheet = "Precios",style=cbp,rows = (ultima_fila_precios+6),cols = 1)
 addStyle(wb, sheet = "Precios",style=cbn4,rows = (ultima_fila_precios+6),cols = 2:9)
 addStyle(wb, sheet = "Precios",style=rn5,rows = (ultima_fila_precios+6),cols = 10:16)
@@ -1129,26 +1134,26 @@ Valores_precios<-matrix(c(paste0("'Precios'!AF",fila_anterior_precios+5),
                           paste0("'Precios'!AG",fila_anterior_precios+5),
                           paste0("'Precios'!AD",fila_anterior_precios+5),
                           paste0("'Precios'!AE",fila_anterior_precios+5),
-                          paste0("'Precios'!AF",ultima_fila_precios+5),
-                          paste0("'Precios'!AG",ultima_fila_precios+5),
-                          paste0("'Precios'!AD",ultima_fila_precios+5),
-                          paste0("'Precios'!AE",ultima_fila_precios+5),
+                          paste0("'Precios'!AF",ultima_fila_precios+6),
+                          paste0("'Precios'!AG",ultima_fila_precios+6),
+                          paste0("'Precios'!AD",ultima_fila_precios+6),
+                          paste0("'Precios'!AE",ultima_fila_precios+6),
                           paste0("'Precios'!AV",fila_anterior_precios+5),
                           paste0("'Precios'!AW",fila_anterior_precios+5),
                           paste0("'Precios'!AT",fila_anterior_precios+5),
                           paste0("'Precios'!AU",fila_anterior_precios+5),
-                          paste0("'Precios'!AV",ultima_fila_precios+5),
-                          paste0("'Precios'!AW",ultima_fila_precios+5),
-                          paste0("'Precios'!AT",ultima_fila_precios+5),
-                          paste0("'Precios'!AU",ultima_fila_precios+5),
+                          paste0("'Precios'!AV",ultima_fila_precios+6),
+                          paste0("'Precios'!AW",ultima_fila_precios+6),
+                          paste0("'Precios'!AT",ultima_fila_precios+6),
+                          paste0("'Precios'!AU",ultima_fila_precios+6),
                           paste0("'Precios'!BL",fila_anterior_precios+5),
                           paste0("'Precios'!BM",fila_anterior_precios+5),
                           paste0("'Precios'!BJ",fila_anterior_precios+5),
                           paste0("'Precios'!BK",fila_anterior_precios+5),
-                          paste0("'Precios'!BL",ultima_fila_precios+5),
-                          paste0("'Precios'!BM",ultima_fila_precios+5),
-                          paste0("'Precios'!BJ",ultima_fila_precios+5),
-                          paste0("'Precios'!BK",ultima_fila_precios+5)
+                          paste0("'Precios'!BL",ultima_fila_precios+6),
+                          paste0("'Precios'!BM",ultima_fila_precios+6),
+                          paste0("'Precios'!BJ",ultima_fila_precios+6),
+                          paste0("'Precios'!BK",ultima_fila_precios+6)
 
 ),nrow=4,ncol=6,byrow = FALSE)
 
@@ -1232,26 +1237,26 @@ Valores_precios<-matrix(c(paste0("'Precios'!AK",fila_anterior_precios+5),
                           paste0("'Precios'!AM",fila_anterior_precios+5),
                           paste0("'Precios'!AP",fila_anterior_precios+5),
                           paste0("'Precios'!AN",fila_anterior_precios+5),
-                          paste0("'Precios'!AK",ultima_fila_precios+5),
-                          paste0("'Precios'!AM",ultima_fila_precios+5),
-                          paste0("'Precios'!AP",ultima_fila_precios+5),
-                          paste0("'Precios'!AN",ultima_fila_precios+5),
+                          paste0("'Precios'!AK",ultima_fila_precios+6),
+                          paste0("'Precios'!AM",ultima_fila_precios+6),
+                          paste0("'Precios'!AP",ultima_fila_precios+6),
+                          paste0("'Precios'!AN",ultima_fila_precios+6),
                           paste0("'Precios'!BA",fila_anterior_precios+5),
                           paste0("'Precios'!BC",fila_anterior_precios+5),
                           paste0("'Precios'!BF",fila_anterior_precios+5),
                           paste0("'Precios'!BD",fila_anterior_precios+5),
-                          paste0("'Precios'!BA",ultima_fila_precios+5),
-                          paste0("'Precios'!BC",ultima_fila_precios+5),
-                          paste0("'Precios'!BF",ultima_fila_precios+5),
-                          paste0("'Precios'!BD",ultima_fila_precios+5),
+                          paste0("'Precios'!BA",ultima_fila_precios+6),
+                          paste0("'Precios'!BC",ultima_fila_precios+6),
+                          paste0("'Precios'!BF",ultima_fila_precios+6),
+                          paste0("'Precios'!BD",ultima_fila_precios+6),
                           paste0("'Precios'!BQ",fila_anterior_precios+5),
                           paste0("'Precios'!BS",fila_anterior_precios+5),
                           paste0("'Precios'!BU",fila_anterior_precios+5),
                           paste0("'Precios'!BT",fila_anterior_precios+5),
-                          paste0("'Precios'!BQ",ultima_fila_precios+5),
-                          paste0("'Precios'!BS",ultima_fila_precios+5),
-                          paste0("'Precios'!BU",ultima_fila_precios+5),
-                          paste0("'Precios'!BT",ultima_fila_precios+5)
+                          paste0("'Precios'!BQ",ultima_fila_precios+6),
+                          paste0("'Precios'!BS",ultima_fila_precios+6),
+                          paste0("'Precios'!BU",ultima_fila_precios+6),
+                          paste0("'Precios'!BT",ultima_fila_precios+6)
 
 ),nrow=4,ncol=6,byrow = FALSE)
 

@@ -68,7 +68,8 @@ ZG_Permanentes=function(directorio,mes,anio){
 
       addStyle(wb, sheet = "Cafe Pergamino", style = col1, rows = (ultima_fila+10), cols = 1:4)
       addStyle(wb, sheet = "Cafe Pergamino",style=col8,rows = (ultima_fila+10),cols = 5:8)
-      addStyle(wb, sheet = "Cafe Pergamino",style=col9,rows = (ultima_fila+10),cols = 9:12)
+      addStyle(wb, sheet = "Cafe Pergamino",style=col9,rows = (ultima_fila+10),cols = 9:11)
+      addStyle(wb, sheet = "Cafe Pergamino",style=col7,rows = (ultima_fila+10),cols = 12)
       addStyle(wb, sheet = "Cafe Pergamino",style= col4 ,rows = (ultima_fila+10),cols = 13)
       addStyle(wb, sheet = "Cafe Pergamino",style=col8,rows = (ultima_fila+10),cols = 14)
 
@@ -112,7 +113,7 @@ ZG_Permanentes=function(directorio,mes,anio){
   #Añadir estilos de celda
   addStyle(wb, sheet = "Cafe Verde",style=col1,rows = (ultima_fila+11),cols = 1:4)
   addStyle(wb, sheet = "Cafe Verde",style=col9,rows = (ultima_fila+11),cols = 5:8)
-  addStyle(wb, sheet = "Cafe Verde",style=col7,rows = (ultima_fila+11),cols = 9:14)
+  addStyle(wb, sheet = "Cafe Verde",style=col6,rows = (ultima_fila+11),cols = 9:14)
 
 
 
@@ -938,7 +939,8 @@ if (mes %in% c(3,6,9,12)){
 }
 
 addStyle(wb, sheet = "Áreas en desarrollo",style=col1,rows = (ultima_fila+13),cols = 1:4)
-addStyle(wb, sheet = "Áreas en desarrollo",style=col7,rows = (ultima_fila+13),cols = 5:13)
+addStyle(wb, sheet = "Áreas en desarrollo",style=col7,rows = (ultima_fila+13),cols = c(5:6,8:10,12:13))
+addStyle(wb, sheet = "Áreas en desarrollo",style=col2,rows = (ultima_fila+13),cols = c(7,11))
 addStyle(wb, sheet = "Áreas en desarrollo",style=col4,rows = (ultima_fila+13),cols = 14:15)
 
   # Guardar el libro --------------------------------------------------------
