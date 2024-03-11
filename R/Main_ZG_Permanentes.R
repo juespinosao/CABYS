@@ -924,6 +924,7 @@ writeData(wb, sheet="Áreas en desarrollo", x = nuevos_datos,colNames = FALSE,st
 
 
 
+
 formulas <- c(paste0("E",ultima_fila+13,"/(SUM(E133:E144)/12)*100"),
                    paste0("F",ultima_fila+13,"/(SUM(F133:F144)/12)*100"),
                    paste0("G",ultima_fila+13),
