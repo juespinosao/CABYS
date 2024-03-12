@@ -75,7 +75,7 @@ writeData(wb, sheet = "Ganado_Bovino", x = nuevos_datos,colNames = FALSE,startCo
 addStyle(wb, sheet = "Ganado_Bovino",style=col1,rows = (ultima_fila+11),cols = 1:4,gridExpand = TRUE)
 addStyle(wb, sheet = "Ganado_Bovino",style=col2,rows = (ultima_fila+11),cols = 5,gridExpand = TRUE)
 addStyle(wb, sheet = "Ganado_Bovino",style=col3,rows = (ultima_fila+11),cols = 6,gridExpand = TRUE)
-addStyle(wb, sheet = "Ganado_Bovino",style=col6,rows = (ultima_fila+11),cols = 7:8,gridExpand = TRUE)
+addStyle(wb, sheet = "Ganado_Bovino",style=col4,rows = (ultima_fila+11),cols = 7:8,gridExpand = TRUE)
 
 # Pollos ------------------------------------------------------------------
 
@@ -324,7 +324,7 @@ nuevos_datos <- data.frame(
 )
 
 # Escribe los datos en la hoja "Ovino y Caprino trimestral"
-writeData(wb, sheet = "Ovino y Caprino trimestral", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila+11))
+writeData(wb, sheet = "Ovino y Caprino trimestral", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
 #Añadir estilos de celda
 addStyle(wb, sheet = "Ovino y Caprino trimestral",style=col1,rows = (ultima_fila+11),cols = 1:4)

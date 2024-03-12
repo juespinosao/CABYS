@@ -55,7 +55,7 @@ ZG_Permanentes=function(directorio,mes,anio){
       Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"Sacos de 60 kilogramos de CAFÉ PERGAMINO"),
       valor_Cafe_verde_pergamino,
       Variacion.Anual=valor_Cafe_verde_pergamino$produccion_total_pergamino/anterior_pergamino*100-100,
-      Estado=Estado,
+      Estado=as.numeric(Estado),
       observaciones=rep("",tamaño),
       Tipo=rep("",tamaño)
     )
@@ -146,7 +146,7 @@ ZG_Permanentes=function(directorio,mes,anio){
     Descripcion=rep("Hectáreas Renovadas para Producción",mes),
     Cafetos.Toneladas=valor_Cafetos$valor_Cafetos,
     Variacion.Anual=valor_Cafetos$valor_Cafetos/valor_Cafetos$anterior*100-100,
-    Estado=valor_Cafetos$Estado,
+    Estado=as.numeric(valor_Cafetos$Estado),
     observaciones=rep("",mes),
     Tipo=rep("",mes)
   )
@@ -249,14 +249,14 @@ ZG_Permanentes=function(directorio,mes,anio){
     exportacion_Variacion_Anual=valor_Banano$exportaciones/Expo_anterior*100-100,
     consumo_Variacion_Anual=valor_Banano$consumo_interno/Consumo_anterior*100-100,
     indice_Variacion_Anual2=Indice_ponderado/Indice_ponderado_anterior*100-100,
-    Expos_trim=expo_trim,
-    Consumo_trim=consumo_trim,
-    Indice_trim=ponderado_trim,
+    Expos_trim=as.numeric(expo_trim),
+    Consumo_trim=as.numeric(consumo_trim),
+    Indice_trim=as.numeric(ponderado_trim),
     Tipo=rep("",tamaño),
-    Var_anual_indice_consumo=consumo_anual,
-    Var_anual_indice_ponderado=ponderado_anual,
-    Var_anual_consumo=consumo_anual,
-    Var_anual_expos=expo_anual
+    Var_anual_indice_consumo=as.numeric(consumo_anual),
+    Var_anual_indice_ponderado=as.numeric(ponderado_anual),
+    Var_anual_consumo=as.numeric(consumo_anual),
+    Var_anual_expos=as.numeric(expo_anual)
   )
 
 
@@ -353,11 +353,11 @@ ZG_Permanentes=function(directorio,mes,anio){
     exportacion_Variacion_Anual=valor_Platano$exportaciones/Expo_anterior*100-100,
     consumo_Variacion_Anual=valor_Platano$consumo_interno/Consumo_anterior*100-100,
     indice_Variacion_Anual2=Indice_ponderado/Indice_ponderado_anterior*100-100,
-    Expos_trim=expo_trim,
-    Consumo_trim=consumo_trim,
-    Indice_trim=ponderado_trim,
-    Tipo=expo_anual,
-    Total_Interno=consumo_anual,
+    Expos_trim=as.numeric(expo_trim),
+    Consumo_trim=as.numeric(consumo_trim),
+    Indice_trim=as.numeric(ponderado_trim),
+    Tipo=as.numeric(expo_anual),
+    Total_Interno=as.numeric(consumo_anual),
     var_anual=rep("",tamaño)
   )
 
@@ -473,12 +473,12 @@ ZG_Permanentes=function(directorio,mes,anio){
     exportacion_Variacion_Anual=Exportaciones/Exportaciones_anterior*100-100,
     consumo_Variacion_Anual=valor_Frutas$vector/lag(valor_Frutas$vector,12)*100-100,
     indice_Variacion_Anual2=Indice_ponderado/Indice_ponderado_anterior*100-100,
-    Expos_trim=expo_trim,
-    Consumo_trim=consumo_trim,
-    Indice_trim=ponderado_trim,
-    Total_Interno=consumo_anual,
-    Tipo=expo_anual,
-    var_anual=ponderado_anual
+    Expos_trim=as.numeric(expo_trim),
+    Consumo_trim=as.numeric(consumo_trim),
+    Indice_trim=as.numeric(ponderado_trim),
+    Total_Interno=as.numeric(consumo_anual),
+    Tipo=as.numeric(expo_anual),
+    var_anual=as.numeric(ponderado_anual)
   )
 
 
@@ -532,8 +532,8 @@ ZG_Permanentes=function(directorio,mes,anio){
     Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"MILES DE TONELADAS"),
     Palma.Toneladas=valor_Palma$fruto[1:tamaño],
     Variacion.Anual=valor_Palma$fruto[1:tamaño]/Palma_anterior*100-100,
-    Estado=Estado,
-    observaciones=Observaciones,
+    Estado=as.numeric(Estado),
+    observaciones=as.numeric(Observaciones),
     Tipo=rep("",tamaño)
   )
 
@@ -583,8 +583,8 @@ ZG_Permanentes=function(directorio,mes,anio){
     Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"MILES DE TONELADAS"),
     Palma.Toneladas=valor_Palma$aceite[1:tamaño],
     Variacion.Anual=valor_Palma$aceite[1:tamaño]/Palma_anterior*100-100,
-    Estado=Estado,
-    observaciones=Observaciones,
+    Estado=as.numeric(Estado),
+    observaciones=as.numeric(Observaciones),
     Tipo=rep("",tamaño)
   )
 
@@ -646,9 +646,9 @@ ZG_Permanentes=function(directorio,mes,anio){
     Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"Toneladas"),
     Palma.Toneladas=valor_Cacao,
     Variacion.Anual=valor_Cacao/Cacao_anterior*100-100,
-    Estado=Estado,
-    observaciones=Observaciones,
-    Tipo=Tipo
+    Estado=as.numeric(Estado),
+    observaciones=as.numeric(Observaciones),
+    Tipo=as.numeric(Tipo)
   )
 
 
@@ -702,8 +702,8 @@ ZG_Permanentes=function(directorio,mes,anio){
     Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"Exportaciones en miles de millones de pesos constantes"),
     Palma.Toneladas=valor_Flores,
     Variacion.Anual=valor_Flores/Flores_anterior*100-100,
-    Estado=Estado,
-    observaciones=Observaciones,
+    Estado=as.numeric(Estado),
+    observaciones=as.numeric(Observaciones),
     Tipo=rep("",tamaño)
   )
 
@@ -751,7 +751,7 @@ ZG_Permanentes=function(directorio,mes,anio){
     Descripcion="Toneladas",
     Leche.Toneladas=vector_caña,
     Variacion.Anual=vector_caña/Caña_anterior*100-100,
-    Estado=Estado,
+    Estado=as.numeric(Estado),
     observaciones=if (mes==12) {
       c(rep("",11),sum(vector_caña)/sum(Caña_anterior)*100-100)
     } else {
@@ -807,13 +807,13 @@ ZG_Permanentes=function(directorio,mes,anio){
         (sum(tail(lag(data$Panela,11),3)))*100-100
 
     } else {
-      ""
+      " "
     },
     observaciones=if (mes==12) {
       (valor_actual+sum(filter(data, Año == anio)[["Panela"]]))/
         (sum(tail(lag(data$Panela,11),12)))*100-100
     } else {
-      ""
+      " "
     },
     Tipo=""
   )
@@ -940,7 +940,8 @@ if (mes %in% c(3,6,9,12)){
 }
 
 addStyle(wb, sheet = "Áreas en desarrollo",style=col1,rows = (ultima_fila+13),cols = 1:4)
-addStyle(wb, sheet = "Áreas en desarrollo",style=col7,rows = (ultima_fila+13),cols = c(5:6,8:10,12:13))
+addStyle(wb, sheet = "Áreas en desarrollo",style=col7,rows = (ultima_fila+13),cols = c(5:6,8:10,12))
+addStyle(wb, sheet = "Áreas en desarrollo",style=col6,rows = (ultima_fila+13),cols = 13)
 addStyle(wb, sheet = "Áreas en desarrollo",style=col2,rows = (ultima_fila+13),cols = c(7,11))
 addStyle(wb, sheet = "Áreas en desarrollo",style=col4,rows = (ultima_fila+13),cols = 14:15)
 
