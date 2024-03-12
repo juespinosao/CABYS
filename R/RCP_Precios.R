@@ -45,7 +45,7 @@ f_Precios<-function(directorio,mes,anio){
 
 
   #Tomar el valor que nos interesa
-  Valor_Precios=as.data.frame(t(Precios[c(fila1,fila2,fila3,fila4,fila5,fila6,fila7,fila8,fila9),c(columna1[2],columna2[1])]))
+  Valor_Precios=as.data.frame(t(Precios[c(fila1,fila2,fila3,fila4,fila5,fila6,fila7,fila8,fila9),c(columna1[1],columna2[1])]))
 
   Valor_Precios=as.data.frame(lapply(Valor_Precios, as.numeric))
 
@@ -131,7 +131,7 @@ valor_usp=as.data.frame(lapply(valor_usp, as.numeric))
 
 
 
-  # IPC -----------------------------------------------------------
+# IPC -----------------------------------------------------------
 
 
 archivo=nombre_archivos[nombre_archivos$PRODUCTO=="IPC","NOMBRE"]

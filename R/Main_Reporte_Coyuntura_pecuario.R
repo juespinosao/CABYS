@@ -125,7 +125,7 @@ if (mes %in% c(3,6,9,12)){
                       paste('IFERROR(SUM(L',ultima_fila_precios+4,':L',ultima_fila_precios+6,')/SUM(L',fila_anterior_precios+3,':L',fila_anterior_precios+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(M',ultima_fila_precios+4,':M',ultima_fila_precios+6,')/SUM(M',fila_anterior_precios+3,':M',fila_anterior_precios+5,')*100-100,','"*")',sep = ""),
                       paste('IFERROR(SUM(N',ultima_fila_precios+4,':N',ultima_fila_precios+6,')/SUM(N',fila_anterior_precios+3,':N',fila_anterior_precios+5,')*100-100,','"*")',sep = ""),
-                      paste('IFERROR(SUM(P',ultima_fila_precios+4,':P',ultima_fila_precios+6,')/SUM(P',fila_anterior_precios+3,':P',fila_anterior_precios+5,')*100-100,','"*")',sep = ""),
+                      paste('IFERROR(SUM(P',ultima_fila_precios+4,':P',ultima_fila_precios+6,')/SUM(P',fila_anterior_precios+3,':P',fila_anterior_precios+5,')*100-100,','"*")',sep = "")
   )
 
   for (i in 60:73) {
@@ -810,7 +810,7 @@ if (mes==12){
   addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 68:80)
 
 }else{
-  cat("Este mes no se actualiza trimestre")
+  cat("Este mes no se actualiza anual")
 }
 
 
