@@ -303,13 +303,9 @@ writeData(wb, sheet = "Ovino y Caprino trimestral", x = nuevos_datos,colNames = 
 }
 
 
-if (!file.exists(salida)) {
-  saveWorkbook(wb, file = salida)
-} else {
-  saveWorkbook(wb, file = salida,overwrite= TRUE)
-}
 
 # Formatos ----------------------------------------------------------------
+
 
 addStyle(wb, sheet = "Ganado_Bovino",style=col1,rows = (ultima_fila+11),cols = 1:4,gridExpand = TRUE)
 addStyle(wb, sheet = "Ganado_Bovino",style=col2,rows = (ultima_fila+11),cols = 5,gridExpand = TRUE)

@@ -1266,14 +1266,6 @@ if(mes %in% c(3,6,9,12)){
 
 }
 
-# Guardar el libro --------------------------------------------------------
-
-
-if (!file.exists(salida)) {
-  saveWorkbook(wb, file = salida)
-} else {
-  saveWorkbook(wb, file = salida,overwrite= TRUE)
-}
 
 
 

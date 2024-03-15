@@ -532,11 +532,6 @@ if (mes %in% c(3, 6, 9, 12)){
 
 
 
-  if (!file.exists(salida)) {
-    saveWorkbook(wb, file = salida)
-  } else {
-    saveWorkbook(wb, file = salida,overwrite= TRUE)
-  }
 
 # Formatos ----------------------------------------------------------------
 

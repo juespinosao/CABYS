@@ -858,11 +858,7 @@ if (mes %in% c(3,6,9,12)){
 }
 
 
-if (!file.exists(salida)) {
-  saveWorkbook(wb, file = salida)
-} else {
-  saveWorkbook(wb, file = salida,overwrite= TRUE)
-}
+
 # Formatos ----------------------------------------------------------------
 addStyle(wb, sheet = "Cafe Pergamino", style = col1, rows = (ultima_fila+10), cols = 1:4)
 addStyle(wb, sheet = "Cafe Pergamino",style=col8,rows = (ultima_fila+10),cols = 5:8)
