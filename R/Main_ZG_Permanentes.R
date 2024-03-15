@@ -66,12 +66,6 @@ ZG_Permanentes=function(directorio,mes,anio){
     writeData(wb, sheet = "Cafe Pergamino", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+9))
 
 
-      addStyle(wb, sheet = "Cafe Pergamino", style = col1, rows = (ultima_fila+10), cols = 1:4)
-      addStyle(wb, sheet = "Cafe Pergamino",style=col8,rows = (ultima_fila+10),cols = 5:8)
-      addStyle(wb, sheet = "Cafe Pergamino",style=col9,rows = (ultima_fila+10),cols = 9:11)
-      addStyle(wb, sheet = "Cafe Pergamino",style=col7,rows = (ultima_fila+10),cols = 12)
-      addStyle(wb, sheet = "Cafe Pergamino",style= col4 ,rows = (ultima_fila+10),cols = 13)
-      addStyle(wb, sheet = "Cafe Pergamino",style=col8,rows = (ultima_fila+10),cols = 14)
 
 # Cafe_verde ------------------------------------------------------------------
 
@@ -109,12 +103,6 @@ ZG_Permanentes=function(directorio,mes,anio){
 
   # Escribe los datos en la hoja "Cafe_verde"
   writeData(wb, sheet = "Cafe Verde", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
-
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Cafe Verde",style=col1,rows = (ultima_fila+11),cols = 1:4)
-  addStyle(wb, sheet = "Cafe Verde",style=col9,rows = (ultima_fila+11),cols = 5:8)
-  addStyle(wb, sheet = "Cafe Verde",style=col6,rows = (ultima_fila+11),cols = 9:14)
-
 
 
   # Cafetos ------------------------------------------------------------------
@@ -156,13 +144,6 @@ ZG_Permanentes=function(directorio,mes,anio){
 
   # Escribe los datos en la hoja "Cafetos"
   writeData(wb, sheet = "Cafetos", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+9))
-
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Cafetos",style=col1,rows = (ultima_fila+10),cols = 1:4)
-  addStyle(wb, sheet = "Cafetos",style=col7,rows = (ultima_fila+10),cols = 5)
-  addStyle(wb, sheet = "Cafetos",style=col3,rows = (ultima_fila+10),cols = 6)
-  addStyle(wb, sheet = "Cafetos",style=col4,rows = (ultima_fila+10),cols = 7)
-
 
   # Banano ------------------------------------------------------------------
 
@@ -265,16 +246,6 @@ ZG_Permanentes=function(directorio,mes,anio){
   # Escribe los datos en la hoja "Banano Total(Expos+Interno)"
   writeData(wb, sheet = "Banano Total(Expos+Interno)", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+11))
 
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col1,rows = (ultima_fila+12),cols = 1:4)
-  addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 5:7)
-  addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col7,rows = (ultima_fila+12),cols = 8)
-  addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 9:11)
-  addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col3,rows = (ultima_fila+12),cols = 12:19)
-  addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 20:21)
-  addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col3,rows = (ultima_fila+12),cols = 22:23)
-
-
 
   # Platano ------------------------------------------------------------------
 
@@ -366,15 +337,6 @@ ZG_Permanentes=function(directorio,mes,anio){
 
   # Escribe los datos en la hoja "Plátano Total(Expos+Interno)"
   writeData(wb, sheet = "Plátano Total(Expos+Interno)", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+11))
-
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col1,rows = (ultima_fila+12),cols = 1:4)
-  addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col6,rows = (ultima_fila+12),cols = 5)
-  addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 6:7)
-  addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col7,rows = (ultima_fila+12),cols = 8)
-  addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 9:11)
-  addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col3,rows = (ultima_fila+12),cols = 12:18)
-  addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 19:20)
 
 
   # Frutas ------------------------------------------------------------------
@@ -487,15 +449,6 @@ ZG_Permanentes=function(directorio,mes,anio){
   # Escribe los datos en la hoja "Frutas Total(Expos+Interno)"
   writeData(wb, sheet = "Frutas Total(Expos+Interno)", x = nuevos_datos,colNames = FALSE,startCol = "H", startRow = (fila[1]+11))
 
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col1,rows = (ultima_fila+12),cols = 1:4)
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col6,rows = (ultima_fila+12),cols = 5)
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 6:7)
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col7,rows = (ultima_fila+12),cols = 8)
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 9:11)
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col3,rows = (ultima_fila+12),cols = 12:18)
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 19:21)
-
   writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Total(Expos+Interno)'!K",ultima_fila+12) ,startCol = "G", startRow = ultima_fila+13)
 
   # Fruto de Palma ------------------------------------------------------------------
@@ -543,13 +496,6 @@ ZG_Permanentes=function(directorio,mes,anio){
   # Escribe los datos en la hoja "Fruto de Palma"
   writeData(wb, sheet = "Fruto de Palma", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+9))
 
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Fruto de Palma",style=col1,rows = (ultima_fila+10),cols = 1:4)
-  addStyle(wb, sheet = "Fruto de Palma",style=col4,rows = (ultima_fila+10),cols = 5:6)
-  addStyle(wb, sheet = "Fruto de Palma",style=col3,rows = (ultima_fila+10),cols = 7)
-  addStyle(wb, sheet = "Fruto de Palma",style=col6,rows = (ultima_fila+10),cols = 8)
-
-
   writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Fruto de Palma'!E",ultima_fila+10) ,startCol = "E", startRow = ultima_fila+13)
 
 
@@ -593,14 +539,6 @@ ZG_Permanentes=function(directorio,mes,anio){
 
   # Escribe los datos en la hoja "Aceite de Palma"
   writeData(wb, sheet = "Aceite de palma", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+9))
-
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Aceite de palma",style=col1,rows = (ultima_fila+10),cols = 1:4)
-  addStyle(wb, sheet = "Aceite de palma",style=col7,rows = (ultima_fila+10),cols = 5)
-  addStyle(wb, sheet = "Aceite de palma",style=col4,rows = (ultima_fila+10),cols = 6)
-  addStyle(wb, sheet = "Aceite de palma",style=col3,rows = (ultima_fila+10),cols = 7)
-  addStyle(wb, sheet = "Aceite de palma",style=col6,rows = (ultima_fila+10),cols = 8)
-
 
 
   # Cacao ------------------------------------------------------------------
@@ -656,11 +594,6 @@ ZG_Permanentes=function(directorio,mes,anio){
   # Escribe los datos en la hoja "Cacao"
   writeData(wb, sheet = "Cacao", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+9))
 
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Cacao",style=col1,rows = (ultima_fila+10),cols = 1:4)
-  addStyle(wb, sheet = "Cacao",style=col7,rows = (ultima_fila+10),cols = 5)
-  addStyle(wb, sheet = "Cacao",style=col4,rows = (ultima_fila+10),cols = c(6:7,9))
-  addStyle(wb, sheet = "Cacao",style=col3,rows = (ultima_fila+10),cols = 8)
 
   writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Cacao'!E",ultima_fila+10) ,startCol = "H", startRow = ultima_fila+13)
 
@@ -714,10 +647,6 @@ ZG_Permanentes=function(directorio,mes,anio){
   # Escribe los datos en la hoja "Flores"
   writeData(wb, sheet = "Flores", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Flores",style=col1,rows = (ultima_fila+11),cols = 1:4)
-  addStyle(wb, sheet = "Flores",style=col4,rows = (ultima_fila+11),cols = 5:8)
-
 
   # Caña de Azucar ------------------------------------------------------------------
 
@@ -764,11 +693,6 @@ ZG_Permanentes=function(directorio,mes,anio){
 
   # Escribe los datos en la hoja "Caña de Azúcar"
   writeData(wb, sheet = "Caña de Azúcar", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+9))
-
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Caña de Azúcar",style=col1,rows = (ultima_fila+10),cols = 1:4)
-  addStyle(wb, sheet = "Caña de Azúcar",style=col7,rows = (ultima_fila+10),cols = 5)
-  addStyle(wb, sheet = "Caña de Azúcar",style=col4,rows = (ultima_fila+10),cols = 6:8)
 
   writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Caña de Azúcar'!E",ultima_fila+10) ,startCol = "F", startRow = ultima_fila+13)
 
@@ -824,12 +748,6 @@ ZG_Permanentes=function(directorio,mes,anio){
 
   # Escribe los datos en la hoja "Panela"
   writeData(wb, sheet = "Panela", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila+10))
-
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Panela",style=col1,rows = (ultima_fila+10),cols = 1:4)
-  addStyle(wb, sheet = "Panela",style=col7,rows = (ultima_fila+10),cols = 5)
-  addStyle(wb, sheet = "Panela",style=col4,rows = (ultima_fila+10),cols = 6:8)
-
 
 #  # Algodon ------------------------------------------------------------------
 #
@@ -936,22 +854,86 @@ for (i in 9:14) {
   writeFormula(wb, sheet ="Áreas en desarrollo" , x = formulas[i-8] ,startCol = i, startRow = ultima_fila+13)
 }
 if (mes %in% c(3,6,9,12)){
-  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("SUM(M",ultima_fila+11,":M",ultima_fila+13,")/SUM(M",fila_ant+10,":M",fila_ant+10,")*100-100") ,startCol = "O", startRow = ultima_fila+13)
+  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("SUM(M",ultima_fila+11,":M",ultima_fila+13,")/SUM(M",fila_ant+10,":M",fila_ant+12,")*100-100") ,startCol = "O", startRow = ultima_fila+13)
 }
 
+
+if (!file.exists(salida)) {
+  saveWorkbook(wb, file = salida)
+} else {
+  saveWorkbook(wb, file = salida,overwrite= TRUE)
+}
+# Formatos ----------------------------------------------------------------
+addStyle(wb, sheet = "Cafe Pergamino", style = col1, rows = (ultima_fila+10), cols = 1:4)
+addStyle(wb, sheet = "Cafe Pergamino",style=col8,rows = (ultima_fila+10),cols = 5:8)
+addStyle(wb, sheet = "Cafe Pergamino",style=col9,rows = (ultima_fila+10),cols = 9:11)
+addStyle(wb, sheet = "Cafe Pergamino",style=col7,rows = (ultima_fila+10),cols = 12)
+addStyle(wb, sheet = "Cafe Pergamino",style= col4 ,rows = (ultima_fila+10),cols = 13)
+addStyle(wb, sheet = "Cafe Pergamino",style=col8,rows = (ultima_fila+10),cols = 14)
+addStyle(wb, sheet = "Cafe Verde",style=col1,rows = (ultima_fila+11),cols = 1:4)
+addStyle(wb, sheet = "Cafe Verde",style=col9,rows = (ultima_fila+11),cols = 5:8)
+addStyle(wb, sheet = "Cafe Verde",style=col6,rows = (ultima_fila+11),cols = 9:14)
+addStyle(wb, sheet = "Cafetos",style=col1,rows = (ultima_fila+10),cols = 1:4)
+addStyle(wb, sheet = "Cafetos",style=col7,rows = (ultima_fila+10),cols = 5)
+addStyle(wb, sheet = "Cafetos",style=col3,rows = (ultima_fila+10),cols = 6)
+addStyle(wb, sheet = "Cafetos",style=col4,rows = (ultima_fila+10),cols = 7)
+addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col1,rows = (ultima_fila+12),cols = 1:4)
+addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 5:7)
+addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col7,rows = (ultima_fila+12),cols = 8)
+addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 9:11)
+addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col3,rows = (ultima_fila+12),cols = 12:19)
+addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 20:21)
+addStyle(wb, sheet = "Banano Total(Expos+Interno)",style=col3,rows = (ultima_fila+12),cols = 22:23)
+addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col1,rows = (ultima_fila+12),cols = 1:4)
+addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col6,rows = (ultima_fila+12),cols = 5)
+addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 6:7)
+addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col7,rows = (ultima_fila+12),cols = 8)
+addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 9:11)
+addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col3,rows = (ultima_fila+12),cols = 12:18)
+addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 19:20)
+addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col1,rows = (ultima_fila+12),cols = 1:4)
+addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col6,rows = (ultima_fila+12),cols = 5)
+addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 6:7)
+addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col7,rows = (ultima_fila+12),cols = 8)
+addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 9:11)
+addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col3,rows = (ultima_fila+12),cols = 12:18)
+addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 19:21)
+addStyle(wb, sheet = "Fruto de Palma",style=col1,rows = (ultima_fila+10),cols = 1:4)
+addStyle(wb, sheet = "Fruto de Palma",style=col4,rows = (ultima_fila+10),cols = 5:6)
+addStyle(wb, sheet = "Fruto de Palma",style=col3,rows = (ultima_fila+10),cols = 7)
+addStyle(wb, sheet = "Fruto de Palma",style=col6,rows = (ultima_fila+10),cols = 8)
+addStyle(wb, sheet = "Aceite de palma",style=col1,rows = (ultima_fila+10),cols = 1:4)
+addStyle(wb, sheet = "Aceite de palma",style=col7,rows = (ultima_fila+10),cols = 5)
+addStyle(wb, sheet = "Aceite de palma",style=col4,rows = (ultima_fila+10),cols = 6)
+addStyle(wb, sheet = "Aceite de palma",style=col3,rows = (ultima_fila+10),cols = 7)
+addStyle(wb, sheet = "Aceite de palma",style=col6,rows = (ultima_fila+10),cols = 8)
+addStyle(wb, sheet = "Cacao",style=col1,rows = (ultima_fila+10),cols = 1:4)
+addStyle(wb, sheet = "Cacao",style=col7,rows = (ultima_fila+10),cols = 5)
+addStyle(wb, sheet = "Cacao",style=col4,rows = (ultima_fila+10),cols = c(6:7,9))
+addStyle(wb, sheet = "Cacao",style=col3,rows = (ultima_fila+10),cols = 8)
+addStyle(wb, sheet = "Flores",style=col1,rows = (ultima_fila+11),cols = 1:4)
+addStyle(wb, sheet = "Flores",style=col4,rows = (ultima_fila+11),cols = 5:8)
+addStyle(wb, sheet = "Caña de Azúcar",style=col1,rows = (ultima_fila+10),cols = 1:4)
+addStyle(wb, sheet = "Caña de Azúcar",style=col7,rows = (ultima_fila+10),cols = 5)
+addStyle(wb, sheet = "Caña de Azúcar",style=col4,rows = (ultima_fila+10),cols = 6:8)
+addStyle(wb, sheet = "Panela",style=col1,rows = (ultima_fila+10),cols = 1:4)
+addStyle(wb, sheet = "Panela",style=col7,rows = (ultima_fila+10),cols = 5)
+addStyle(wb, sheet = "Panela",style=col4,rows = (ultima_fila+10),cols = 6:8)
 addStyle(wb, sheet = "Áreas en desarrollo",style=col1,rows = (ultima_fila+13),cols = 1:4)
 addStyle(wb, sheet = "Áreas en desarrollo",style=col7,rows = (ultima_fila+13),cols = c(5:6,8:10,12))
 addStyle(wb, sheet = "Áreas en desarrollo",style=col6,rows = (ultima_fila+13),cols = 13)
 addStyle(wb, sheet = "Áreas en desarrollo",style=col2,rows = (ultima_fila+13),cols = c(7,11))
 addStyle(wb, sheet = "Áreas en desarrollo",style=col4,rows = (ultima_fila+13),cols = 14:15)
 
-  # Guardar el libro --------------------------------------------------------
 
 
-  if (!file.exists(salida)) {
-    saveWorkbook(wb, file = salida)
-  } else {
-    saveWorkbook(wb, file = salida,overwrite= TRUE)
-  }
+# Guardar el libro --------------------------------------------------------
+
+if (!file.exists(salida)) {
+  saveWorkbook(wb, file = salida)
+} else {
+  saveWorkbook(wb, file = salida,overwrite= TRUE)
+}
+
 
 }

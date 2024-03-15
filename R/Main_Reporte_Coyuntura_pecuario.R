@@ -60,10 +60,13 @@ for (i in 1:(mes-length(USP$Valor_sinbon))) {
 
 }
 }
-addStyle(wb, sheet = "Precios",style=cbp,rows = (ultima_fila_precios+6),cols = 1)
-addStyle(wb, sheet = "Precios",style=cbn4,rows = (ultima_fila_precios+6),cols = 2:9)
-addStyle(wb, sheet = "Precios",style=rn5,rows = (ultima_fila_precios+6),cols = 10:16)
+if(mes-length(USP$Valor_total)>0){
+  for (i in 1:(mes-length(USP$Valor_total))) {
 
+    writeFormula(wb, sheet ="Precios" , x = paste0("AVERAGE(I",(fila_enero_precios[1]+5),":I",ultima_fila_precios+6-i,")") ,startCol = "I", startRow = (ultima_fila_precios+7-i))
+
+  }
+}
 
 
 
@@ -136,9 +139,6 @@ if (mes %in% c(3,6,9,12)){
   cat("Este mes no se actualiza trimestre")
 }
 
-addStyle(wb, sheet = "Precios",style=rn4,rows = (ultima_fila_precios+6),cols = 28:73)
-
-
 
 
 
@@ -158,8 +158,6 @@ valor_Bovino=f_Bovino(directorio,mes,anio)
 valor_fecha=as.integer(as.Date(paste0(1,"/",mes_0[mes],"/",anio), format = "%d/%m/%Y") - as.Date("1899-12-30"))
 writeData(wb, sheet = "Bovino kilo en pie", x = valor_fecha,colNames = FALSE,startCol = "A", startRow = (ultima_fila+7))
 writeData(wb, sheet = "Bovino kilo en pie", x = valor_Bovino,colNames = FALSE,startCol = "B", startRow = (fila_enero[1]+6))
-addStyle(wb, sheet = "Bovino kilo en pie",style=cbp,rows = (ultima_fila+7),cols = 1)
-addStyle(wb, sheet = "Bovino kilo en pie",style=cbn,rows = (ultima_fila+7),cols = 2:10)
 
 #Añadir formulas
 participacion <- c(paste0("SUM(N",ultima_fila+7,":Q",ultima_fila+7,")"),paste0("C",ultima_fila+7,"/B",ultima_fila+7,"*100"),
@@ -168,7 +166,6 @@ participacion <- c(paste0("SUM(N",ultima_fila+7,":Q",ultima_fila+7,")"),paste0("
 for (i in 13:17) {
   writeFormula(wb, sheet ="Bovino kilo en pie" , x = participacion[i-12] ,startCol = i, startRow = ultima_fila+7)
 }
-addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 13:17)
 
 tasa_anual <- c(paste('IFERROR(B',ultima_fila+7,'/B',fila_anterior+6,'*100-100,','"*")',sep = ""),
                       paste('IFERROR(C',ultima_fila+7,'/C',fila_anterior+6,'*100-100,','"*")',sep = ""),
@@ -184,7 +181,6 @@ tasa_anual <- c(paste('IFERROR(B',ultima_fila+7,'/B',fila_anterior+6,'*100-100,'
 for (i in 19:27) {
   writeFormula(wb, sheet ="Bovino kilo en pie" , x = tasa_anual[i-18] ,startCol = i, startRow = ultima_fila+7)
 }
-addStyle(wb, sheet = "Bovino kilo en pie",style=cbn2,rows = (ultima_fila+7),cols = 19:27)
 
 
 tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+6,':B',ultima_fila+7,')/SUM(B',fila_enero_ant+6,':B',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
@@ -200,7 +196,6 @@ tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+6,':B',ultima_fila+7,')/SUM(B
 for (i in 29:37) {
   writeFormula(wb, sheet ="Bovino kilo en pie" , x = tasa_corrido[i-28] ,startCol = i, startRow = ultima_fila+7)
 }
-addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 29:37)
 
 if (mes %in% c(3,6,9,12)){
   tasa_trimestre <- c(paste('IFERROR(SUM(B',ultima_fila+5,':B',ultima_fila+7,')/SUM(B',fila_anterior+4,':B',fila_anterior+6,')*100-100,','"*")',sep = ""),
@@ -216,7 +211,6 @@ if (mes %in% c(3,6,9,12)){
   for (i in 40:48) {
     writeFormula(wb, sheet ="Bovino kilo en pie" , x = tasa_trimestre[i-39] ,startCol = i, startRow = ultima_fila+7)
   }
-  addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 40:48)
 
 }else{
   cat("Este mes no se actualiza trimestre")
@@ -232,7 +226,6 @@ for (i in 50:54) {
   writeFormula(wb, sheet ="Bovino kilo en pie" , x = contribucion[i-49] ,startCol = i, startRow = ultima_fila+7)
 }
 
-addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 50:54)
 
 
 
@@ -254,8 +247,6 @@ valor_Bovino=f_Bovino_cabezas(directorio,mes,anio)
 valor_fecha=as.integer(as.Date(paste0(1,"/",mes_0[mes],"/",anio), format = "%d/%m/%Y") - as.Date("1899-12-30"))
 writeData(wb, sheet = "Bovino cabezas", x = valor_fecha,colNames = FALSE,startCol = "A", startRow = (ultima_fila+6))
 writeData(wb, sheet = "Bovino cabezas", x = valor_Bovino,colNames = FALSE,startCol = "B", startRow = (fila_enero[1]+5))
-addStyle(wb, sheet = "Bovino cabezas",style=cbp,rows = (ultima_fila+6),cols = 1)
-addStyle(wb, sheet = "Bovino cabezas",style=cbn,rows = (ultima_fila+6),cols = 2:10)
 
 #Añadir formulas
 participacion <- c(paste0("IFERROR(SUM(M",ultima_fila+6,":P",ultima_fila+6,"),0)"),
@@ -267,7 +258,6 @@ participacion <- c(paste0("IFERROR(SUM(M",ultima_fila+6,":P",ultima_fila+6,"),0)
 for (i in 12:16) {
   writeFormula(wb, sheet ="Bovino cabezas" , x = participacion[i-11] ,startCol = i, startRow = ultima_fila+6)
 }
-addStyle(wb, sheet = "Bovino cabezas",style=rn4,rows = (ultima_fila+6),cols = 12:16)
 
 tasa_anual <- c(paste('IFERROR(B',ultima_fila+6,'/B',fila_anterior+5,'*100-100,','"*")',sep = ""),
                 paste('IFERROR(C',ultima_fila+6,'/C',fila_anterior+5,'*100-100,','"*")',sep = ""),
@@ -283,7 +273,6 @@ tasa_anual <- c(paste('IFERROR(B',ultima_fila+6,'/B',fila_anterior+5,'*100-100,'
 for (i in 18:26) {
   writeFormula(wb, sheet ="Bovino cabezas" , x = tasa_anual[i-17] ,startCol = i, startRow = ultima_fila+6)
 }
-addStyle(wb, sheet = "Bovino cabezas",style=rn4,rows = (ultima_fila+6),cols = 18:26)
 
 
 tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
@@ -299,7 +288,6 @@ tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B
 for (i in 28:36) {
   writeFormula(wb, sheet ="Bovino cabezas" , x = tasa_corrido[i-27] ,startCol = i, startRow = ultima_fila+6)
 }
-addStyle(wb, sheet = "Bovino cabezas",style=rn4,rows = (ultima_fila+6),cols = 28:36)
 
 if (mes %in% c(3,6,9,12)){
   tasa_trimestre <- c(paste('IFERROR(SUM(B',ultima_fila+4,':B',ultima_fila+6,')/SUM(B',fila_anterior+3,':B',fila_anterior+5,')*100-100,','"*")',sep = ""),
@@ -315,7 +303,6 @@ if (mes %in% c(3,6,9,12)){
   for (i in 38:46) {
     writeFormula(wb, sheet ="Bovino cabezas" , x = tasa_trimestre[i-37] ,startCol = i, startRow = ultima_fila+6)
   }
-  addStyle(wb, sheet = "Bovino cabezas",style=cbn2,rows = (ultima_fila+6),cols = 38:46)
 
 }else{
   cat("Este mes no se actualiza trimestre")
@@ -343,9 +330,6 @@ valor_fecha=as.integer(as.Date(paste0(1,"/",mes_0[mes],"/",anio), format = "%d/%
 writeData(wb, sheet = "CI_Carne", x = valor_fecha,colNames = FALSE,startCol = "A", startRow = (ultima_fila+6))
 writeData(wb, sheet = "CI_Carne", x = ganado_vacuno,colNames = FALSE,startCol = "C", startRow = (fila_enero[1]+5))
 writeData(wb, sheet = "CI_Carne", x = ganado_porcino,colNames = FALSE,startCol = "I", startRow = (fila_enero[1]+5))
-addStyle(wb, sheet = "CI_Carne",style=cbp,rows = (ultima_fila+6),cols = 1)
-
-addStyle(wb, sheet = "CI_Carne",style=cbn,rows = (ultima_fila+6),cols = c(2:6,8:12))
 
 
 
@@ -434,7 +418,6 @@ if (mes %in% c(3,6,9,12)){
   cat("Este mes no se actualiza trimestre")
 }
 
-addStyle(wb, sheet = "CI_Carne",style=rn4,rows = (ultima_fila+6),cols = 14:58)
 
 
 
@@ -459,9 +442,6 @@ writeData(wb, sheet = "Leche", x = Prod_leche,colNames = FALSE,startCol = "B", s
 writeData(wb, sheet = "Leche", x = Expo_impo$Importacion,colNames = FALSE,startCol = "G", startRow = (fila_enero[1]+5))
 writeData(wb, sheet = "Leche", x = Expo_impo[,2:3],colNames = FALSE,startCol = "I", startRow = (fila_enero[1]+5))
 
-addStyle(wb, sheet = "Leche",style=cbp,rows = (ultima_fila+6),cols = 1)
-addStyle(wb, sheet = "Leche",style=cbn3,rows = (ultima_fila+6),cols = 2)
-addStyle(wb, sheet = "Leche",style=cbn,rows = (ultima_fila+6),cols = 3:10)
 
 for (i in 1:sum(is.na(Prod_leche[,2]))) {
 
@@ -534,8 +514,6 @@ if (mes %in% c(3,6,9,12)){
   cat("Este mes no se actualiza trimestre")
 }
 
-addStyle(wb, sheet = "Leche",style=rn4,rows = (ultima_fila+6),cols = 12:40)
-
 
 
 
@@ -556,8 +534,6 @@ valor_Porcino=f_Porcino(directorio,mes,anio)
 valor_fecha=as.integer(as.Date(paste0(1,"/",mes_0[mes],"/",anio), format = "%d/%m/%Y") - as.Date("1899-12-30"))
 writeData(wb, sheet = "Porcino kilo en pie", x = valor_fecha,colNames = FALSE,startCol = "A", startRow = (ultima_fila+6))
 writeData(wb, sheet = "Porcino kilo en pie", x = valor_Porcino,colNames = FALSE,startCol = "B", startRow = (fila_enero[1]+5))
-addStyle(wb, sheet = "Porcino kilo en pie",style=cbp,rows = (ultima_fila+6),cols = 1)
-addStyle(wb, sheet = "Porcino kilo en pie",style=cbn,rows = (ultima_fila+6),cols = 2:9)
 
 #Añadir formulas
 participacion <- c(paste0("SUM(K",ultima_fila+6,":L",ultima_fila+6,")"),paste0("C",ultima_fila+6,"/B",ultima_fila+6,"*100"),
@@ -566,7 +542,6 @@ participacion <- c(paste0("SUM(K",ultima_fila+6,":L",ultima_fila+6,")"),paste0("
 for (i in 10:12) {
   writeFormula(wb, sheet ="Porcino kilo en pie" , x = participacion[i-9] ,startCol = i, startRow = ultima_fila+6)
 }
-addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 10:12)
 
 tasa_anual <- c(paste('IFERROR(B',ultima_fila+6,'/B',fila_anterior+5,'*100-100,','"*")',sep = ""),
                 paste('IFERROR(C',ultima_fila+6,'/C',fila_anterior+5,'*100-100,','"*")',sep = ""),
@@ -580,7 +555,6 @@ tasa_anual <- c(paste('IFERROR(B',ultima_fila+6,'/B',fila_anterior+5,'*100-100,'
 for (i in 14:20) {
   writeFormula(wb, sheet ="Porcino kilo en pie" , x = tasa_anual[i-13] ,startCol = i, startRow = ultima_fila+6)
 }
-addStyle(wb, sheet = "Porcino kilo en pie",style=cbn2,rows = (ultima_fila+6),cols = 14:20)
 
 
 tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
@@ -594,7 +568,6 @@ tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B
 for (i in 22:28) {
   writeFormula(wb, sheet ="Porcino kilo en pie" , x = tasa_corrido[i-21] ,startCol = i, startRow = ultima_fila+6)
 }
-addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 22:28)
 
 if (mes %in% c(3,6,9,12)){
   tasa_trimestre <- c(paste('IFERROR(SUM(B',ultima_fila+4,':B',ultima_fila+6,')/SUM(B',fila_anterior+4,':B',fila_anterior+5,')*100-100,','"*")',sep = ""),
@@ -608,7 +581,6 @@ if (mes %in% c(3,6,9,12)){
   for (i in 30:36) {
     writeFormula(wb, sheet ="Porcino kilo en pie" , x = tasa_trimestre[i-29] ,startCol = i, startRow = ultima_fila+6)
   }
-  addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 30:36)
 
 }else{
   cat("Este mes no se actualiza trimestre")
@@ -632,8 +604,6 @@ valor_Porcino=f_Porcino_cabezas(directorio,mes,anio)
 valor_fecha=as.integer(as.Date(paste0(1,"/",mes_0[mes],"/",anio), format = "%d/%m/%Y") - as.Date("1899-12-30"))
 writeData(wb, sheet = "Porcino en cabezas" , x = valor_fecha,colNames = FALSE,startCol = "A", startRow = (ultima_fila+6))
 writeData(wb, sheet = "Porcino en cabezas" , x = valor_Porcino,colNames = FALSE,startCol = "B", startRow = (fila_enero[1]+5))
-addStyle(wb, sheet = "Porcino en cabezas" ,style=cbp,rows = (ultima_fila+6),cols = 1)
-addStyle(wb, sheet = "Porcino en cabezas" ,style=cbn,rows = (ultima_fila+6),cols = 2:5)
 
 #Añadir formulas
 participacion <- c(paste0("IFERROR(SUM(H",ultima_fila+6,":I",ultima_fila+6,"),0)"),
@@ -643,7 +613,6 @@ participacion <- c(paste0("IFERROR(SUM(H",ultima_fila+6,":I",ultima_fila+6,"),0)
 for (i in 7:9) {
   writeFormula(wb, sheet ="Porcino en cabezas"  , x = participacion[i-6] ,startCol = i, startRow = ultima_fila+6)
 }
-addStyle(wb, sheet = "Porcino en cabezas" ,style=rn4,rows = (ultima_fila+6),cols = 7:9)
 
 tasa_anual <- c(paste('IFERROR(B',ultima_fila+6,'/B',fila_anterior+5,'*100-100,','"*")',sep = ""),
                 paste('IFERROR(C',ultima_fila+6,'/C',fila_anterior+5,'*100-100,','"*")',sep = ""),
@@ -653,7 +622,6 @@ tasa_anual <- c(paste('IFERROR(B',ultima_fila+6,'/B',fila_anterior+5,'*100-100,'
 for (i in 11:13) {
   writeFormula(wb, sheet ="Porcino en cabezas"  , x = tasa_anual[i-10] ,startCol = i, startRow = ultima_fila+6)
 }
-addStyle(wb, sheet = "Porcino en cabezas" ,style=rn4,rows = (ultima_fila+6),cols = 11:13)
 
 
 tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
@@ -664,7 +632,6 @@ tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B
 for (i in 16:19) {
   writeFormula(wb, sheet ="Porcino en cabezas"  , x = tasa_corrido[i-15] ,startCol = i, startRow = ultima_fila+6)
 }
-addStyle(wb, sheet = "Porcino en cabezas" ,style=rn4,rows = (ultima_fila+6),cols = 16:19)
 
 if (mes %in% c(3,6,9,12)){
   tasa_trimestre <- c(paste('IFERROR(SUM(B',ultima_fila+4,':B',ultima_fila+6,')/SUM(B',fila_anterior+3,':B',fila_anterior+5,')*100-100,','"*")',sep = ""),
@@ -675,7 +642,6 @@ if (mes %in% c(3,6,9,12)){
   for (i in 21:24) {
     writeFormula(wb, sheet ="Porcino en cabezas"  , x = tasa_trimestre[i-20] ,startCol = i, startRow = ultima_fila+6)
   }
-  addStyle(wb, sheet = "Porcino en cabezas" ,style=cbn2,rows = (ultima_fila+6),cols = 21:24)
 
 }else{
   cat("Este mes no se actualiza trimestre")
@@ -705,8 +671,6 @@ writeData(wb, sheet = "Pollo_Huevo", x = Valor_Huevos,colNames = FALSE,startCol 
 writeData(wb, sheet = "Pollo_Huevo", x = Valor_Pollos,colNames = FALSE,startCol = "C", startRow = (fila_enero[1]+5-12))
 writeData(wb, sheet = "Pollo_Huevo", x = Valor_Fenavi,colNames = FALSE,startCol = "D", startRow = (fila_enero[1]+5))
 
-addStyle(wb, sheet = "Pollo_Huevo",style=cbp,rows = (ultima_fila+6),cols = 1)
-addStyle(wb, sheet = "Pollo_Huevo",style=cbn,rows = (ultima_fila+6),cols = 2:14)
 
 #Añadir formulas
 tasa_mensual <-    c(paste('IFERROR(B',ultima_fila+6,'/B',ultima_fila+5,'*100-100,','"*")',sep = ""),
@@ -722,7 +686,6 @@ tasa_mensual <-    c(paste('IFERROR(B',ultima_fila+6,'/B',ultima_fila+5,'*100-10
 for (i in 16:24) {
   writeFormula(wb, sheet ="Pollo_Huevo" , x = tasa_mensual[i-15] ,startCol = i, startRow = ultima_fila+6)
 }
-addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 16:24)
 
 tasa_anual <- c(paste('IFERROR(B',ultima_fila+6,'/B',fila_anterior+5,'*100-100,','"*")',sep = ""),
                 paste('IFERROR(C',ultima_fila+6,'/C',fila_anterior+5,'*100-100,','"*")',sep = ""),
@@ -742,7 +705,6 @@ tasa_anual <- c(paste('IFERROR(B',ultima_fila+6,'/B',fila_anterior+5,'*100-100,'
 for (i in 26:38) {
   writeFormula(wb, sheet ="Pollo_Huevo" , x = tasa_anual[i-25] ,startCol = i, startRow = ultima_fila+6)
 }
-addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 26:38)
 
 
 tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
@@ -762,7 +724,6 @@ tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B
 for (i in 40:52) {
   writeFormula(wb, sheet ="Pollo_Huevo" , x = tasa_corrido[i-39] ,startCol = i, startRow = ultima_fila+6)
 }
-addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 40:52)
 
 if (mes %in% c(3,6,9,12)){
   tasa_trimestre <- c(paste('IFERROR(SUM(B',ultima_fila+4,':B',ultima_fila+6,')/SUM(B',fila_anterior+3,':B',fila_anterior+5,')*100-100,','"*")',sep = ""),
@@ -780,9 +741,8 @@ if (mes %in% c(3,6,9,12)){
                       paste('IFERROR(SUM(N',ultima_fila+4,':N',ultima_fila+6,')/SUM(N',fila_anterior+3,':N',fila_anterior+5,')*100-100,','"*")',sep = ""))
 
   for (i in 54:66) {
-    writeFormula(wb, sheet ="Pollo_Huevo" , x = tasa_trimestre[i-54] ,startCol = i, startRow = ultima_fila+6)
+    writeFormula(wb, sheet ="Pollo_Huevo" , x = tasa_trimestre[i-53] ,startCol = i, startRow = ultima_fila+6)
   }
-  addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 54:66)
 
 }else{
   cat("Este mes no se actualiza trimestre")
@@ -807,7 +767,6 @@ if (mes==12){
   for (i in 68:80) {
     writeFormula(wb, sheet ="Pollo_Huevo" , x = tasa_anual_trimestre[i-67] ,startCol = i, startRow = ultima_fila+6)
   }
-  addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 68:80)
 
 }else{
   cat("Este mes no se actualiza anual")
@@ -1299,13 +1258,68 @@ for (i in 1:3) {
 setColWidths(wb,sheet ="CUADROS LECHE",cols = c(8,9),hidden = c(TRUE,TRUE))
 
 if(mes %in% c(3,6,9,12)){
-
+  setColWidths(wb,sheet ="CUADROS BOVINO",cols = c(8,9),widths = "auto")
+  setColWidths(wb,sheet ="CUADROS LECHE",cols = c(6,7),widths = "auto")
+  setColWidths(wb,sheet ="CUADROS PORCINO",cols = c(8,9),widths = "auto")
+  setColWidths(wb,sheet ="CUADROS AVICULTURA",cols = c(8,9),widths = "auto")
 }else{
-  setColWidths(wb,sheet ="CUADROS BOVINO",cols = c(8,9),hidden = c(TRUE,TRUE))
-  setColWidths(wb,sheet ="CUADROS LECHE",cols = c(6,7),hidden = c(TRUE,TRUE))
-  setColWidths(wb,sheet ="CUADROS PORCINO",cols = c(8,9),hidden = c(TRUE,TRUE))
-  setColWidths(wb,sheet ="CUADROS AVICULTURA",cols = c(8,9),hidden = c(TRUE,TRUE))
+
 }
+
+# Guardar el libro --------------------------------------------------------
+
+
+if (!file.exists(salida)) {
+  saveWorkbook(wb, file = salida)
+} else {
+  saveWorkbook(wb, file = salida,overwrite= TRUE)
+}
+
+
+
+# Formatos ----------------------------------------------------------------
+addStyle(wb, sheet = "Precios",style=cbp,rows = (ultima_fila_precios+6),cols = 1)
+addStyle(wb, sheet = "Precios",style=cbn4,rows = (ultima_fila_precios+6),cols = 2:9)
+addStyle(wb, sheet = "Precios",style=rn5,rows = (ultima_fila_precios+6),cols = 10:16)
+addStyle(wb, sheet = "Precios",style=rn4,rows = (ultima_fila_precios+6),cols = 28:73)
+addStyle(wb, sheet = "Bovino kilo en pie",style=cbp,rows = (ultima_fila+7),cols = 1)
+addStyle(wb, sheet = "Bovino kilo en pie",style=cbn,rows = (ultima_fila+7),cols = 2:10)
+addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 13:17)
+addStyle(wb, sheet = "Bovino kilo en pie",style=cbn2,rows = (ultima_fila+7),cols = 19:27)
+addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 29:37)
+addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 40:48)
+addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 50:54)
+addStyle(wb, sheet = "Bovino cabezas",style=cbp,rows = (ultima_fila+6),cols = 1)
+addStyle(wb, sheet = "Bovino cabezas",style=cbn,rows = (ultima_fila+6),cols = 2:10)
+addStyle(wb, sheet = "Bovino cabezas",style=rn4,rows = (ultima_fila+6),cols = 12:16)
+addStyle(wb, sheet = "Bovino cabezas",style=rn4,rows = (ultima_fila+6),cols = 18:26)
+addStyle(wb, sheet = "Bovino cabezas",style=rn4,rows = (ultima_fila+6),cols = 28:36)
+addStyle(wb, sheet = "Bovino cabezas",style=cbn2,rows = (ultima_fila+6),cols = 38:46)
+addStyle(wb, sheet = "CI_Carne",style=cbp,rows = (ultima_fila+6),cols = 1)
+addStyle(wb, sheet = "CI_Carne",style=cbn,rows = (ultima_fila+6),cols = c(2:6,8:12))
+addStyle(wb, sheet = "CI_Carne",style=rn4,rows = (ultima_fila+6),cols = 14:58)
+addStyle(wb, sheet = "Leche",style=rn4,rows = (ultima_fila+6),cols = 12:40)
+addStyle(wb, sheet = "Porcino kilo en pie",style=cbp,rows = (ultima_fila+6),cols = 1)
+addStyle(wb, sheet = "Porcino kilo en pie",style=cbn,rows = (ultima_fila+6),cols = 2:9)
+addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 10:12)
+addStyle(wb, sheet = "Porcino kilo en pie",style=cbn2,rows = (ultima_fila+6),cols = 14:20)
+addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 22:28)
+addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 30:36)
+addStyle(wb, sheet = "Porcino en cabezas" ,style=cbp,rows = (ultima_fila+6),cols = 1)
+addStyle(wb, sheet = "Porcino en cabezas" ,style=cbn,rows = (ultima_fila+6),cols = 2:5)
+addStyle(wb, sheet = "Porcino en cabezas" ,style=rn4,rows = (ultima_fila+6),cols = 7:9)
+addStyle(wb, sheet = "Porcino en cabezas" ,style=rn4,rows = (ultima_fila+6),cols = 11:13)
+addStyle(wb, sheet = "Porcino en cabezas" ,style=rn4,rows = (ultima_fila+6),cols = 16:19)
+addStyle(wb, sheet = "Porcino en cabezas" ,style=cbn2,rows = (ultima_fila+6),cols = 21:24)
+addStyle(wb, sheet = "Pollo_Huevo",style=cbp,rows = (ultima_fila+6),cols = 1)
+addStyle(wb, sheet = "Pollo_Huevo",style=cbn,rows = (ultima_fila+6),cols = 2:14)
+addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 16:24)
+addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 26:38)
+addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 40:52)
+addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 54:66)
+addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 68:80)
+
+
 # Guardar el libro --------------------------------------------------------
 
 

@@ -87,16 +87,7 @@ ZG_Transitorio=function(directorio,mes,anio){
   writeData(wb, sheet = "Maíz", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
 
-  addStyle(wb, sheet = "Maíz", style = col1, rows = ultima_fila+11, cols = 1:4)
-  addStyle(wb, sheet = "Maíz",style= col4 ,rows = ultima_fila+11,cols = 7:8)
-  semestre=f_semestre(mes)
-  if(semestre==1){
-    addStyle(wb, sheet = "Maíz",style=colma,rows = ultima_fila+11,cols = 5)
-  }else{
-    addStyle(wb, sheet = "Maíz",style=colmb,rows = ultima_fila+11,cols = 5)
-  }
 
-  addStyle(wb, sheet = "Maíz",style=col3,rows = ultima_fila+11,cols = 6)
 
   # Arroz ------------------------------------------------------------------
 
@@ -139,11 +130,6 @@ ZG_Transitorio=function(directorio,mes,anio){
   # Escribe los datos en la hoja "Arroz"
   writeData(wb, sheet = "Arroz", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Arroz",style=col1,rows = (ultima_fila+11),cols = 1:4)
-  addStyle(wb, sheet = "Arroz",style=col6,rows = (ultima_fila+11),cols = 5)
-  addStyle(wb, sheet = "Arroz",style=col3,rows = (ultima_fila+11),cols = 6)
-  addStyle(wb, sheet = "Arroz",style=col4,rows = (ultima_fila+11),cols = 7:8)
 
   # Hortalizas ------------------------------------------------------------------
 
@@ -193,12 +179,6 @@ ZG_Transitorio=function(directorio,mes,anio){
   # Escribe los datos en la hoja "Hortalizas"
   writeData(wb, sheet = "Hortalizas", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Hortalizas",style=col1,rows = (ultima_fila+11),cols = 1:4)
-  addStyle(wb, sheet = "Hortalizas",style=col7,rows = (ultima_fila+11),cols = 5)
-  addStyle(wb, sheet = "Hortalizas",style=col3,rows = (ultima_fila+11),cols = 6)
-  addStyle(wb, sheet = "Hortalizas",style=col4,rows = (ultima_fila+11),cols = 7:9)
-
 
   # Yuca ------------------------------------------------------------------
 
@@ -246,16 +226,6 @@ ZG_Transitorio=function(directorio,mes,anio){
 
   # Escribe los datos en la hoja "Yuca"
   writeData(wb, sheet = "Yuca", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
-
-
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Yuca",style=col1,rows = (ultima_fila+11),cols = 1:4)
-  addStyle(wb, sheet = "Yuca",style=col6,rows = (ultima_fila+11),cols = 5)
-  addStyle(wb, sheet = "Yuca",style=col3,rows = (ultima_fila+11),cols = 6)
-  addStyle(wb, sheet = "Yuca",style=col4,rows = (ultima_fila+11),cols = 7:9)
-
-
-
 
 
 # # Trigo ------------------------------------------------------------------
@@ -484,14 +454,6 @@ ZG_Transitorio=function(directorio,mes,anio){
   # Escribe los datos en la hoja "Papa"
   writeData(wb, sheet = "Papa", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
-  #Añadir estilos de celda
-  addStyle(wb, sheet = "Papa",style=col1,rows = (ultima_fila+11),cols = 1:4)
-  addStyle(wb, sheet = "Papa",style=col5,rows = (ultima_fila+11),cols = 5)
-  addStyle(wb, sheet = "Papa",style=col3,rows = (ultima_fila+11),cols = 6)
-  addStyle(wb, sheet = "Papa",style=col4,rows = (ultima_fila+11),cols = 7:9)
-
-
-
   # Legumbres ------------------------------------------------------------------
 
   #Leer solo la hoja de Legumbres
@@ -568,12 +530,46 @@ if (mes %in% c(3, 6, 9, 12)){
   # Escribe los datos en la hoja "Legumbres"
   writeData(wb, sheet = "Legumbres", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = 11)
 
-  #Añadir estilos de celda
+
+
+  if (!file.exists(salida)) {
+    saveWorkbook(wb, file = salida)
+  } else {
+    saveWorkbook(wb, file = salida,overwrite= TRUE)
+  }
+
+# Formatos ----------------------------------------------------------------
+
+  addStyle(wb, sheet = "Maíz", style = col1, rows = ultima_fila+11, cols = 1:4)
+  addStyle(wb, sheet = "Maíz",style= col4 ,rows = ultima_fila+11,cols = 7:8)
+  semestre=f_semestre(mes)
+  if(semestre==1){
+    addStyle(wb, sheet = "Maíz",style=colma,rows = ultima_fila+11,cols = 5)
+  }else{
+    addStyle(wb, sheet = "Maíz",style=colmb,rows = ultima_fila+11,cols = 5)
+  }
+
+  addStyle(wb, sheet = "Maíz",style=col3,rows = ultima_fila+11,cols = 6)
+  addStyle(wb, sheet = "Arroz",style=col1,rows = (ultima_fila+11),cols = 1:4)
+  addStyle(wb, sheet = "Arroz",style=col6,rows = (ultima_fila+11),cols = 5)
+  addStyle(wb, sheet = "Arroz",style=col3,rows = (ultima_fila+11),cols = 6)
+  addStyle(wb, sheet = "Arroz",style=col4,rows = (ultima_fila+11),cols = 7:8)
+  addStyle(wb, sheet = "Hortalizas",style=col1,rows = (ultima_fila+11),cols = 1:4)
+  addStyle(wb, sheet = "Hortalizas",style=col7,rows = (ultima_fila+11),cols = 5)
+  addStyle(wb, sheet = "Hortalizas",style=col3,rows = (ultima_fila+11),cols = 6)
+  addStyle(wb, sheet = "Hortalizas",style=col4,rows = (ultima_fila+11),cols = 7:9)
+  addStyle(wb, sheet = "Yuca",style=col1,rows = (ultima_fila+11),cols = 1:4)
+  addStyle(wb, sheet = "Yuca",style=col6,rows = (ultima_fila+11),cols = 5)
+  addStyle(wb, sheet = "Yuca",style=col3,rows = (ultima_fila+11),cols = 6)
+  addStyle(wb, sheet = "Yuca",style=col4,rows = (ultima_fila+11),cols = 7:9)
+  addStyle(wb, sheet = "Papa",style=col1,rows = (ultima_fila+11),cols = 1:4)
+  addStyle(wb, sheet = "Papa",style=col5,rows = (ultima_fila+11),cols = 5)
+  addStyle(wb, sheet = "Papa",style=col3,rows = (ultima_fila+11),cols = 6)
+  addStyle(wb, sheet = "Papa",style=col4,rows = (ultima_fila+11),cols = 7:9)
   addStyle(wb, sheet = "Legumbres",style=col1,rows = (ultima_fila+11),cols = 1:4)
   addStyle(wb, sheet = "Legumbres",style=col7,rows = (ultima_fila+11),cols = 5)
   addStyle(wb, sheet = "Legumbres",style=col3,rows = (ultima_fila+11),cols = 6)
   addStyle(wb, sheet = "Legumbres",style=col4,rows = (ultima_fila+11),cols = 7:9)
-
 
   # Guardar el libro --------------------------------------------------------
 
