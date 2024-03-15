@@ -140,7 +140,10 @@ if (mes %in% c(3,6,9,12)){
 }
 
 
-
+addStyle(wb, sheet = "Precios",style=cbp,rows = (ultima_fila_precios+6),cols = 1)
+addStyle(wb, sheet = "Precios",style=cbn4,rows = (ultima_fila_precios+6),cols = 2:9)
+addStyle(wb, sheet = "Precios",style=rn5,rows = (ultima_fila_precios+6),cols = 10:16)
+addStyle(wb, sheet = "Precios",style=rn4,rows = (ultima_fila_precios+6),cols = 28:73)
 
 
 # Bovino_kilo_en_pie ------------------------------------------------------
@@ -229,6 +232,13 @@ for (i in 50:54) {
 
 
 
+addStyle(wb, sheet = "Bovino kilo en pie",style=cbp,rows = (ultima_fila+7),cols = 1)
+addStyle(wb, sheet = "Bovino kilo en pie",style=cbn,rows = (ultima_fila+7),cols = 2:10)
+addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 13:17)
+addStyle(wb, sheet = "Bovino kilo en pie",style=cbn2,rows = (ultima_fila+7),cols = 19:27)
+addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 29:37)
+addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 40:48)
+addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 50:54)
 
 
 
@@ -309,6 +319,12 @@ if (mes %in% c(3,6,9,12)){
 }
 
 
+addStyle(wb, sheet = "Bovino cabezas",style=cbp,rows = (ultima_fila+6),cols = 1)
+addStyle(wb, sheet = "Bovino cabezas",style=cbn,rows = (ultima_fila+6),cols = 2:10)
+addStyle(wb, sheet = "Bovino cabezas",style=rn4,rows = (ultima_fila+6),cols = 12:16)
+addStyle(wb, sheet = "Bovino cabezas",style=rn4,rows = (ultima_fila+6),cols = 18:26)
+addStyle(wb, sheet = "Bovino cabezas",style=rn4,rows = (ultima_fila+6),cols = 28:36)
+addStyle(wb, sheet = "Bovino cabezas",style=cbn2,rows = (ultima_fila+6),cols = 38:46)
 
 
 
@@ -420,6 +436,9 @@ if (mes %in% c(3,6,9,12)){
 
 
 
+addStyle(wb, sheet = "CI_Carne",style=cbp,rows = (ultima_fila+6),cols = 1)
+addStyle(wb, sheet = "CI_Carne",style=cbn,rows = (ultima_fila+6),cols = c(2:6,8:12))
+addStyle(wb, sheet = "CI_Carne",style=rn4,rows = (ultima_fila+6),cols = 14:58)
 
 
 # Leche ------------------------------------------------------
@@ -516,6 +535,7 @@ if (mes %in% c(3,6,9,12)){
 
 
 
+addStyle(wb, sheet = "Leche",style=rn4,rows = (ultima_fila+6),cols = 12:40)
 
 
 
@@ -586,7 +606,12 @@ if (mes %in% c(3,6,9,12)){
   cat("Este mes no se actualiza trimestre")
 }
 
-
+addStyle(wb, sheet = "Porcino kilo en pie",style=cbp,rows = (ultima_fila+6),cols = 1)
+addStyle(wb, sheet = "Porcino kilo en pie",style=cbn,rows = (ultima_fila+6),cols = 2:9)
+addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 10:12)
+addStyle(wb, sheet = "Porcino kilo en pie",style=cbn2,rows = (ultima_fila+6),cols = 14:20)
+addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 22:28)
+addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 30:36)
 
 
 # Porcino_cabezas ------------------------------------------------------
@@ -647,7 +672,12 @@ if (mes %in% c(3,6,9,12)){
   cat("Este mes no se actualiza trimestre")
 }
 
-
+addStyle(wb, sheet = "Porcino en cabezas" ,style=cbp,rows = (ultima_fila+6),cols = 1)
+addStyle(wb, sheet = "Porcino en cabezas" ,style=cbn,rows = (ultima_fila+6),cols = 2:5)
+addStyle(wb, sheet = "Porcino en cabezas" ,style=rn4,rows = (ultima_fila+6),cols = 7:9)
+addStyle(wb, sheet = "Porcino en cabezas" ,style=rn4,rows = (ultima_fila+6),cols = 11:13)
+addStyle(wb, sheet = "Porcino en cabezas" ,style=rn4,rows = (ultima_fila+6),cols = 16:19)
+addStyle(wb, sheet = "Porcino en cabezas" ,style=cbn2,rows = (ultima_fila+6),cols = 21:24)
 
 
 
@@ -773,7 +803,13 @@ if (mes==12){
 }
 
 
-
+addStyle(wb, sheet = "Pollo_Huevo",style=cbp,rows = (ultima_fila+6),cols = 1)
+addStyle(wb, sheet = "Pollo_Huevo",style=cbn,rows = (ultima_fila+6),cols = 2:14)
+addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 16:24)
+addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 26:38)
+addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 40:52)
+addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 54:66)
+addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 68:80)
 
 
 # Cuadro Bovino -----------------------------------------------------------
@@ -1266,50 +1302,6 @@ if(mes %in% c(3,6,9,12)){
 
 }
 
-
-
-
-# Formatos ----------------------------------------------------------------
-addStyle(wb, sheet = "Precios",style=cbp,rows = (ultima_fila_precios+6),cols = 1)
-addStyle(wb, sheet = "Precios",style=cbn4,rows = (ultima_fila_precios+6),cols = 2:9)
-addStyle(wb, sheet = "Precios",style=rn5,rows = (ultima_fila_precios+6),cols = 10:16)
-addStyle(wb, sheet = "Precios",style=rn4,rows = (ultima_fila_precios+6),cols = 28:73)
-addStyle(wb, sheet = "Bovino kilo en pie",style=cbp,rows = (ultima_fila+7),cols = 1)
-addStyle(wb, sheet = "Bovino kilo en pie",style=cbn,rows = (ultima_fila+7),cols = 2:10)
-addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 13:17)
-addStyle(wb, sheet = "Bovino kilo en pie",style=cbn2,rows = (ultima_fila+7),cols = 19:27)
-addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 29:37)
-addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 40:48)
-addStyle(wb, sheet = "Bovino kilo en pie",style=rn4,rows = (ultima_fila+7),cols = 50:54)
-addStyle(wb, sheet = "Bovino cabezas",style=cbp,rows = (ultima_fila+6),cols = 1)
-addStyle(wb, sheet = "Bovino cabezas",style=cbn,rows = (ultima_fila+6),cols = 2:10)
-addStyle(wb, sheet = "Bovino cabezas",style=rn4,rows = (ultima_fila+6),cols = 12:16)
-addStyle(wb, sheet = "Bovino cabezas",style=rn4,rows = (ultima_fila+6),cols = 18:26)
-addStyle(wb, sheet = "Bovino cabezas",style=rn4,rows = (ultima_fila+6),cols = 28:36)
-addStyle(wb, sheet = "Bovino cabezas",style=cbn2,rows = (ultima_fila+6),cols = 38:46)
-addStyle(wb, sheet = "CI_Carne",style=cbp,rows = (ultima_fila+6),cols = 1)
-addStyle(wb, sheet = "CI_Carne",style=cbn,rows = (ultima_fila+6),cols = c(2:6,8:12))
-addStyle(wb, sheet = "CI_Carne",style=rn4,rows = (ultima_fila+6),cols = 14:58)
-addStyle(wb, sheet = "Leche",style=rn4,rows = (ultima_fila+6),cols = 12:40)
-addStyle(wb, sheet = "Porcino kilo en pie",style=cbp,rows = (ultima_fila+6),cols = 1)
-addStyle(wb, sheet = "Porcino kilo en pie",style=cbn,rows = (ultima_fila+6),cols = 2:9)
-addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 10:12)
-addStyle(wb, sheet = "Porcino kilo en pie",style=cbn2,rows = (ultima_fila+6),cols = 14:20)
-addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 22:28)
-addStyle(wb, sheet = "Porcino kilo en pie",style=rn4,rows = (ultima_fila+6),cols = 30:36)
-addStyle(wb, sheet = "Porcino en cabezas" ,style=cbp,rows = (ultima_fila+6),cols = 1)
-addStyle(wb, sheet = "Porcino en cabezas" ,style=cbn,rows = (ultima_fila+6),cols = 2:5)
-addStyle(wb, sheet = "Porcino en cabezas" ,style=rn4,rows = (ultima_fila+6),cols = 7:9)
-addStyle(wb, sheet = "Porcino en cabezas" ,style=rn4,rows = (ultima_fila+6),cols = 11:13)
-addStyle(wb, sheet = "Porcino en cabezas" ,style=rn4,rows = (ultima_fila+6),cols = 16:19)
-addStyle(wb, sheet = "Porcino en cabezas" ,style=cbn2,rows = (ultima_fila+6),cols = 21:24)
-addStyle(wb, sheet = "Pollo_Huevo",style=cbp,rows = (ultima_fila+6),cols = 1)
-addStyle(wb, sheet = "Pollo_Huevo",style=cbn,rows = (ultima_fila+6),cols = 2:14)
-addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 16:24)
-addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 26:38)
-addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 40:52)
-addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 54:66)
-addStyle(wb, sheet = "Pollo_Huevo",style=rn4,rows = (ultima_fila+6),cols = 68:80)
 
 
 # Guardar el libro --------------------------------------------------------

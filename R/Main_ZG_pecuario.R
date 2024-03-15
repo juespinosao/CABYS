@@ -72,6 +72,11 @@ nuevos_datos <- data.frame(
 writeData(wb, sheet = "Ganado_Bovino", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
 
+addStyle(wb, sheet = "Ganado_Bovino",style=col1,rows = (ultima_fila+11),cols = 1:4,gridExpand = TRUE)
+addStyle(wb, sheet = "Ganado_Bovino",style=col2,rows = (ultima_fila+11),cols = 5,gridExpand = TRUE)
+addStyle(wb, sheet = "Ganado_Bovino",style=col3,rows = (ultima_fila+11),cols = 6,gridExpand = TRUE)
+addStyle(wb, sheet = "Ganado_Bovino",style=col4,rows = (ultima_fila+11),cols = 7:8,gridExpand = TRUE)
+
 # Pollos ------------------------------------------------------------------
 
 #Leer solo la hoja de Pollos
@@ -117,7 +122,10 @@ nuevos_datos <- data.frame(
 writeData(wb, sheet = "Pollos", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
 
-
+addStyle(wb, sheet = "Pollos",style=col1,rows = (ultima_fila+11),cols = 1:4)
+addStyle(wb, sheet = "Pollos",style=col2,rows = (ultima_fila+11),cols = 5)
+addStyle(wb, sheet = "Pollos",style=col3,rows = (ultima_fila+11),cols = 6)
+addStyle(wb, sheet = "Pollos",style=col4,rows = (ultima_fila+11),cols = 7:8)
 # Porcino ------------------------------------------------------------------
 
 #Leer solo la hoja de Porcinos
@@ -162,6 +170,10 @@ nuevos_datos <- data.frame(
 # Escribe los datos en la hoja "Porcino"
 writeData(wb, sheet = "Porcino", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
+addStyle(wb, sheet = "Porcino",style=col1,rows = (ultima_fila+11),cols = 1:4)
+addStyle(wb, sheet = "Porcino",style=col2,rows = (ultima_fila+11),cols = 5)
+addStyle(wb, sheet = "Porcino",style=col3,rows = (ultima_fila+11),cols = 6)
+addStyle(wb, sheet = "Porcino",style=col4,rows = (ultima_fila+11),cols = 7:8)
 
 # Leche ------------------------------------------------------------------
 
@@ -208,6 +220,10 @@ nuevos_datos <- data.frame(
 writeData(wb, sheet = "Leche", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
 
+addStyle(wb, sheet = "Leche",style=col1,rows = (ultima_fila+11),cols = 1:4)
+addStyle(wb, sheet = "Leche",style=col2,rows = (ultima_fila+11),cols = 5)
+addStyle(wb, sheet = "Leche",style=col3,rows = (ultima_fila+11),cols = 6)
+addStyle(wb, sheet = "Leche",style=col4,rows = (ultima_fila+11),cols = 7:8)
 # Huevos ------------------------------------------------------------------
 
 #Leer solo la hoja de Huevos
@@ -254,7 +270,10 @@ nuevos_datos <- data.frame(
 # Escribe los datos en la hoja "Huevos"
 writeData(wb, sheet = "Huevos", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
 
-
+addStyle(wb, sheet = "Huevos",style=col1,rows = (ultima_fila+11),cols = 1:4)
+addStyle(wb, sheet = "Huevos",style=col2,rows = (ultima_fila+11),cols = 5)
+addStyle(wb, sheet = "Huevos",style=col3,rows = (ultima_fila+11),cols = 6)
+addStyle(wb, sheet = "Huevos",style=col4,rows = (ultima_fila+11),cols = 7:8)
 # Ovino y Caprino ------------------------------------------------------------------
 
 
@@ -304,29 +323,6 @@ writeData(wb, sheet = "Ovino y Caprino trimestral", x = nuevos_datos,colNames = 
 
 
 
-# Formatos ----------------------------------------------------------------
-
-
-addStyle(wb, sheet = "Ganado_Bovino",style=col1,rows = (ultima_fila+11),cols = 1:4,gridExpand = TRUE)
-addStyle(wb, sheet = "Ganado_Bovino",style=col2,rows = (ultima_fila+11),cols = 5,gridExpand = TRUE)
-addStyle(wb, sheet = "Ganado_Bovino",style=col3,rows = (ultima_fila+11),cols = 6,gridExpand = TRUE)
-addStyle(wb, sheet = "Ganado_Bovino",style=col4,rows = (ultima_fila+11),cols = 7:8,gridExpand = TRUE)
-addStyle(wb, sheet = "Pollos",style=col1,rows = (ultima_fila+11),cols = 1:4)
-addStyle(wb, sheet = "Pollos",style=col2,rows = (ultima_fila+11),cols = 5)
-addStyle(wb, sheet = "Pollos",style=col3,rows = (ultima_fila+11),cols = 6)
-addStyle(wb, sheet = "Pollos",style=col4,rows = (ultima_fila+11),cols = 7:8)
-addStyle(wb, sheet = "Porcino",style=col1,rows = (ultima_fila+11),cols = 1:4)
-addStyle(wb, sheet = "Porcino",style=col2,rows = (ultima_fila+11),cols = 5)
-addStyle(wb, sheet = "Porcino",style=col3,rows = (ultima_fila+11),cols = 6)
-addStyle(wb, sheet = "Porcino",style=col4,rows = (ultima_fila+11),cols = 7:8)
-addStyle(wb, sheet = "Leche",style=col1,rows = (ultima_fila+11),cols = 1:4)
-addStyle(wb, sheet = "Leche",style=col2,rows = (ultima_fila+11),cols = 5)
-addStyle(wb, sheet = "Leche",style=col3,rows = (ultima_fila+11),cols = 6)
-addStyle(wb, sheet = "Leche",style=col4,rows = (ultima_fila+11),cols = 7:8)
-addStyle(wb, sheet = "Huevos",style=col1,rows = (ultima_fila+11),cols = 1:4)
-addStyle(wb, sheet = "Huevos",style=col2,rows = (ultima_fila+11),cols = 5)
-addStyle(wb, sheet = "Huevos",style=col3,rows = (ultima_fila+11),cols = 6)
-addStyle(wb, sheet = "Huevos",style=col4,rows = (ultima_fila+11),cols = 7:8)
 addStyle(wb, sheet = "Ovino y Caprino trimestral",style=col1,rows = (ultima_fila+11),cols = 1:4)
 addStyle(wb, sheet = "Ovino y Caprino trimestral",style=col3,rows = (ultima_fila+11),cols = 5)
 addStyle(wb, sheet = "Ovino y Caprino trimestral",style=col5,rows = (ultima_fila+11),cols = 6:7)
