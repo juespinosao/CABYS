@@ -62,6 +62,11 @@ f0_inicial<-function(directorio,mes,anio){
     }
   }
   carpeta=nombre_carpeta(mes,anio)
+
+  #crear la carpeta results
+  ruta=paste0(directorio,"/ISE/",anio,"/",carpeta)
+  crearCarpeta(ruta)
+
   #crear la carpeta results
   ruta=paste0(directorio,"/ISE/",anio,"/",carpeta,"/Results")
   crearCarpeta(ruta)

@@ -706,7 +706,14 @@ ZG_Permanentes=function(directorio,mes,anio){
   #Correr la funcion Palma
   valor_Caña_Azucar=f_Caña_azucar(directorio,mes,anio)
   valor_actual_caña=tail(lag(data$Caña.de.Azúcar,11),1)*(1+valor_Caña_Azucar$variacion/100)
-  vector_caña=c(valor_Caña_Azucar$vector,valor_actual_caña)
+  if(mes==length(valor_Caña_Azucar$vector)){
+    valor_Caña_Azucar$vector[10]=valor_actual_caña
+    vector_caña=valor_Caña_Azucar$vector
+  }else{
+    vector_caña=c(valor_Caña_Azucar$vector,valor_actual_caña)
+  }
+
+
   Caña_anterior=tail(lag(data$Caña.de.Azúcar,11),mes)
 
   tamaño=length(Caña_anterior)
