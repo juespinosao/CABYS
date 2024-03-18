@@ -534,7 +534,9 @@ if (mes %in% c(3,6,9,12)){
 }
 
 
-
+addStyle(wb, sheet = "Leche",style=cbp,rows = (ultima_fila+6),cols = 1)
+addStyle(wb, sheet = "Leche",style=cbn3,rows = (ultima_fila+6),cols = 2)
+addStyle(wb, sheet = "Leche",style=cbn,rows = (ultima_fila+6),cols = 3:10)
 addStyle(wb, sheet = "Leche",style=rn4,rows = (ultima_fila+6),cols = 12:40)
 
 
