@@ -616,23 +616,48 @@ ZG_Permanentes=function(directorio,mes,anio){
   for (i in seq(12, tamaño, by = 12)) {
     Tipo[i] <- (sum(valor_Cacao[(i-11):i]) / sum(Cacao_anterior[(i-11):i]))*100-100  # Realiza la suma y división
   }
+
+  if((mes+24)==tamaño){
+    nuevos_datos <- data.frame(
+      Consecutivo = c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
+      Año = c(data[fila[1]:ultima_fila,"Año"],anio),
+      Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],mes),
+      Descripcion=c(data[fila[1]:ultima_fila,"Descripcion"],"Toneladas"),
+      Palma.Toneladas=valor_Cacao,
+      Variacion.Anual=valor_Cacao/Cacao_anterior*100-100,
+      Estado=as.numeric(Estado),
+      observaciones=as.numeric(Observaciones),
+      Tipo=as.numeric(Tipo)
+    )
+  }else{
+    valor_Cacao=c(valor_Cacao,0)
+    Cacao_anterior=c(Cacao_anterior,0)
+    nuevos_datos <- data.frame(
+      Consecutivo = c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
+      Año = c(data[fila[1]:ultima_fila,"Año"],anio),
+      Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],mes),
+      Descripcion=c(data[fila[1]:ultima_fila,"Descripcion"],"Toneladas"),
+      Palma.Toneladas=valor_Cacao,
+      Variacion.Anual=valor_Cacao/Cacao_anterior*100-100,
+      Estado=as.numeric(c(Estado,0)),
+      observaciones=as.numeric(c(Observaciones,0)),
+      Tipo=as.numeric(c(Tipo,0))
+    )
+  }
   #Crear la nueva fila
-  nuevos_datos <- data.frame(
-    Consecutivo = c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
-    Año = c(data[fila[1]:ultima_fila,"Año"],anio),
-    Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],mes),
-    Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"Toneladas"),
-    Palma.Toneladas=valor_Cacao,
-    Variacion.Anual=valor_Cacao/Cacao_anterior*100-100,
-    Estado=as.numeric(Estado),
-    observaciones=as.numeric(Observaciones),
-    Tipo=as.numeric(Tipo)
-  )
-
-
 
   # Escribe los datos en la hoja "Cacao"
   writeData(wb, sheet = "Cacao", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+9))
+
+if((mes+24)==tamaño){
+
+}else{
+  valor_meses=tail(which(mes==data$Periodicidad),3)
+  writeFormula(wb, sheet ="Cacao" , x = paste0("AVERAGE(E",valor_meses[1]+9,",E",valor_meses[2]+9,",E",valor_meses[3]+9) ,startCol = "E", startRow = ultima_fila+10)
+  writeFormula(wb, sheet ="Cacao" , x = paste0("E",ultima_fila+10,"/E",valor_meses[3]+9,"*100-100") ,startCol = "F", startRow = ultima_fila+10)
+
+  }
+
 
 
   writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Cacao'!E",ultima_fila+10) ,startCol = "H", startRow = ultima_fila+13)
