@@ -19,7 +19,7 @@ f_Leche_polvo<-function(directorio,mes,anio){
   Leche <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Leche/SIPSA/",archivo),
                       sheet = "LecheDANE")
 
-  Valor_Leche=as.data.frame(Leche[Leche[,"Año"] == anio | Leche[,"Año"] == (anio-1),"PRODUCCION LECHE CRUDA DANE"])
+  Valor_Leche=as.data.frame(Leche[Leche[,"Año"] == anio,"PRODUCCION LECHE CRUDA DANE"])
   Valor_Leche=as.numeric(Valor_Leche$`PRODUCCION LECHE CRUDA DANE`)
 
 
@@ -35,8 +35,8 @@ f_Leche_polvo<-function(directorio,mes,anio){
   Leche_cruda[,col_per[1]]=as.numeric(Leche_cruda[,col_per[1]])
   Leche_cruda[,col_per[1]] <- as.Date(Leche_cruda[,col_per[1]], origin = "1899-12-30")
   Leche_cruda[,col_per[1]]=format(Leche_cruda[,col_per[1]], "%Y-%m")
-  fila1=which(Leche_cruda==paste0(anio-1,"-01"))
-  Valor_cruda=as.numeric(Leche_cruda[fila1:(fila_fuente[length(fila_fuente)]-1),col_vol[1]])
+  fila1=which(Leche_cruda==paste0(anio,"-01"),arr.ind = TRUE)[,"row"]
+  Valor_cruda=as.numeric(Leche_cruda[fila1:(fila_fuente[length(fila_fuente)]),col_vol[1]])
 
 
 
@@ -51,7 +51,7 @@ f_Leche_polvo<-function(directorio,mes,anio){
 
   fila_fuente=which(grepl("Fuente",as.data.frame(t(Leche_polvo))))
 
-  fila1=which(grepl(anio-1,Leche_polvo$Fecha),arr.ind = TRUE)
+  fila1=which(grepl(anio,Leche_polvo$Fecha),arr.ind = TRUE)
   fila2=which(grepl("Enero",Leche_polvo$Fecha),arr.ind = TRUE)
   filaf <- intersect(fila1, fila2)
   columna=which(Leche_polvo=="Leche en Polvo Entera (Tn)",arr.ind = TRUE)[,"col"]
@@ -66,7 +66,7 @@ f_Leche_polvo<-function(directorio,mes,anio){
   Valor_cruda <- c(Valor_cruda, rep(NA, longitud_maxima - length(Valor_cruda)))
   Valor_polvo <- c(Valor_polvo, rep(NA, longitud_maxima - length(Valor_polvo)))
 
-  leche_final=as.data.frame(cbind(Valor_Leche,Valor_cruda,Valor_polvo))
+  leche_final=as.data.frame(cbind(Valor_Leche[1:mes],Valor_cruda[1:mes],Valor_polvo[1:mes]))
 
 
 
