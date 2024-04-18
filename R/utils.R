@@ -95,7 +95,7 @@ col5 <- createStyle(
   fontColour = "black",
   border = "Top: thin, Left: thin, Right: thin",
   borderColour = "#A6A6A6",
-  numFmt = "0,000.00",
+  numFmt = "0.00",
   halign = "center",
   valign = "center"
 )
@@ -168,7 +168,14 @@ col9 <- createStyle(
   numFmt = "0"
 )
 
-
+col10 <- createStyle(
+  fontName = "Arial Narrow",
+  fontSize = 11,
+  fontColour = "black",
+  border = "Top: thin, Left: thin, Right: thin",
+  borderColour = "#A6A6A6",
+  numFmt = "_-* #,##0.0_-;-* #,##0.0_-;_-* \"-\"_-;_-@_-"
+)
 
 
 # Formatos Reporte coyuntura ----------------------------------------------
