@@ -21,18 +21,18 @@ f_Fenavi<-function(directorio,mes,anio){
 
   n_fila=which(Encasetamiento_pollito == "MES",arr.ind = TRUE)[, "row"]
   fila_tabla1=as.numeric(which(Encasetamiento_pollito == "ENERO",arr.ind = TRUE)[, "row"])
-  fila_tabla2=as.numeric(which(Encasetamiento_pollito == "SUBTOTAL",arr.ind = TRUE)[, "row"])
+  fila_tabla2=as.numeric(which(Encasetamiento_pollito == "SUBTOTAL"|Encasetamiento_pollito == "TOTAL",arr.ind = TRUE)[, "row"])
   columna=which(grepl(anio,Encasetamiento_pollito[n_fila,]),arr.ind = TRUE)
-  Tabla1=as.numeric(Encasetamiento_pollito[fila_tabla1:(fila_tabla2-1),columna])
+  Tabla1=as.numeric(Encasetamiento_pollito[fila_tabla1:(fila_tabla2[1]-1),columna])
 
 
   Encasetamiento_pollita <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/FENAVI/",archivo),sheet = "POLLITA")
 
   n_fila=which(Encasetamiento_pollita == "MES",arr.ind = TRUE)[, "row"]
   fila_tabla1=as.numeric(which(Encasetamiento_pollita == "ENERO",arr.ind = TRUE)[, "row"])
-  fila_tabla2=as.numeric(which(Encasetamiento_pollita == "SUBTOTAL",arr.ind = TRUE)[, "row"])
+  fila_tabla2=as.numeric(which(Encasetamiento_pollita == "SUBTOTAL" |Encasetamiento_pollita == "TOTAL",arr.ind = TRUE)[, "row"])
   columna=which(grepl(anio,Encasetamiento_pollita[n_fila,]),arr.ind = TRUE)
-  Tabla2=as.numeric(Encasetamiento_pollita[fila_tabla1:(fila_tabla2-1),columna])
+  Tabla2=as.numeric(Encasetamiento_pollita[fila_tabla1:(fila_tabla2[1]-1),columna])
 
 
 
