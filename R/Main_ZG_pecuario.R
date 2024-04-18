@@ -75,7 +75,8 @@ writeData(wb, sheet = "Ganado_Bovino", x = nuevos_datos,colNames = FALSE,startCo
 addStyle(wb, sheet = "Ganado_Bovino",style=col1,rows = (ultima_fila+11),cols = 1:4,gridExpand = TRUE)
 addStyle(wb, sheet = "Ganado_Bovino",style=col2,rows = (ultima_fila+11),cols = 5,gridExpand = TRUE)
 addStyle(wb, sheet = "Ganado_Bovino",style=col3,rows = (ultima_fila+11),cols = 6,gridExpand = TRUE)
-addStyle(wb, sheet = "Ganado_Bovino",style=col4,rows = (ultima_fila+11),cols = 7:8,gridExpand = TRUE)
+addStyle(wb, sheet = "Ganado_Bovino",style=col4,rows = (ultima_fila+11),cols = 7,gridExpand = TRUE)
+addStyle(wb, sheet = "Ganado_Bovino",style=col4,rows = (ultima_fila+11),cols = 8,gridExpand = TRUE)
 
 # Pollos ------------------------------------------------------------------
 
@@ -157,7 +158,7 @@ nuevos_datos <- data.frame(
   Variacion.Anual=valor_Porcino$valor_Porcino/tail(lag(data$Porcino.Kilos,11),mes)*100-100,
   Estado=as.numeric(valor_Porcino$Estado),
   observaciones=if (mes==12) {
-    c(rep("",11),sum(valor_Porcino$valor_Porcino)/sum(valor_Porcino$anterior)*100-100)
+    c(rep("",11),as.numeric(sum(valor_Porcino$valor_Porcino)/sum(valor_Porcino$anterior)*100-100))
   } else {
     rep("",mes)
   },
@@ -206,7 +207,7 @@ nuevos_datos <- data.frame(
   Variacion.Anual=valor_Leche$valor_Leche/tail(lag(data$Leche.sin.elaborar.Volumen,11),mes)*100-100,
   Estado=as.numeric(valor_Leche$Estado),
   observaciones=if (mes==12) {
-    c(rep("",11),sum(valor_Porcino$valor_Porcino)/sum(valor_Porcino$anterior)*100-100)
+    c(rep("",11),as.numeric(sum(valor_Leche$valor_Leche)/sum(valor_Leche$anterior)*100-100))
   } else {
     rep("",mes)
   },
@@ -304,7 +305,7 @@ nuevos_datos <- data.frame(
   Ovino_caprino=valor_trimestre$valor_trimestre,
   Variacion.Anual=valor_trimestre$valor_trimestre/tail(lag(data$Ovino.y.Caprino,3),tamaño)*100-100,
   Estado=if (trimestre==4) {
-    c(rep("",3),(valor_trimestre+sum(filter(data, Año == anio)[["Ovino.y.Caprino"]]))/
+    c(rep("",3),(sum(valor_trimestre$valor_trimestre))/
       (sum(tail(lag(data$Ovino.y.Caprino,3),4)))*100-100 )
   } else {
     rep("",tamaño)
