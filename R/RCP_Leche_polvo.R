@@ -18,7 +18,7 @@ f_Leche_polvo<-function(directorio,mes,anio){
   # Especifica la ruta del archivo de Excel
   Leche <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Leche/SIPSA/",archivo),
                       sheet = "LecheDANE")
-
+  Leche$Año=na.locf(Leche$Año)
   Valor_Leche=as.data.frame(Leche[Leche[,"Año"] == anio,"PRODUCCION LECHE CRUDA DANE"])
   Valor_Leche=as.numeric(Valor_Leche$`PRODUCCION LECHE CRUDA DANE`)
 
