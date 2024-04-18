@@ -76,7 +76,7 @@ addStyle(wb, sheet = "Ganado_Bovino",style=col1,rows = (ultima_fila+11),cols = 1
 addStyle(wb, sheet = "Ganado_Bovino",style=col2,rows = (ultima_fila+11),cols = 5,gridExpand = TRUE)
 addStyle(wb, sheet = "Ganado_Bovino",style=col3,rows = (ultima_fila+11),cols = 6,gridExpand = TRUE)
 addStyle(wb, sheet = "Ganado_Bovino",style=col4,rows = (ultima_fila+11),cols = 7,gridExpand = TRUE)
-addStyle(wb, sheet = "Ganado_Bovino",style=col4,rows = (ultima_fila+11),cols = 8,gridExpand = TRUE)
+addStyle(wb, sheet = "Ganado_Bovino",style=col10,rows = (ultima_fila+11),cols = 8,gridExpand = TRUE)
 
 # Pollos ------------------------------------------------------------------
 
@@ -165,7 +165,7 @@ nuevos_datos <- data.frame(
   Tipo=rep("",mes)
 )
 
-
+nuevos_datos$observaciones=as.numeric(nuevos_datos$observaciones)
 
 
 # Escribe los datos en la hoja "Porcino"
@@ -214,6 +214,7 @@ nuevos_datos <- data.frame(
   Tipo=rep("",mes)
 )
 
+nuevos_datos$observaciones=as.numeric(nuevos_datos$observaciones)
 
 
 
@@ -313,6 +314,8 @@ nuevos_datos <- data.frame(
   observaciones=rep("",tamaño),
   Tipo=rep("",tamaño)
 )
+
+nuevos_datos$Estado=as.numeric(nuevos_datos$Estado)
 
 # Escribe los datos en la hoja "Ovino y Caprino trimestral"
 writeData(wb, sheet = "Ovino y Caprino trimestral", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
