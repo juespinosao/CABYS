@@ -639,9 +639,9 @@ ZG_Permanentes=function(directorio,mes,anio){
       Descripcion=c(data[fila[1]:ultima_fila,"Descripcion"],"Toneladas"),
       Palma.Toneladas=valor_Cacao,
       Variacion.Anual=valor_Cacao/Cacao_anterior*100-100,
-      Estado=as.numeric(c(Estado,0)),
-      observaciones=as.numeric(c(Observaciones,0)),
-      Tipo=as.numeric(c(Tipo,0))
+      Estado=as.numeric(c(Estado,"")),
+      observaciones=as.numeric(c(Observaciones,"")),
+      Tipo=as.numeric(c(Tipo,""))
     )
   }
   #Crear la nueva fila
@@ -653,7 +653,7 @@ if((mes+24)==tamaño){
 
 }else{
   valor_meses=tail(which(mes==data$Periodicidad),3)
-  writeFormula(wb, sheet ="Cacao" , x = paste0("AVERAGE(E",valor_meses[1]+9,",E",valor_meses[2]+9,",E",valor_meses[3]+9) ,startCol = "E", startRow = ultima_fila+10)
+  writeFormula(wb, sheet ="Cacao" , x = paste0("AVERAGE(E",valor_meses[1]+9,",E",valor_meses[2]+9,",E",valor_meses[3]+9,")") ,startCol = "E", startRow = ultima_fila+10)
   writeFormula(wb, sheet ="Cacao" , x = paste0("E",ultima_fila+10,"/E",valor_meses[3]+9,"*100-100") ,startCol = "F", startRow = ultima_fila+10)
 
   }
