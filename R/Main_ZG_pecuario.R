@@ -44,11 +44,13 @@ valor_Bovino=valor_Bovino[,1]
 valor_Bovino=as.data.frame(valor_Bovino)
 valor_Bovino$anterior=tail(lag(data$Ganado.bovino.Kilos,11),mes)
 valor_Bovino$Estado <- ""
-
+if(nrow(valor_Bovino)>3){
 for (i in seq(3, nrow(valor_Bovino), by = 3)) {
   valor_Bovino$Estado[i] <- (sum(valor_Bovino$valor_Bovino[(i-2):i]) / sum(valor_Bovino$anterior[(i-2):i]))*100-100  # Realiza la suma y división
 }
-
+}else{
+valor_Bovino$Estado <- ""
+}
 
 #Crear la nueva fila
 nuevos_datos <- data.frame(
@@ -66,7 +68,7 @@ nuevos_datos <- data.frame(
   },
   Tipo=rep("",mes)
 )
-
+nuevos_datos$observaciones=as.numeric(nuevos_datos$observaciones)
 
 # Escribe los datos en la hoja "Ganado_Bovino"
 writeData(wb, sheet = "Ganado_Bovino", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
@@ -143,10 +145,13 @@ valor_Porcino=as.data.frame(valor_Porcino)
 valor_Porcino$anterior=tail(lag(data$Porcino.Kilos,11),mes)
 valor_Porcino$Estado <- ""
 
+if(nrow(valor_Porcino)>3){
 for (i in seq(3, nrow(valor_Porcino), by = 3)) {
   valor_Porcino$Estado[i] <- (sum(valor_Porcino$valor_Porcino[(i-2):i]) / sum(valor_Porcino$anterior[(i-2):i]))*100-100  # Realiza la suma y división
 }
-
+}else{
+  valor_Porcino$Estado <- ""
+}
 
 #Crear la nueva fila
 nuevos_datos <- data.frame(
@@ -192,10 +197,13 @@ valor_Leche=as.data.frame(valor_Leche)
 valor_Leche$anterior=tail(lag(data$Leche.sin.elaborar.Volumen,11),mes)
 valor_Leche$Estado <- ""
 
+if(nrow(valor_Leche)>3){
 for (i in seq(3, nrow(valor_Leche), by = 3)) {
   valor_Leche$Estado[i] <- (sum(valor_Leche$valor_Leche[(i-2):i]) / sum(valor_Leche$anterior[(i-2):i]))*100-100  # Realiza la suma y división
 }
-
+}else{
+  valor_Leche$Estado <- ""
+}
 
 #Crear la nueva fila
 nuevos_datos <- data.frame(

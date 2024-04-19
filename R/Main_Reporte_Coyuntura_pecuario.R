@@ -457,9 +457,9 @@ Prod_leche=Leche_polvo[[1]]
 Expo_impo=Leche_polvo[[2]]
 valor_fecha=as.integer(as.Date(paste0(1,"/",mes_0[mes],"/",anio), format = "%d/%m/%Y") - as.Date("1899-12-30"))
 writeData(wb, sheet = "Leche", x = valor_fecha,colNames = FALSE,startCol = "A", startRow = (ultima_fila+6))
-writeData(wb, sheet = "Leche", x = Prod_leche,colNames = FALSE,startCol = "B", startRow = (fila_enero[1]+5))
-writeData(wb, sheet = "Leche", x = Expo_impo$Importacion,colNames = FALSE,startCol = "G", startRow = (fila_enero[1]+5))
-writeData(wb, sheet = "Leche", x = Expo_impo[,2:3],colNames = FALSE,startCol = "I", startRow = (fila_enero[1]+5))
+writeData(wb, sheet = "Leche", x = Prod_leche,colNames = FALSE,startCol = "B", startRow = (fila_enero_ant[1]+5))
+writeData(wb, sheet = "Leche", x = Expo_impo$Importacion,colNames = FALSE,startCol = "G", startRow = (fila_enero_ant[1]+5))
+writeData(wb, sheet = "Leche", x = Expo_impo[,2:3],colNames = FALSE,startCol = "I", startRow = (fila_enero_ant[1]+5))
 
 
 for (i in 1:sum(is.na(Prod_leche[,2]))) {
@@ -699,9 +699,9 @@ Valor_Pollos=f_Pollos(directorio,mes,anio)
 Valor_Fenavi=f_Fenavi(directorio,mes,anio)
 valor_fecha=as.integer(as.Date(paste0(1,"/",mes_0[mes],"/",anio), format = "%d/%m/%Y") - as.Date("1899-12-30"))
 writeData(wb, sheet = "Pollo_Huevo", x = valor_fecha,colNames = FALSE,startCol = "A", startRow = (ultima_fila+6))
-writeData(wb, sheet = "Pollo_Huevo", x = Valor_Huevos,colNames = FALSE,startCol = "B", startRow = (fila_enero[1]+5-12))
-writeData(wb, sheet = "Pollo_Huevo", x = Valor_Pollos,colNames = FALSE,startCol = "C", startRow = (fila_enero[1]+5-12))
-writeData(wb, sheet = "Pollo_Huevo", x = Valor_Fenavi,colNames = FALSE,startCol = "D", startRow = (fila_enero[1]+5))
+writeData(wb, sheet = "Pollo_Huevo", x = Valor_Huevos,colNames = FALSE,startCol = "B", startRow = (fila_enero_ant[1]+5-12))
+writeData(wb, sheet = "Pollo_Huevo", x = Valor_Pollos,colNames = FALSE,startCol = "C", startRow = (fila_enero_ant[1]+5-12))
+writeData(wb, sheet = "Pollo_Huevo", x = Valor_Fenavi,colNames = FALSE,startCol = "D", startRow = (fila_enero_ant[1]+5))
 
 
 #Añadir formulas

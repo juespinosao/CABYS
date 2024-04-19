@@ -23,17 +23,27 @@ f_Fenavi<-function(directorio,mes,anio){
   fila_tabla1=as.numeric(which(Encasetamiento_pollito == "ENERO",arr.ind = TRUE)[, "row"])
   fila_tabla2=as.numeric(which(Encasetamiento_pollito == "SUBTOTAL"|Encasetamiento_pollito == "TOTAL",arr.ind = TRUE)[, "row"])
   columna=which(grepl(anio,Encasetamiento_pollito[n_fila,]),arr.ind = TRUE)
-  Tabla1=as.numeric(Encasetamiento_pollito[fila_tabla1:(fila_tabla2[1]-1),columna])
+  columna <- which(grepl(paste0((anio-1), "|", (anio)), Encasetamiento_pollito[n_fila, ]), arr.ind = TRUE)
 
+  Tabla1=as.data.frame(Encasetamiento_pollito[fila_tabla1:(fila_tabla2[1]-1),columna])
+  vector1=NULL
+  for (i in 1:ncol(Tabla1)) {
+    vector1=c(vector1,as.vector(Tabla1[,i]))
+  }
+  vector1=na.omit(vector1)
 
   Encasetamiento_pollita <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/FENAVI/",archivo),sheet = "POLLITA")
 
   n_fila=which(Encasetamiento_pollita == "MES",arr.ind = TRUE)[, "row"]
   fila_tabla1=as.numeric(which(Encasetamiento_pollita == "ENERO",arr.ind = TRUE)[, "row"])
   fila_tabla2=as.numeric(which(Encasetamiento_pollita == "SUBTOTAL" |Encasetamiento_pollita == "TOTAL",arr.ind = TRUE)[, "row"])
-  columna=which(grepl(anio,Encasetamiento_pollita[n_fila,]),arr.ind = TRUE)
-  Tabla2=as.numeric(Encasetamiento_pollita[fila_tabla1:(fila_tabla2[1]-1),columna])
-
+  columna <- which(grepl(paste0((anio-1), "|", (anio)), Encasetamiento_pollita[n_fila, ]), arr.ind = TRUE)
+  Tabla2=as.data.frame(Encasetamiento_pollita[fila_tabla1:(fila_tabla2[1]-1),columna])
+  vector2=NULL
+  for (i in 1:ncol(Tabla2)) {
+    vector2=c(vector2,as.vector(Tabla2[,i]))
+  }
+  vector2=na.omit(vector2)
 
 
 # Aves de postura ---------------------------------------------------------
@@ -45,26 +55,30 @@ f_Fenavi<-function(directorio,mes,anio){
  fila_col=which(grepl("Mes",as.data.frame(t(Postura))),arr.ind = TRUE)
   n_fila=which(grepl("postura",as.data.frame(t(Postura))),arr.ind = TRUE)
   fila_tabla=as.numeric(which(Postura == "Ene",arr.ind = TRUE)[, "row"])
+  fila_tabla2=as.numeric(which(Postura == "Dic",arr.ind = TRUE)[, "row"])
   des=which.min(abs(n_fila-fila_tabla))
-  columna=which(grepl(anio,Postura[fila_col[1],]),arr.ind = TRUE)
+  des2=which.max(abs(n_fila-fila_tabla2))
+  columna <- which(grepl(paste0((anio-1), "|", (anio)), Postura[fila_col[1],]), arr.ind = TRUE)
 
 
-  Tabla=as.data.frame(Postura[fila_tabla[des]:(fila_tabla[des]+mes-1),columna])
+  Tabla3=as.data.frame(Postura[fila_tabla[des]:(fila_tabla2[des2]),columna])
 
 
-  Valor_Postura=as.numeric(Tabla[,1])
-
-
+  vector3=NULL
+  for (i in 1:ncol(Tabla3)) {
+    vector3=c(vector3,as.vector(Tabla3[,i]))
+  }
+  vector3=na.omit(vector3)
 
 
 
 # agrupar datos -----------------------------------------------------------
-  longitud_maxima <- max(length(Tabla1), length(Tabla2), length(Valor_Postura))
-  Tabla1 <- c(Tabla1, rep(NA, longitud_maxima - length(Tabla1)))
-  Tabla2 <- c(Tabla2, rep(NA, longitud_maxima - length(Tabla2)))
-  Valor_Postura <- c(Valor_Postura, rep(NA, longitud_maxima - length(Valor_Postura)))
+  longitud_maxima <- max(length(vector1), length(vector2), length(vector3))
+  vector1 <- c(vector1, rep(NA, longitud_maxima - length(vector1)))
+  vector2 <- c(vector2, rep(NA, longitud_maxima - length(vector2)))
+  vector3 <- c(vector3, rep(NA, longitud_maxima - length(vector3)))
 
-  valor_Fenavi=data.frame(Tabla1,Tabla2,Valor_Postura)
+  valor_Fenavi=data.frame(vector1,vector2,vector3)
 
 
 
