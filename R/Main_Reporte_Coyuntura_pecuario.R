@@ -10,7 +10,7 @@ library(openxlsx)
 carpeta_actual=nombre_carpeta(mes,anio)
 if(mes==1){
   carpeta_anterior=nombre_carpeta(12,(anio-1))
-  entrada=paste0(directorio,"/ISE/",anio-1,"/",carpeta_anterior,"/Results/Reporte Coyuntura Pecuario ISE_",nombres_meses[mes-1],"_",anio,".xlsx")
+  entrada=paste0(directorio,"/ISE/",anio-1,"/",carpeta_anterior,"/Results/Reporte Coyuntura Pecuario ISE_",nombres_meses[12],"_",(anio-1),".xlsx")
 
 }else{
   carpeta_anterior=nombre_carpeta(mes-1,anio)
