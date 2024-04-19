@@ -234,6 +234,7 @@ addStyle(wb, sheet = "Leche",style=col1,rows = (ultima_fila+11),cols = 1:4)
 addStyle(wb, sheet = "Leche",style=col2,rows = (ultima_fila+11),cols = 5)
 addStyle(wb, sheet = "Leche",style=col3,rows = (ultima_fila+11),cols = 6)
 addStyle(wb, sheet = "Leche",style=col4,rows = (ultima_fila+11),cols = 7:8)
+
 # Huevos ------------------------------------------------------------------
 
 #Leer solo la hoja de Huevos
