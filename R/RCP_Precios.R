@@ -28,8 +28,14 @@ f_Precios<-function(directorio,mes,anio){
  dos_digitos=anio %% 100
   #identificar las columna donde dice total general y peso en pie
   #identificar las columna donde dice total general y peso en pie
-  columna1=which(grepl(paste0(nombres_siglas[mes-1],"-",dos_digitos),Precios),arr.ind = TRUE)
-  columna2=which(grepl(paste0(nombres_siglas[mes],"-",dos_digitos),Precios),arr.ind = TRUE)
+ if(mes==1){
+   columna1=which(grepl(paste0(nombres_siglas[12],"-",(dos_digitos-1)),Precios),arr.ind = TRUE)
+   columna2=which(grepl(paste0(nombres_siglas[mes],"-",dos_digitos),Precios),arr.ind = TRUE)
+ }else{
+   columna1=which(grepl(paste0(nombres_siglas[mes-1],"-",dos_digitos),Precios),arr.ind = TRUE)
+   columna2=which(grepl(paste0(nombres_siglas[mes],"-",dos_digitos),Precios),arr.ind = TRUE)
+ }
+columna1=max(columna1)
 
   fila1=which(grepl("02111",Precios[,n_col]),arr.ind = TRUE)
   fila2=which(grepl("21111",Precios[,n_col]),arr.ind = TRUE)
@@ -45,7 +51,7 @@ f_Precios<-function(directorio,mes,anio){
 
 
   #Tomar el valor que nos interesa
-  Valor_Precios=as.data.frame(t(Precios[c(fila1,fila2,fila3,fila4,fila5,fila6,fila7,fila8,fila9),c(columna1[1],columna2[1])]))
+  Valor_Precios=as.data.frame(t(Precios[c(fila1,fila2,fila3,fila4,fila5,fila6,fila7,fila8,fila9),c(columna1,columna2[1])]))
 
   Valor_Precios=as.data.frame(lapply(Valor_Precios, as.numeric))
 
@@ -55,7 +61,7 @@ f_Precios<-function(directorio,mes,anio){
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="PorkColombia","NOMBRE"]
 
 
-    Porkcol_pie <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Porkcolombia/",archivo),
+  Porkcol_pie <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Porkcolombia/",archivo),
                                sheet = "Precio nacional pie ")
 
   #Identificar la fila donde esta la palabra Periodo

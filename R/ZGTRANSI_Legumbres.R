@@ -15,8 +15,12 @@ f_Legumbres<-function(directorio,mes,anio){
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Legumbres","NOMBRE"]
 
   Legumbres <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Mensualización_lejumbres/",archivo))
-
+if(mes==1){
   fila=which(Legumbres$Año==anio)+(mes-1)
+}else{
+  fila=which(Legumbres$Año==anio)+(mes-1)
+}
+
 
 
   vector=as.data.frame(Legumbres[1:fila,"Serie retropolada y mensualizada con r"])

@@ -71,7 +71,13 @@ nuevos_datos <- data.frame(
 nuevos_datos$observaciones=as.numeric(nuevos_datos$observaciones)
 
 # Escribe los datos en la hoja "Ganado_Bovino"
+if(mes==1){
+writeData(wb, sheet = "Ganado_Bovino", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila[1]+11))
+
+}else{
 writeData(wb, sheet = "Ganado_Bovino", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
+
+}
 
 
 addStyle(wb, sheet = "Ganado_Bovino",style=col1,rows = (ultima_fila+11),cols = 1:4,gridExpand = TRUE)
@@ -174,7 +180,11 @@ nuevos_datos$observaciones=as.numeric(nuevos_datos$observaciones)
 
 
 # Escribe los datos en la hoja "Porcino"
+if(mes==1){
+  writeData(wb, sheet = "Porcino", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila[1]+11))
+}else{
 writeData(wb, sheet = "Porcino", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
+}
 
 addStyle(wb, sheet = "Porcino",style=col1,rows = (ultima_fila+11),cols = 1:4)
 addStyle(wb, sheet = "Porcino",style=col2,rows = (ultima_fila+11),cols = 5)
@@ -227,7 +237,13 @@ nuevos_datos$observaciones=as.numeric(nuevos_datos$observaciones)
 
 
 # Escribe los datos en la hoja "Leche"
-writeData(wb, sheet = "Leche", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
+if(mes==1){
+  writeData(wb, sheet = "Leche", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila[1]+11))
+
+}else{
+  writeData(wb, sheet = "Leche", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+10))
+
+}
 
 
 addStyle(wb, sheet = "Leche",style=col1,rows = (ultima_fila+11),cols = 1:4)

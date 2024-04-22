@@ -75,9 +75,11 @@ f_Ovino_Caprino<-function(directorio,mes,anio){
            indice_anual=(103/12)*indice/100)
 indice_trimestral=NULL
 #Calcular el valor del indice trimestral, usado en el ZG
+
 for (i in seq(3, nrow(Tabla_datos), by = 3)) {
   indice_trimestral$indice_trimestral[i]=as.numeric(sum(Tabla_datos$indice_anual[(i-2):i]))  # Realiza la suma y división
 }
+
 indice_final=na.omit(indice_trimestral$indice_trimestral)
 return(indice_final)
 

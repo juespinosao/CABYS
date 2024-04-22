@@ -77,8 +77,8 @@ ZG_Transitorio=function(directorio,mes,anio){
     Variacion.Anual=head(rep(valor_Maiz, each = 6),tamaño),
     Estado=as.numeric(Estado[1:tamaño]),
     observaciones=as.numeric(Observaciones[1:tamaño]),
-    Tipo=rep("",tamaño),
-    adicional=as.numeric(adicional[1:tamaño])
+    Tipo=rep("",tamaño)#,
+    #adicional=as.numeric(adicional[1:tamaño])
   )
 
 
