@@ -31,11 +31,25 @@ f_Frutas<-function(directorio,mes,anio){
   n_fila=which(Frutas == "010499" |Frutas == "010403",arr.ind = TRUE)[,"row"]
   n_fila=c(n_fila[[1]],n_fila[[2]])
   n_col_1=which(Frutas== paste0(anio," ",mes),arr.ind = TRUE)[,"col"]
-  n_col_2=which(Frutas== paste0((anio-1)," ",mes),arr.ind = TRUE)[,"col"]
+  n_col_2=which(Frutas== paste0((anio-1)," ",1),arr.ind = TRUE)[,"col"]
 
 
-  #Tomar el valor que nos interesa
-  Valor_exportaciones=sum(as.numeric(Frutas[n_fila,n_col_1[1]]))/sum(as.numeric(Frutas[n_fila,n_col_2[1]]))*100-100
+
+  Frutas2 <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
+                      sheet = "CTES FOBPES")
+  n_fila_2=which(Frutas2 == "010499" |Frutas2 == "010403",arr.ind = TRUE)[,"row"]
+  n_fila_2=c(n_fila[[1]],n_fila[[2]])
+  n_col_1_2=which(Frutas2== paste0(anio," ",mes),arr.ind = TRUE)[,"col"]
+  n_col_2_2=which(Frutas2== paste0((anio-1)," ",1),arr.ind = TRUE)[,"col"]
+
+  Frutas3 <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
+                       sheet = "IP_EXPO")
+
+
+   valor_exportaciones=as.data.frame(cbind(t(Frutas[n_fila,n_col_2[1]:n_col_1[1]]),t(Frutas2[n_fila_2,n_col_2_2[1]:n_col_1_2[1]]),t(Frutas3[n_fila_2,n_col_2_2[1]:n_col_1_2[1]])))
+   for (i in 1:6) {
+     valor_exportaciones[,i]=as.numeric(valor_exportaciones[,i])
+   }
 
 
 
@@ -44,12 +58,14 @@ f_Frutas<-function(directorio,mes,anio){
 
   # Consumo interno ---------------------------------------------------------
 archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
-  Frutas <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/Base_EB_SIPSA.xlsx"))
+  Frutas <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
 
-  fila1=which(Frutas==anio,arr.ind = TRUE)[,"row"]
-  fila2=which(Frutas==mes,arr.ind = TRUE)[,"row"]
-  fila_f=intersect(fila1,fila2)
-  Valor_Frutas=as.data.frame(na.omit(Frutas[1:fila_f,"Frutas"]))
+  fila1=min(which(Frutas==2013,arr.ind = TRUE)[,"row"])
+  fila2=min(which(Frutas==anio,arr.ind = TRUE)[,"row"])
+  columna1=which(Frutas=="Frutas citricas retropolado",arr.ind = TRUE)[,"col"]
+  columna2=which(Frutas=="Otras frutas retropolado",arr.ind = TRUE)[,"col"]
+
+  Valor_Frutas=as.data.frame(na.omit(Frutas[fila1:fila2,c(columna1[1],columna2[1])]))
 
 
 
@@ -57,5 +73,5 @@ archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
   # Agrupar datos -----------------------------------------------------------
 
 
-  return(list(variacion = Valor_exportaciones, vector = Valor_Frutas))
+  return(list(variacion = valor_exportaciones, vector = Valor_Frutas))
 }

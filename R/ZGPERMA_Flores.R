@@ -33,7 +33,7 @@ f_Flores<-function(directorio,mes,anio){
 
 # Rosas -------------------------------------------------------------------
   Promedio_rosas_2015=4072178.51916667
-  Participacion_rosas=0.222549869904597
+  Participacion_rosas=0.195282617934552
 
   n_fila=which(Flores == "011101",arr.ind = TRUE)[,"row"]
   n_col1=which(Flores== paste0((anio-2)," 1"),arr.ind = TRUE)[,"col"]
@@ -47,7 +47,7 @@ f_Flores<-function(directorio,mes,anio){
 
 # Claveles -------------------------------------------------------------------
   Promedio_Claveles_2015=3327397.96666667
-  Participacion_Claveles=0.154206418039896
+  Participacion_Claveles=0.14067148321292
 
   n_fila=which(Flores == "011102",arr.ind = TRUE)[,"row"]
   n_col1=which(Flores== paste0((anio-2)," 1"),arr.ind = TRUE)[,"col"]
@@ -64,7 +64,7 @@ f_Flores<-function(directorio,mes,anio){
 
 # Pompones -------------------------------------------------------------------
   Promedio_Pompones_2015=11130088.51
-  Participacion_Pompones=0.623243712055507
+  Participacion_Pompones=0.664045898852529
 
   n_fila=which(Flores == "011103",arr.ind = TRUE)[,"row"]
   n_col1=which(Flores== paste0((anio-2)," 1"),arr.ind = TRUE)[,"col"]

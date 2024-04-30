@@ -128,17 +128,20 @@ ZG_Permanentes=function(directorio,mes,anio){
   valor_Cafetos$anterior=tail(lag(data$Cafetos,11),mes)
   valor_Cafetos$Estado <- ""
 
+  if(nrow(valor_Bovino)>3){
   for (i in seq(3, nrow(valor_Cafetos), by = 3)) {
     valor_Cafetos$Estado[i] <- (sum(valor_Cafetos$valor_Cafetos[(i-2):i]) / sum(valor_Cafetos$anterior[(i-2):i]))*100-100  # Realiza la suma y división
   }
-
+  }else{
+    valor_Cafetos$Estado <- ""
+}
 
 
   #Crear la nueva fila
   nuevos_datos <- data.frame(
     Consecutivo = c(data[fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
-    Año = c(data[fila[1]:ultima_fila,"Año"],anio),
-    Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],mes),
+    Año = c(data[fila,"Año"],anio),
+    Periodicidad=c(data[fila,"Periodicidad"],mes),
     Descripcion=rep("Hectáreas Renovadas para Producción",mes),
     Cafetos.Toneladas=valor_Cafetos$valor_Cafetos,
     Variacion.Anual=valor_Cafetos$valor_Cafetos/valor_Cafetos$anterior*100-100,
@@ -174,10 +177,10 @@ ZG_Permanentes=function(directorio,mes,anio){
 
   Prom2015_exportaciones=196007330826.056
   Indice_exportacion=valor_Banano$exportaciones/Prom2015_exportaciones*100
-  Ponderador_expos=83.3677448956183
+  Ponderador_expos=74.0461933276304
   Prom2015_consumo=7767960.5
   Indice_consumo=valor_Banano$consumo_interno/Prom2015_consumo*100
-  Ponderador_consumo=16.6322551043817
+  Ponderador_consumo=25.9538066723696
   Indice_ponderado=((Indice_exportacion*Ponderador_expos)+(Indice_consumo*Ponderador_consumo))/100
   vector_banano=cbind(valor_Banano$exportaciones,Indice_exportacion,Ponderador_expos,valor_Banano$consumo_interno,Indice_consumo,
                   Ponderador_consumo,Indice_ponderado)
@@ -283,10 +286,10 @@ ZG_Permanentes=function(directorio,mes,anio){
 
   Prom2015_exportaciones=7963.12480916667
   Indice_exportacion=valor_Platano$exportaciones/Prom2015_exportaciones*100
-  Ponderador_expos=7.52947481243301
+  Ponderador_expos=5.76126001657917
   Prom2015_consumo=21334420.25
   Indice_consumo=valor_Platano$consumo_interno/Prom2015_consumo*100
-  Ponderador_consumo=92.470525187567
+  Ponderador_consumo=94.2387399834208
   Indice_ponderado=((Indice_exportacion*Ponderador_expos)+(Indice_consumo*Ponderador_consumo))/100
   vector_Platano=cbind(valor_Platano$exportaciones,Indice_exportacion,Ponderador_expos,valor_Platano$consumo_interno,Indice_consumo,
                   Ponderador_consumo,Indice_ponderado)
@@ -364,126 +367,138 @@ ZG_Permanentes=function(directorio,mes,anio){
   addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 9:11)
   addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col3,rows = (ultima_fila+12),cols = 12:18)
   addStyle(wb, sheet = "Plátano Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 19:20)
-  # Frutas ------------------------------------------------------------------
+  # Frutas citricas ------------------------------------------------------------------
 
   #Leer solo la hoja de Frutas
-  data <- read.xlsx(wb, sheet = "Frutas Total(Expos+Interno)", colNames = TRUE,startRow = 11)
+  data <- read.xlsx(wb, sheet = "Frutas Citricas", colNames = TRUE,startRow = 2)
 
   ultima_fila=nrow(data)
   fila=which(data$Año==2013)
+  fila_anio_ant=which(data$Año== (anio-1))
+  fila_anterior=max(which(data$Mes== mes))
 
 
   #Correr la funcion Pollos
   valor_Frutas=f_Frutas(directorio,mes,anio)
+exportaciones=valor_Frutas$variacion
+consumo_interno=valor_Frutas$vector
+nuevos_datos=data.frame(
+consecutivo=data[ultima_fila,1]+1,
+periodo=anio,
+Mes=mes
+)
+  # Escribe los datos en la hoja "Frutas Total(Expos+Interno)"
+writeData(wb, sheet = "Frutas Citricas", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila[1]+3))
+writeData(wb, sheet = "Frutas Citricas", x = exportaciones[,1],colNames = FALSE,startCol = "D", startRow = (fila_anio_ant[1]+2))
+writeData(wb, sheet = "Frutas Citricas", x =as.numeric(consumo_interno[,1]),colNames = FALSE,startCol = "E", startRow = (fila[1]+2))
+writeData(wb, sheet = "Frutas Citricas", x = exportaciones[,3],colNames = FALSE,startCol = "J", startRow = (fila_anio_ant[1]+2))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("D",ultima_fila+3,"/D",fila_anterior+2,"*100-100") ,startCol = "G", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("E",ultima_fila+3,"/E",fila_anterior+2,"*100-100") ,startCol = "H", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("E",ultima_fila+3,"*R",ultima_fila+3,"/100") ,startCol = "K", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("J",ultima_fila+3,"/J",fila_anterior+2,"*100-100") ,startCol = "M", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("K",ultima_fila+3,"/K",fila_anterior+2,"*100-100") ,startCol = "N", startRow = (ultima_fila[1]+3))
+writeData(wb, sheet = "Frutas Citricas", x = exportaciones[,5],colNames = FALSE,startCol = "P", startRow = (fila_anio_ant[1]+2))
+##Falta columna R
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("P",ultima_fila+3,"/P",fila_anterior+2,"*100-100") ,startCol = "T", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("R",ultima_fila+3,"/R",fila_anterior+2,"*100-100") ,startCol = "V", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("((X3/12)/100)*(D",ultima_fila+3,"/AVERAGE(D125:D136)*100)") ,startCol = "X", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("((Y3/12)/100)*(E",ultima_fila+3,"/AVERAGE(E125:E136)*100)") ,startCol = "Y", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("SUM(X",ultima_fila+3,":Y",ultima_fila+3,")") ,startCol = "Z", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("X",ultima_fila+3,"/X",fila_anterior+2,"*100-100") ,startCol = "AB", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("Y",ultima_fila+3,"/Y",fila_anterior+2,"*100-100") ,startCol = "AC", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("Z",ultima_fila+3,"/Z",fila_anterior+2,"*100-100") ,startCol = "AD", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("Z",ultima_fila+3) ,startCol = "AG", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AG",ultima_fila+3,"/AG",fila_anterior+2,"*100-100") ,startCol = "AI", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AD",ultima_fila+3,"-AI",ultima_fila+3) ,startCol = "AJ", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("((AL3/12)/100)*(J",ultima_fila+3,"/AVERAGE(J125:J136)*100)") ,startCol = "AL", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("((AM3/12)/100)*(K",ultima_fila+3,"/AVERAGE(K125:K136)*100)") ,startCol = "AM", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("SUM(AL",ultima_fila+3,":AN",ultima_fila+3,")") ,startCol = "AO", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AL",ultima_fila+3,"/AL",fila_anterior+2,"*100-100") ,startCol = "AQ", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AM",ultima_fila+3,"/AM",fila_anterior+2,"*100-100") ,startCol = "AR", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AO",ultima_fila+3,"/AO",fila_anterior+2,"*100-100") ,startCol = "AS", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AL",ultima_fila+3) ,startCol = "AU", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AO",ultima_fila+3) ,startCol = "AV", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AU",ultima_fila+3,"/AU",fila_anterior+2,"*100-100") ,startCol = "AW", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AV",ultima_fila+3,"/AV",fila_anterior+2,"*100-100") ,startCol = "AX", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AX",ultima_fila+3,"-AS",ultima_fila+3) ,startCol = "AY", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("X",ultima_fila+3,"/Z",ultima_fila+3,"*100") ,startCol = "BB", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("Y",ultima_fila+3,"/Z",ultima_fila+3,"*100") ,startCol = "BD", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("SUM(BB",ultima_fila+3,":BD",ultima_fila+3,")") ,startCol = "BF", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("BB",fila_anterior+2,"*AB",ultima_fila+3,"/100") ,startCol = "BH", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("BD",fila_anterior+2,"*AC",ultima_fila+3,"/100") ,startCol = "BI", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("SUM(BH",ultima_fila+3,":BI",ultima_fila+3,")") ,startCol = "BJ", startRow = (ultima_fila[1]+3))
+writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("BJ",ultima_fila+3,"-AI",ultima_fila+3) ,startCol = "BK", startRow = (ultima_fila[1]+3))
+
+writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Citricas'!AG",ultima_fila+3) ,startCol = "F", startRow = ultima_fila+11)
+
+  addStyle(wb, sheet = "Frutas Citricas",style=col1,rows = (ultima_fila+3),cols = 1:3)
+  addStyle(wb, sheet = "Frutas Citricas",style=col8,rows = (ultima_fila+3),cols = c(4,5,10,11))
+  addStyle(wb, sheet = "Frutas Citricas",style=col4,rows = (ultima_fila+3),cols = c(7,8,13:63))
 
 
-  #Crear valores necesarios
+  # Otras Frutas ------------------------------------------------------------------
 
-  exportacion_fruta=tail(lag(data$`OTRAS.FRUTAS.Exportaciones.ton.(ktes)`,11),1)*(1+valor_Frutas$variacion/100)
-  Prom2015_exportaciones=3551.87355083333
-  Indice_exportacion=exportacion_fruta/Prom2015_exportaciones*100
-  Ponderador_expos=6.73817034700315
-  Prom2015_consumo=81124638.740786
-  nuevos_datos <- data.frame(
-    Consecutivo = (data[ultima_fila, "Consecutivo"] + 1),
-    Año = anio,
-    Periodicidad=mes,
-    Descripcion="Toneladas",
-    exportaciones=exportacion_fruta,
-    exportacion_indice=Indice_exportacion,
-    Ponderador_expos=Ponderador_expos)
-  writeData(wb, sheet = "Frutas Total(Expos+Interno)", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila+12))
+  #Leer solo la hoja de Frutas
+  data <- read.xlsx(wb, sheet = "Otras frutas.", colNames = TRUE,startRow = 2)
 
-
-  valor_Frutas$vector=as.numeric(valor_Frutas$vector$Frutas)
-  tamaño=length(valor_Frutas$vector)
-  Indice_consumo=valor_Frutas$vector/Prom2015_consumo*100
-  Ponderador_consumo=93.2618296529968
-  Exportaciones=c(data[fila[1]:nrow(data),"OTRAS.FRUTAS.Exportaciones.ton.(ktes)"],exportacion_fruta)
-  Indice_exportacion=c(data[fila[1]:nrow(data),"OTRAS.FRUTAS.de.Exportación.(DANE-DIAN).ÍNDICE"],Indice_exportacion)
-  Ponderador_expos=c(data[fila[1]:nrow(data),"PONDERADOR.EXPOS"],Ponderador_expos)
-  Indice_ponderado=((Indice_exportacion*Ponderador_expos)+(Indice_consumo*Ponderador_consumo))/100
-  Indice_ponderado_anterior=c(data[data$Año==(2012),"ÍNDICE.de.producción.ponderado"],Indice_ponderado[1:(length(Indice_ponderado)-12)])
-  Exportaciones_anterior=c(data[data$Año==(2012),"OTRAS.FRUTAS.Exportaciones.ton.(ktes)"],Exportaciones[1:(length(Exportaciones)-12)])
-  Consumo_anterior=lag(valor_Frutas$vector,12)
-  Indice_consumo_anterior=lag(Indice_consumo,12)
-  Indice_exportacion_anterior=c(data[data$Año==(2012),"OTRAS.FRUTAS.de.Exportación.(DANE-DIAN).ÍNDICE"],Indice_exportacion[1:(length(Indice_exportacion)-12)])
-
-  expo_trim <- rep("",length(Indice_exportacion))
-
-  for (i in seq(3, length(Exportaciones), by = 3)) {
-    expo_trim[i] <- (sum(Exportaciones[(i-2):i]) / sum(Exportaciones_anterior[(i-2):i]))*100-100  # Realiza la suma y división
-  }
-
-  consumo_trim <- rep("",length(Indice_exportacion))
-
-  for (i in seq(3, length(Indice_exportacion), by = 3)) {
-    consumo_trim[i] <- (sum(valor_Frutas$vector[(i-2):i]) / sum(Consumo_anterior[(i-2):i]))*100-100  # Realiza la suma y división
-  }
-
-
-  ponderado_trim <- rep("",length(Indice_exportacion))
-
-  for (i in seq(3, length(Indice_exportacion), by = 3)) {
-    ponderado_trim[i] <- (sum(Indice_ponderado[(i-2):i]) / sum(Indice_ponderado_anterior[(i-2):i]))*100-100  # Realiza la suma y división
-  }
-
-  consumo_anual <- rep("",length(Indice_exportacion))
-
-  for (i in seq(12, length(Indice_exportacion), by = 12)) {
-    consumo_anual[i] <- (sum(Indice_consumo[(i-11):i]) / sum(Indice_consumo_anterior[(i-11):i]))*100-100  # Realiza la suma y división
-  }
-
-
-
-
-  expo_anual <- rep("",length(Indice_exportacion))
-
-  for (i in seq(12, length(Indice_exportacion), by = 12)) {
-    expo_anual[i] <- (sum(Indice_exportacion[(i-11):i]) / sum(Indice_exportacion_anterior[(i-11):i]))*100-100  # Realiza la suma y división
-  }
-
-  ponderado_anual <- rep("",length(Indice_exportacion))
-
-  for (i in seq(12, length(Indice_exportacion), by = 12)) {
-    ponderado_anual[i] <- (sum(Indice_ponderado[(i-11):i]) / sum(Indice_ponderado_anterior[(i-11):i]))*100-100  # Realiza la suma y división
-  }
-
-
-  #Crear la nueva fila
-  nuevos_datos <- data.frame(
-    frutas_sipsa=valor_Frutas$vector,
-    indice_sipsa=Indice_consumo,
-    Ponderador_consumo=c(data[fila[1]:nrow(data),"PONDERADOR.CONSUMO.INTERNO"],Ponderador_consumo),
-    Indice_ponderado=Indice_ponderado,
-    indice_Variacion_Anual=Indice_ponderado/Indice_ponderado_anterior*100-100,
-    exportacion_Variacion_Anual=Exportaciones/Exportaciones_anterior*100-100,
-    consumo_Variacion_Anual=valor_Frutas$vector/lag(valor_Frutas$vector,12)*100-100,
-    indice_Variacion_Anual2=Indice_ponderado/Indice_ponderado_anterior*100-100,
-    Expos_trim=as.numeric(expo_trim),
-    Consumo_trim=as.numeric(consumo_trim),
-    Indice_trim=as.numeric(ponderado_trim),
-    Total_Interno=as.numeric(consumo_anual),
-    Tipo=as.numeric(expo_anual),
-    var_anual=as.numeric(ponderado_anual)
-  )
-
+  ultima_fila=nrow(data)
+  fila=which(data$Año==2013)
+  fila_anio_ant=which(data$Año== (anio-1))
+  fila_anterior=max(which(data$Mes== mes))
 
 
 
   # Escribe los datos en la hoja "Frutas Total(Expos+Interno)"
-  writeData(wb, sheet = "Frutas Total(Expos+Interno)", x = nuevos_datos,colNames = FALSE,startCol = "H", startRow = (fila[1]+11))
+  writeData(wb, sheet = "Otras frutas.", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila[1]+3))
+  writeData(wb, sheet = "Otras frutas.", x = exportaciones[,2],colNames = FALSE,startCol = "D", startRow = (fila_anio_ant[1]+2))
+  writeData(wb, sheet = "Otras frutas.", x =as.numeric(consumo_interno[,2]),colNames = FALSE,startCol = "E", startRow = (fila[1]+2))
+  writeData(wb, sheet = "Otras frutas.", x = exportaciones[,4],colNames = FALSE,startCol = "J", startRow = (fila_anio_ant[1]+2))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("D",ultima_fila+3,"/D",fila_anterior+2,"*100-100") ,startCol = "G", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("E",ultima_fila+3,"/E",fila_anterior+2,"*100-100") ,startCol = "H", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("E",ultima_fila+3,"*R",ultima_fila+3,"/100") ,startCol = "K", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("J",ultima_fila+3,"/J",fila_anterior+2,"*100-100") ,startCol = "M", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("K",ultima_fila+3,"/K",fila_anterior+2,"*100-100") ,startCol = "N", startRow = (ultima_fila[1]+3))
+  writeData(wb, sheet = "Otras frutas.", x = exportaciones[,6],colNames = FALSE,startCol = "P", startRow = (fila_anio_ant[1]+2))
+  ##Falta columna R
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("P",ultima_fila+3,"/P",fila_anterior+2,"*100-100") ,startCol = "T", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("R",ultima_fila+3,"/R",fila_anterior+2,"*100-100") ,startCol = "V", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("((X3/12)/100)*(D",ultima_fila+3,"/AVERAGE(D125:D136)*100)") ,startCol = "X", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("((Y3/12)/100)*(E",ultima_fila+3,"/AVERAGE(E125:E136)*100)") ,startCol = "Y", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("SUM(X",ultima_fila+3,":Y",ultima_fila+3,")") ,startCol = "Z", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("X",ultima_fila+3,"/X",fila_anterior+2,"*100-100") ,startCol = "AB", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("Y",ultima_fila+3,"/Y",fila_anterior+2,"*100-100") ,startCol = "AC", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("Z",ultima_fila+3,"/Z",fila_anterior+2,"*100-100") ,startCol = "AD", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("Z",ultima_fila+3) ,startCol = "AG", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("AG",ultima_fila+3,"/AG",fila_anterior+2,"*100-100") ,startCol = "AI", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("AD",ultima_fila+3,"-AI",ultima_fila+3) ,startCol = "AJ", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("((AL3/12)/100)*(J",ultima_fila+3,"/AVERAGE(J125:J136)*100)") ,startCol = "AL", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("((AM3/12)/100)*(K",ultima_fila+3,"/AVERAGE(K125:K136)*100)") ,startCol = "AM", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("SUM(AL",ultima_fila+3,":AN",ultima_fila+3,")") ,startCol = "AO", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("AL",ultima_fila+3,"/AL",fila_anterior+2,"*100-100") ,startCol = "AQ", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("AM",ultima_fila+3,"/AM",fila_anterior+2,"*100-100") ,startCol = "AR", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("AO",ultima_fila+3,"/AO",fila_anterior+2,"*100-100") ,startCol = "AS", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("AL",ultima_fila+3) ,startCol = "AU", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("AO",ultima_fila+3) ,startCol = "AV", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("AU",ultima_fila+3,"/AU",fila_anterior+2,"*100-100") ,startCol = "AW", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("AV",ultima_fila+3,"/AV",fila_anterior+2,"*100-100") ,startCol = "AX", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("AX",ultima_fila+3,"-AS",ultima_fila+3) ,startCol = "AY", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("X",ultima_fila+3,"/Z",ultima_fila+3,"*100") ,startCol = "BB", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("Y",ultima_fila+3,"/Z",ultima_fila+3,"*100") ,startCol = "BD", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("SUM(BB",ultima_fila+3,":BD",ultima_fila+3,")") ,startCol = "BF", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("BB",fila_anterior+2,"*AB",ultima_fila+3,"/100") ,startCol = "BH", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("BD",fila_anterior+2,"*AC",ultima_fila+3,"/100") ,startCol = "BI", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("SUM(BH",ultima_fila+3,":BI",ultima_fila+3,")") ,startCol = "BJ", startRow = (ultima_fila[1]+3))
+  writeFormula(wb, sheet ="Otras frutas." , x = paste0("BJ",ultima_fila+3,"-AI",ultima_fila+3) ,startCol = "BK", startRow = (ultima_fila[1]+3))
 
-  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Total(Expos+Interno)'!K",ultima_fila+12) ,startCol = "G", startRow = ultima_fila+13)
+  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Otras frutas.'!AG",ultima_fila+3) ,startCol = "F", startRow = ultima_fila+11)
 
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col1,rows = (ultima_fila+12),cols = 1:4)
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col6,rows = (ultima_fila+12),cols = 5)
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 6:7)
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col7,rows = (ultima_fila+12),cols = 8)
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 9:11)
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col3,rows = (ultima_fila+12),cols = 12:18)
-  addStyle(wb, sheet = "Frutas Total(Expos+Interno)",style=col2,rows = (ultima_fila+12),cols = 19:21)
-  # Fruto de Palma ------------------------------------------------------------------
+  addStyle(wb, sheet = "Otras frutas.",style=col1,rows = (ultima_fila+3),cols = 1:3)
+  addStyle(wb, sheet = "Otras frutas.",style=col8,rows = (ultima_fila+3),cols = c(4,5,10,11))
+  addStyle(wb, sheet = "Otras frutas.",style=col4,rows = (ultima_fila+3),cols = c(7,8,13:63))
+
+
+
+# Fruto de Palma ------------------------------------------------------------------
 
   #Leer solo la hoja de Palma
   data <- read.xlsx(wb, sheet = "Fruto de Palma", colNames = TRUE,startRow = 9)
@@ -926,24 +941,26 @@ writeData(wb, sheet="Áreas en desarrollo", x = nuevos_datos,colNames = FALSE,st
 
 formulas <- c(paste0("E",ultima_fila+13,"/(SUM(E133:E144)/12)*100"),
                    paste0("F",ultima_fila+13,"/(SUM(F133:F144)/12)*100"),
-                   paste0("G",ultima_fila+13),
+                   paste0("G",ultima_fila+13,"/(SUM(G133:G144)/12)*100"),
                    paste0("H",ultima_fila+13,"/(SUM(H133:H144)/12)*100"),
-                   paste0("(I",ultima_fila+13,"*I10)+(J",ultima_fila+13,"*J10)+(K",ultima_fila+13,"*K10)+(L",ultima_fila+13,"*L10)"),
-                   paste0("M",ultima_fila+13,"/M",fila_ant+12,"*100-100")) ## skip header row
+                   paste0("I",ultima_fila+13,"/(SUM(I133:I144)/12)*100"),
+                   paste0("(J",ultima_fila+13,"*J10)+(K",ultima_fila+13,"*K10)+(L",ultima_fila+13,"*L10)+(N",ultima_fila+13,"*N10)+(M",ultima_fila+13,"*M10)"),
+                   paste0("O",ultima_fila+13,"/O",fila_ant+12,"*100-100")) ## skip header row
 
-for (i in 9:14) {
-  writeFormula(wb, sheet ="Áreas en desarrollo" , x = formulas[i-8] ,startCol = i, startRow = ultima_fila+13)
+for (i in 10:16) {
+  writeFormula(wb, sheet ="Áreas en desarrollo" , x = formulas[i-9] ,startCol = i, startRow = ultima_fila+13)
 }
 if (mes %in% c(3,6,9,12)){
-  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("SUM(M",ultima_fila+11,":M",ultima_fila+13,")/SUM(M",fila_ant+10,":M",fila_ant+12,")*100-100") ,startCol = "O", startRow = ultima_fila+13)
+  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("SUM(O",ultima_fila+11,":O",ultima_fila+13,")/SUM(O",fila_ant+10,":O",fila_ant+12,")*100-100") ,startCol = "Q", startRow = ultima_fila+13)
 }
 
 
 addStyle(wb, sheet = "Áreas en desarrollo",style=col1,rows = (ultima_fila+13),cols = 1:4)
-addStyle(wb, sheet = "Áreas en desarrollo",style=col7,rows = (ultima_fila+13),cols = c(5:6,8:10,12))
-addStyle(wb, sheet = "Áreas en desarrollo",style=col6,rows = (ultima_fila+13),cols = 13)
-addStyle(wb, sheet = "Áreas en desarrollo",style=col2,rows = (ultima_fila+13),cols = c(7,11))
-addStyle(wb, sheet = "Áreas en desarrollo",style=col4,rows = (ultima_fila+13),cols = 14:15)
+addStyle(wb, sheet = "Áreas en desarrollo",style=col7,rows = (ultima_fila+13),cols = c(5:7,9:11,14))
+addStyle(wb, sheet = "Áreas en desarrollo",style=col6,rows = (ultima_fila+13),cols = 15)
+addStyle(wb, sheet = "Áreas en desarrollo",style=col2,rows = (ultima_fila+13),cols = c(8,12:13))
+addStyle(wb, sheet = "Áreas en desarrollo",style=col3,rows = (ultima_fila+13),cols = 16)
+addStyle(wb, sheet = "Áreas en desarrollo",style=col4,rows = (ultima_fila+13),cols = 17)
 
 
 

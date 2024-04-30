@@ -45,7 +45,7 @@ f_Banano<-function(directorio,mes,anio){
 # Consumo interno ---------------------------------------------------------
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
 
-  Banano <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/Base_EB_SIPSA.xlsx"))
+  Banano <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
   fila_i=which(Banano$year==(anio-2) & Banano$month==1,arr.ind = TRUE)
   fila1=which(Banano==anio,arr.ind = TRUE)[,"row"]
   fila2=which(Banano==mes,arr.ind = TRUE)[,"row"]

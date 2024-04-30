@@ -100,24 +100,45 @@ for (i in 28:42) {
   writeFormula(wb, sheet ="Precios" , x = tasa_anual[i-27] ,startCol = i, startRow = ultima_fila_precios+6)
 }
 
+if(mes==1){
+  tasa_corrido <- c(paste('IFERROR(SUM(B',ultima_fila_precios+6,':B',ultima_fila_precios+6,')/SUM(B',fila_enero_ant_precios+5,':B',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',ultima_fila_precios+6,':C',ultima_fila_precios+6,')/SUM(C',fila_enero_ant_precios+5,':C',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',ultima_fila_precios+6,':D',ultima_fila_precios+6,')/SUM(D',fila_enero_ant_precios+5,':D',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',ultima_fila_precios+6,':E',ultima_fila_precios+6,')/SUM(E',fila_enero_ant_precios+5,':E',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',ultima_fila_precios+6,':F',ultima_fila_precios+6,')/SUM(F',fila_enero_ant_precios+5,':F',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(G',ultima_fila_precios+6,':G',ultima_fila_precios+6,')/SUM(G',fila_enero_ant_precios+5,':G',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(H',ultima_fila_precios+6,':H',ultima_fila_precios+6,')/SUM(H',fila_enero_ant_precios+5,':H',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(I',ultima_fila_precios+6,':I',ultima_fila_precios+6,')/SUM(I',fila_enero_ant_precios+5,':I',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(J',ultima_fila_precios+6,':J',ultima_fila_precios+6,')/SUM(J',fila_enero_ant_precios+5,':J',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(K',ultima_fila_precios+6,':K',ultima_fila_precios+6,')/SUM(K',fila_enero_ant_precios+5,':K',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(L',ultima_fila_precios+6,':L',ultima_fila_precios+6,')/SUM(L',fila_enero_ant_precios+5,':L',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(M',ultima_fila_precios+6,':M',ultima_fila_precios+6,')/SUM(M',fila_enero_ant_precios+5,':M',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(N',ultima_fila_precios+6,':N',ultima_fila_precios+6,')/SUM(N',fila_enero_ant_precios+5,':N',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(O',ultima_fila_precios+6,':O',ultima_fila_precios+6,')/SUM(O',fila_enero_ant_precios+5,':O',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(P',ultima_fila_precios+6,':P',ultima_fila_precios+6,')/SUM(P',fila_enero_ant_precios+5,':P',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = "")
 
-tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero_precios+5,':B',ultima_fila_precios+6,')/SUM(B',fila_enero_ant_precios+5,':B',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(C',fila_enero_precios+5,':C',ultima_fila_precios+6,')/SUM(C',fila_enero_ant_precios+5,':C',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(D',fila_enero_precios+5,':D',ultima_fila_precios+6,')/SUM(D',fila_enero_ant_precios+5,':D',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(E',fila_enero_precios+5,':E',ultima_fila_precios+6,')/SUM(E',fila_enero_ant_precios+5,':E',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(F',fila_enero_precios+5,':F',ultima_fila_precios+6,')/SUM(F',fila_enero_ant_precios+5,':F',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(G',fila_enero_precios+5,':G',ultima_fila_precios+6,')/SUM(G',fila_enero_ant_precios+5,':G',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(H',fila_enero_precios+5,':H',ultima_fila_precios+6,')/SUM(H',fila_enero_ant_precios+5,':H',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(I',fila_enero_precios+5,':I',ultima_fila_precios+6,')/SUM(I',fila_enero_ant_precios+5,':I',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(J',fila_enero_precios+5,':J',ultima_fila_precios+6,')/SUM(J',fila_enero_ant_precios+5,':J',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(K',fila_enero_precios+5,':K',ultima_fila_precios+6,')/SUM(K',fila_enero_ant_precios+5,':K',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(L',fila_enero_precios+5,':L',ultima_fila_precios+6,')/SUM(L',fila_enero_ant_precios+5,':L',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(M',fila_enero_precios+5,':M',ultima_fila_precios+6,')/SUM(M',fila_enero_ant_precios+5,':M',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(N',fila_enero_precios+5,':N',ultima_fila_precios+6,')/SUM(N',fila_enero_ant_precios+5,':N',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(O',fila_enero_precios+5,':O',ultima_fila_precios+6,')/SUM(O',fila_enero_ant_precios+5,':O',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(P',fila_enero_precios+5,':P',ultima_fila_precios+6,')/SUM(P',fila_enero_ant_precios+5,':P',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = "")
+  )
 
-                  )
+}else{
+  tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero_precios+5,':B',ultima_fila_precios+6,')/SUM(B',fila_enero_ant_precios+5,':B',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',fila_enero_precios+5,':C',ultima_fila_precios+6,')/SUM(C',fila_enero_ant_precios+5,':C',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',fila_enero_precios+5,':D',ultima_fila_precios+6,')/SUM(D',fila_enero_ant_precios+5,':D',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',fila_enero_precios+5,':E',ultima_fila_precios+6,')/SUM(E',fila_enero_ant_precios+5,':E',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',fila_enero_precios+5,':F',ultima_fila_precios+6,')/SUM(F',fila_enero_ant_precios+5,':F',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(G',fila_enero_precios+5,':G',ultima_fila_precios+6,')/SUM(G',fila_enero_ant_precios+5,':G',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(H',fila_enero_precios+5,':H',ultima_fila_precios+6,')/SUM(H',fila_enero_ant_precios+5,':H',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(I',fila_enero_precios+5,':I',ultima_fila_precios+6,')/SUM(I',fila_enero_ant_precios+5,':I',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(J',fila_enero_precios+5,':J',ultima_fila_precios+6,')/SUM(J',fila_enero_ant_precios+5,':J',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(K',fila_enero_precios+5,':K',ultima_fila_precios+6,')/SUM(K',fila_enero_ant_precios+5,':K',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(L',fila_enero_precios+5,':L',ultima_fila_precios+6,')/SUM(L',fila_enero_ant_precios+5,':L',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(M',fila_enero_precios+5,':M',ultima_fila_precios+6,')/SUM(M',fila_enero_ant_precios+5,':M',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(N',fila_enero_precios+5,':N',ultima_fila_precios+6,')/SUM(N',fila_enero_ant_precios+5,':N',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(O',fila_enero_precios+5,':O',ultima_fila_precios+6,')/SUM(O',fila_enero_ant_precios+5,':O',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(P',fila_enero_precios+5,':P',ultima_fila_precios+6,')/SUM(P',fila_enero_ant_precios+5,':P',fila_enero_ant_precios+4+mes,')*100-100,','"*")',sep = "")
+
+  )
+
+}
 
 for (i in 44:58) {
   writeFormula(wb, sheet ="Precios" , x = tasa_corrido[i-43] ,startCol = i, startRow = ultima_fila_precios+6)
@@ -198,16 +219,29 @@ for (i in 19:27) {
   writeFormula(wb, sheet ="Bovino kilo en pie" , x = tasa_anual[i-18] ,startCol = i, startRow = ultima_fila+7)
 }
 
+if(mes==1){
+  tasa_corrido <- c(paste('IFERROR(SUM(B',ultima_fila+7,':B',ultima_fila+7,')/SUM(B',fila_enero_ant+6,':B',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',ultima_fila+7,':C',ultima_fila+7,')/SUM(C',fila_enero_ant+6,':C',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',ultima_fila+7,':D',ultima_fila+7,')/SUM(D',fila_enero_ant+6,':D',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',ultima_fila+7,':E',ultima_fila+7,')/SUM(E',fila_enero_ant+6,':E',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',ultima_fila+7,':F',ultima_fila+7,')/SUM(F',fila_enero_ant+6,':F',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(G',ultima_fila+7,':G',ultima_fila+7,')/SUM(G',fila_enero_ant+6,':G',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(H',ultima_fila+7,':H',ultima_fila+7,')/SUM(H',fila_enero_ant+6,':H',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(I',ultima_fila+7,':I',ultima_fila+7,')/SUM(I',fila_enero_ant+6,':I',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(J',ultima_fila+7,':J',ultima_fila+7,')/SUM(J',fila_enero_ant+6,':J',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""))
 
-tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+6,':B',ultima_fila+7,')/SUM(B',fila_enero_ant+6,':B',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(C',fila_enero+6,':C',ultima_fila+7,')/SUM(C',fila_enero_ant+6,':C',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(D',fila_enero+6,':D',ultima_fila+7,')/SUM(D',fila_enero_ant+6,':D',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(E',fila_enero+6,':E',ultima_fila+7,')/SUM(E',fila_enero_ant+6,':E',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(F',fila_enero+6,':F',ultima_fila+7,')/SUM(F',fila_enero_ant+6,':F',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(G',fila_enero+6,':G',ultima_fila+7,')/SUM(G',fila_enero_ant+6,':G',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(H',fila_enero+6,':H',ultima_fila+7,')/SUM(H',fila_enero_ant+6,':H',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(I',fila_enero+6,':I',ultima_fila+7,')/SUM(I',fila_enero_ant+6,':I',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(J',fila_enero+6,':J',ultima_fila+7,')/SUM(J',fila_enero_ant+6,':J',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""))
+}else{
+  tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+6,':B',ultima_fila+7,')/SUM(B',fila_enero_ant+6,':B',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',fila_enero+6,':C',ultima_fila+7,')/SUM(C',fila_enero_ant+6,':C',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',fila_enero+6,':D',ultima_fila+7,')/SUM(D',fila_enero_ant+6,':D',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',fila_enero+6,':E',ultima_fila+7,')/SUM(E',fila_enero_ant+6,':E',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',fila_enero+6,':F',ultima_fila+7,')/SUM(F',fila_enero_ant+6,':F',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(G',fila_enero+6,':G',ultima_fila+7,')/SUM(G',fila_enero_ant+6,':G',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(H',fila_enero+6,':H',ultima_fila+7,')/SUM(H',fila_enero_ant+6,':H',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(I',fila_enero+6,':I',ultima_fila+7,')/SUM(I',fila_enero_ant+6,':I',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(J',fila_enero+6,':J',ultima_fila+7,')/SUM(J',fila_enero_ant+6,':J',fila_enero_ant+5+mes,')*100-100,','"*")',sep = ""))
+
+}
 
 for (i in 29:37) {
   writeFormula(wb, sheet ="Bovino kilo en pie" , x = tasa_corrido[i-28] ,startCol = i, startRow = ultima_fila+7)
@@ -302,16 +336,29 @@ for (i in 18:26) {
   writeFormula(wb, sheet ="Bovino cabezas" , x = tasa_anual[i-17] ,startCol = i, startRow = ultima_fila+6)
 }
 
+if(mes==1){
+  tasa_corrido <- c(paste('IFERROR(SUM(B',ultima_fila+6,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',ultima_fila+6,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',ultima_fila+6,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',ultima_fila+6,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',ultima_fila+6,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(G',ultima_fila+6,':G',ultima_fila+6,')/SUM(G',fila_enero_ant+5,':G',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(H',ultima_fila+6,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(I',ultima_fila+6,':I',ultima_fila+6,')/SUM(I',fila_enero_ant+5,':I',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(J',ultima_fila+6,':J',ultima_fila+6,')/SUM(J',fila_enero_ant+5,':J',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""))
 
-tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(C',fila_enero+5,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(D',fila_enero+5,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(E',fila_enero+5,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(F',fila_enero+5,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(G',fila_enero+5,':G',ultima_fila+6,')/SUM(G',fila_enero_ant+5,':G',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(H',fila_enero+5,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(I',fila_enero+5,':I',ultima_fila+6,')/SUM(I',fila_enero_ant+5,':I',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(J',fila_enero+5,':J',ultima_fila+6,')/SUM(J',fila_enero_ant+5,':J',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""))
+}else{
+  tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',fila_enero+5,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',fila_enero+5,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',fila_enero+5,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',fila_enero+5,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(G',fila_enero+5,':G',ultima_fila+6,')/SUM(G',fila_enero_ant+5,':G',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(H',fila_enero+5,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(I',fila_enero+5,':I',ultima_fila+6,')/SUM(I',fila_enero_ant+5,':I',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(J',fila_enero+5,':J',ultima_fila+6,')/SUM(J',fila_enero_ant+5,':J',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""))
+
+}
 
 for (i in 28:36) {
   writeFormula(wb, sheet ="Bovino cabezas" , x = tasa_corrido[i-27] ,startCol = i, startRow = ultima_fila+6)
@@ -420,19 +467,35 @@ for (i in 24:34) {
   writeFormula(wb, sheet ="CI_Carne" , x = tasa_anual[i-23] ,startCol = i, startRow = ultima_fila+6)
 }
 
+if(mes==1){
+  tasa_corrido <- c(paste('IFERROR(SUM(B',ultima_fila+6,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',ultima_fila+6,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',ultima_fila+6,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',ultima_fila+6,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',ultima_fila+6,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    "",
+                    paste('IFERROR(SUM(H',ultima_fila+6,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(I',ultima_fila+6,':I',ultima_fila+6,')/SUM(I',fila_enero_ant+5,':I',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(J',ultima_fila+6,':J',ultima_fila+6,')/SUM(J',fila_enero_ant+5,':J',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(K',ultima_fila+6,':K',ultima_fila+6,')/SUM(K',fila_enero_ant+5,':K',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(L',ultima_fila+6,':L',ultima_fila+6,')/SUM(L',fila_enero_ant+5,':L',fila_enero_ant+4+mes,')*100-100,','"*")',sep = "")
+  )
 
-tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(C',fila_enero+5,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(D',fila_enero+5,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(E',fila_enero+5,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(F',fila_enero+5,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  "",
-                  paste('IFERROR(SUM(H',fila_enero+5,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(I',fila_enero+5,':I',ultima_fila+6,')/SUM(I',fila_enero_ant+5,':I',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(J',fila_enero+5,':J',ultima_fila+6,')/SUM(J',fila_enero_ant+5,':J',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(K',fila_enero+5,':K',ultima_fila+6,')/SUM(K',fila_enero_ant+5,':K',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(L',fila_enero+5,':L',ultima_fila+6,')/SUM(L',fila_enero_ant+5,':L',fila_enero_ant+4+mes,')*100-100,','"*")',sep = "")
-                  )
+}else{
+  tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',fila_enero+5,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',fila_enero+5,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',fila_enero+5,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',fila_enero+5,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    "",
+                    paste('IFERROR(SUM(H',fila_enero+5,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(I',fila_enero+5,':I',ultima_fila+6,')/SUM(I',fila_enero_ant+5,':I',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(J',fila_enero+5,':J',ultima_fila+6,')/SUM(J',fila_enero_ant+5,':J',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(K',fila_enero+5,':K',ultima_fila+6,')/SUM(K',fila_enero_ant+5,':K',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(L',fila_enero+5,':L',ultima_fila+6,')/SUM(L',fila_enero_ant+5,':L',fila_enero_ant+4+mes,')*100-100,','"*")',sep = "")
+  )
+
+}
 
 for (i in 36:46) {
   writeFormula(wb, sheet ="CI_Carne" , x = tasa_corrido[i-35] ,startCol = i, startRow = ultima_fila+6)
@@ -529,17 +592,31 @@ for (i in 12:20) {
   writeFormula(wb, sheet ="Leche" , x = tasa_anual[i-11] ,startCol = i, startRow = ultima_fila+6)
 }
 
+if(mes==1){
+  tasa_corrido <- c(paste('IFERROR(SUM(B',ultima_fila+6,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',ultima_fila+6,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',ultima_fila+6,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',ultima_fila+6,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',ultima_fila+6,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(G',ultima_fila+6,':G',ultima_fila+6,')/SUM(G',fila_enero_ant+5,':G',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(H',ultima_fila+6,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(I',ultima_fila+6,':I',ultima_fila+6,')/SUM(I',fila_enero_ant+5,':I',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(J',ultima_fila+6,':J',ultima_fila+6,')/SUM(J',fila_enero_ant+5,':J',fila_enero_ant+4+mes,')*100-100,','"*")',sep = "")
+  )
 
-tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(C',fila_enero+5,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(D',fila_enero+5,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(E',fila_enero+5,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(F',fila_enero+5,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(G',fila_enero+5,':G',ultima_fila+6,')/SUM(G',fila_enero_ant+5,':G',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(H',fila_enero+5,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(I',fila_enero+5,':I',ultima_fila+6,')/SUM(I',fila_enero_ant+5,':I',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(J',fila_enero+5,':J',ultima_fila+6,')/SUM(J',fila_enero_ant+5,':J',fila_enero_ant+4+mes,')*100-100,','"*")',sep = "")
-)
+}else{
+  tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',fila_enero+5,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',fila_enero+5,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',fila_enero+5,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',fila_enero+5,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(G',fila_enero+5,':G',ultima_fila+6,')/SUM(G',fila_enero_ant+5,':G',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(H',fila_enero+5,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(I',fila_enero+5,':I',ultima_fila+6,')/SUM(I',fila_enero_ant+5,':I',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(J',fila_enero+5,':J',ultima_fila+6,')/SUM(J',fila_enero_ant+5,':J',fila_enero_ant+4+mes,')*100-100,','"*")',sep = "")
+  )
+
+}
 
 for (i in 22:30) {
   writeFormula(wb, sheet ="Leche" , x = tasa_corrido[i-21] ,startCol = i, startRow = ultima_fila+6)
@@ -615,15 +692,27 @@ for (i in 14:20) {
   writeFormula(wb, sheet ="Porcino kilo en pie" , x = tasa_anual[i-13] ,startCol = i, startRow = ultima_fila+6)
 }
 
+if(mes==1){
+  tasa_corrido <- c(paste('IFERROR(SUM(B',ultima_fila+6,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',ultima_fila+6,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',ultima_fila+6,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',ultima_fila+6,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',ultima_fila+6,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(G',ultima_fila+6,':G',ultima_fila+6,')/SUM(G',fila_enero_ant+5,':G',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(H',ultima_fila+6,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""))
 
-tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(C',fila_enero+5,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(D',fila_enero+5,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(E',fila_enero+5,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(F',fila_enero+5,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(G',fila_enero+5,':G',ultima_fila+6,')/SUM(G',fila_enero_ant+5,':G',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(H',fila_enero+5,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""))
 
+}else{
+  tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',fila_enero+5,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',fila_enero+5,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',fila_enero+5,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',fila_enero+5,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(G',fila_enero+5,':G',ultima_fila+6,')/SUM(G',fila_enero_ant+5,':G',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(H',fila_enero+5,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""))
+
+
+}
 for (i in 22:28) {
   writeFormula(wb, sheet ="Porcino kilo en pie" , x = tasa_corrido[i-21] ,startCol = i, startRow = ultima_fila+6)
 }
@@ -692,11 +781,19 @@ for (i in 11:13) {
   writeFormula(wb, sheet ="Porcino en cabezas"  , x = tasa_anual[i-10] ,startCol = i, startRow = ultima_fila+6)
 }
 
+if(mes==1){
+  tasa_corrido <- c(paste('IFERROR(SUM(B',ultima_fila+6,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',ultima_fila+6,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',ultima_fila+6,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',ultima_fila+6,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""))
 
-tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(C',fila_enero+5,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(D',fila_enero+5,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(E',fila_enero+5,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""))
+}else{
+  tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',fila_enero+5,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',fila_enero+5,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',fila_enero+5,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""))
+
+}
 
 for (i in 16:19) {
   writeFormula(wb, sheet ="Porcino en cabezas"  , x = tasa_corrido[i-15] ,startCol = i, startRow = ultima_fila+6)
@@ -780,20 +877,39 @@ for (i in 26:38) {
   writeFormula(wb, sheet ="Pollo_Huevo" , x = tasa_anual[i-25] ,startCol = i, startRow = ultima_fila+6)
 }
 
+if(mes==1){
+  tasa_corrido <- c(paste('IFERROR(SUM(B',ultima_fila+6,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',ultima_fila+6,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',ultima_fila+6,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',ultima_fila+6,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',ultima_fila+6,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(G',ultima_fila+6,':G',ultima_fila+6,')/SUM(G',fila_enero_ant+5,':G',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(H',ultima_fila+6,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(I',ultima_fila+6,':I',ultima_fila+6,')/SUM(I',fila_enero_ant+5,':I',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(J',ultima_fila+6,':J',ultima_fila+6,')/SUM(J',fila_enero_ant+5,':J',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(K',ultima_fila+6,':K',ultima_fila+6,')/SUM(K',fila_enero_ant+5,':K',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(L',ultima_fila+6,':L',ultima_fila+6,')/SUM(L',fila_enero_ant+5,':L',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(M',ultima_fila+6,':M',ultima_fila+6,')/SUM(M',fila_enero_ant+5,':M',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(N',ultima_fila+6,':N',ultima_fila+6,')/SUM(N',fila_enero_ant+5,':N',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""))
 
-tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(C',fila_enero+5,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(D',fila_enero+5,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(E',fila_enero+5,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(F',fila_enero+5,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(G',fila_enero+5,':G',ultima_fila+6,')/SUM(G',fila_enero_ant+5,':G',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(H',fila_enero+5,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(I',fila_enero+5,':I',ultima_fila+6,')/SUM(I',fila_enero_ant+5,':I',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(J',fila_enero+5,':J',ultima_fila+6,')/SUM(J',fila_enero_ant+5,':J',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(K',fila_enero+5,':K',ultima_fila+6,')/SUM(K',fila_enero_ant+5,':K',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(L',fila_enero+5,':L',ultima_fila+6,')/SUM(L',fila_enero_ant+5,':L',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(M',fila_enero+5,':M',ultima_fila+6,')/SUM(M',fila_enero_ant+5,':M',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
-                  paste('IFERROR(SUM(N',fila_enero+5,':N',ultima_fila+6,')/SUM(N',fila_enero_ant+5,':N',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""))
+
+}else{
+  tasa_corrido <- c(paste('IFERROR(SUM(B',fila_enero+5,':B',ultima_fila+6,')/SUM(B',fila_enero_ant+5,':B',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(C',fila_enero+5,':C',ultima_fila+6,')/SUM(C',fila_enero_ant+5,':C',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(D',fila_enero+5,':D',ultima_fila+6,')/SUM(D',fila_enero_ant+5,':D',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(E',fila_enero+5,':E',ultima_fila+6,')/SUM(E',fila_enero_ant+5,':E',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(F',fila_enero+5,':F',ultima_fila+6,')/SUM(F',fila_enero_ant+5,':F',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(G',fila_enero+5,':G',ultima_fila+6,')/SUM(G',fila_enero_ant+5,':G',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(H',fila_enero+5,':H',ultima_fila+6,')/SUM(H',fila_enero_ant+5,':H',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(I',fila_enero+5,':I',ultima_fila+6,')/SUM(I',fila_enero_ant+5,':I',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(J',fila_enero+5,':J',ultima_fila+6,')/SUM(J',fila_enero_ant+5,':J',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(K',fila_enero+5,':K',ultima_fila+6,')/SUM(K',fila_enero_ant+5,':K',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(L',fila_enero+5,':L',ultima_fila+6,')/SUM(L',fila_enero_ant+5,':L',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(M',fila_enero+5,':M',ultima_fila+6,')/SUM(M',fila_enero_ant+5,':M',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""),
+                    paste('IFERROR(SUM(N',fila_enero+5,':N',ultima_fila+6,')/SUM(N',fila_enero_ant+5,':N',fila_enero_ant+4+mes,')*100-100,','"*")',sep = ""))
+
+
+}
 
 for (i in 40:52) {
   writeFormula(wb, sheet ="Pollo_Huevo" , x = tasa_corrido[i-39] ,startCol = i, startRow = ultima_fila+6)
