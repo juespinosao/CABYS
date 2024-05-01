@@ -128,7 +128,7 @@ ZG_Permanentes=function(directorio,mes,anio){
   valor_Cafetos$anterior=tail(lag(data$Cafetos,11),mes)
   valor_Cafetos$Estado <- ""
 
-  if(nrow(valor_Bovino)>3){
+  if(nrow(valor_Cafetos)>3){
   for (i in seq(3, nrow(valor_Cafetos), by = 3)) {
     valor_Cafetos$Estado[i] <- (sum(valor_Cafetos$valor_Cafetos[(i-2):i]) / sum(valor_Cafetos$anterior[(i-2):i]))*100-100  # Realiza la suma y división
   }

@@ -47,13 +47,11 @@ f_Platano<-function(directorio,mes,anio){
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
 
   Platano <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
-  fila_i=which(Platano$year==(anio-2) & Platano$month==1,arr.ind = TRUE)
-  fila1=which(Platano==anio,arr.ind = TRUE)[,"row"]
-  fila2=which(Platano==mes,arr.ind = TRUE)[,"row"]
-  fila_f=intersect(fila1,fila2)
-  Valor_Platano=as.data.frame(na.omit(Platano[fila_i:fila_f,"Platanos"]))
+  fila1=min(which(Platano==2013,arr.ind = TRUE)[,"row"])
+  fila2=min(which(Platano==anio,arr.ind = TRUE)[,"row"])
+  columna1=which(Platano=="plátano retropolado",arr.ind = TRUE)[,"col"]
 
-
+  Valor_Platano=as.data.frame(na.omit(Platano[fila1:fila2,c(columna1[1])]))
 
   # Agrupar datos -----------------------------------------------------------
 

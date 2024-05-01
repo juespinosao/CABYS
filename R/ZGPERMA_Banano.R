@@ -46,11 +46,13 @@ f_Banano<-function(directorio,mes,anio){
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
 
   Banano <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
-  fila_i=which(Banano$year==(anio-2) & Banano$month==1,arr.ind = TRUE)
-  fila1=which(Banano==anio,arr.ind = TRUE)[,"row"]
-  fila2=which(Banano==mes,arr.ind = TRUE)[,"row"]
-  fila_f=intersect(fila1,fila2)
-  Valor_interno=as.data.frame(na.omit(Banano[fila_i:fila_f,"Bananos"]))
+
+  fila1=min(which(Banano==2013,arr.ind = TRUE)[,"row"])
+  fila2=min(which(Banano==anio,arr.ind = TRUE)[,"row"])
+  columna1=which(Banano=="Indice de pro pon retropolado",arr.ind = TRUE)[,"col"]
+
+  Valor_interno=as.data.frame(na.omit(Banano[fila1:fila2,c(columna1[1])]))
+
 # Agrupar datos -----------------------------------------------------------
 
 
