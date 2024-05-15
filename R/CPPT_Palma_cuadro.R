@@ -23,7 +23,7 @@ f_Palma_complemento<-function(directorio,mes,anio){
 
   columna1=which(grepl("pesos/Tonelada",Precio_interno),arr.ind = TRUE)
   fila=which(Precio_interno== paste0(anio-3),arr.ind = TRUE)[,"row"]
-  n_col2=which(Banano== paste0(anio," ",mes),arr.ind = TRUE)[,"col"]
+
 
   tamaño=36+mes
 

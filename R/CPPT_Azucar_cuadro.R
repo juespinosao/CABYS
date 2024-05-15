@@ -14,6 +14,8 @@ f_Caña_azucar_complemento<-function(directorio,mes,anio){
 
 
   #precio internacional
+  carpeta=nombre_carpeta(mes,anio)
+  nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
 
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Precio_Cafe","NOMBRE"]
 
