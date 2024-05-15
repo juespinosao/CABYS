@@ -34,6 +34,17 @@ f_trim_rom=function(mes){
   return(trimestre)
 }
 
+f_trim_nombre=function(mes){
+  trimestre <- case_when(
+    mes %in% 1:3 ~ "Primer",
+    mes %in% 4:6 ~ "Segundo",
+    mes %in% 7:9 ~ "Tercero",
+    mes %in% 10:12 ~ "Cuarto",
+    TRUE ~ NA
+  )
+  return(trimestre)
+}
+
 f_semestre=function(mes){
 semestre <- case_when(
   mes %in% 1:6 ~ 1,
@@ -42,7 +53,13 @@ semestre <- case_when(
 )
 return(semestre)}
 
-
+f_semestre_nombre=function(mes){
+  semestre <- case_when(
+    mes %in% 1:6 ~ "Primer",
+    mes %in% 7:12 ~ "Segundo",
+    TRUE ~ NA
+  )
+  return(semestre)}
 
 
 # formatos de celdas pecuario

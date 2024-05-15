@@ -14,7 +14,7 @@ library(zoo)
 #Crear el nombre de las carpetas del mes anterior y el actual
 if(mes==1){
   carpeta_anterior=nombre_carpeta(12,(anio-1))
-  Panela_Historico<- read.xlsx(paste0(directorio,"/ISE/",anio-1,"/",carpeta_anterior,"/Data/consolidado_ISE/Caña de azucar y panela/Panela/Historico_panela_",nombres_meses[mes-1], "_",anio,".xlsx"))
+  Panela_Historico<- read.xlsx(paste0(directorio,"/ISE/",anio-1,"/",carpeta_anterior,"/Data/consolidado_ISE/Caña de azucar y panela/Panela/Historico_panela_",nombres_meses[12], "_",anio-1,".xlsx"))
 
 }else{
   carpeta_anterior=nombre_carpeta(mes-1,anio)
@@ -39,7 +39,12 @@ columnaf_act <- intersect(columna1, columna2)
 
 n_fila=which(Panela=="Total general",arr.ind = TRUE)[,"row"]
 
-Valor_actual=as.numeric(Panela[n_fila[[1]],columnaf_act])
+if(is.null(nrow(columna1))){
+
+}else{
+  Valor_actual=as.numeric(Panela[n_fila[[1]],columnaf_act])
+}
+
 
 
 fila_ant=which(Panela_Historico==(anio-1),arr.ind = TRUE)[,"row"]

@@ -154,7 +154,13 @@ ZG_Permanentes=function(directorio,mes,anio){
 
 
   # Escribe los datos en la hoja "Cafetos"
-  writeData(wb, sheet = "Cafetos", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+9))
+  if(is.null(nrow(fila))){
+    writeData(wb, sheet = "Cafetos", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila+10))
+
+  }else{
+    writeData(wb, sheet = "Cafetos", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (fila[1]+9))
+
+  }
 
   addStyle(wb, sheet = "Cafetos",style=col1,rows = (ultima_fila+10),cols = 1:4)
   addStyle(wb, sheet = "Cafetos",style=col7,rows = (ultima_fila+10),cols = 5)
@@ -167,23 +173,23 @@ ZG_Permanentes=function(directorio,mes,anio){
 
   ultima_fila=nrow(data)
   fila=which(data$Año== (anio-2))
-
+  fila_2015=which(data$Año== 2015)
 
   #Correr la funcion Pollos
   valor_Banano=f_Banano(directorio,mes,anio)
-  valor_Banano$consumo_interno=as.numeric(valor_Banano$consumo_interno$Bananos)
+  valor_Banano$consumo_interno=as.numeric(valor_Banano$consumo_interno[,1])
 
   #Crear valores necesarios
-
-  Prom2015_exportaciones=196007330826.056
+  tamaño=length(valor_Banano$exportaciones)
+  Prom2015_exportaciones=mean(data[fila_2015,"Banano.de.Exportación.(DANE).ktes"])
   Indice_exportacion=valor_Banano$exportaciones/Prom2015_exportaciones*100
   Ponderador_expos=74.0461933276304
-  Prom2015_consumo=7767960.5
+  Prom2015_consumo=7921383
   Indice_consumo=valor_Banano$consumo_interno/Prom2015_consumo*100
   Ponderador_consumo=25.9538066723696
-  Indice_ponderado=((Indice_exportacion*Ponderador_expos)+(Indice_consumo*Ponderador_consumo))/100
-  vector_banano=cbind(valor_Banano$exportaciones,Indice_exportacion,Ponderador_expos,valor_Banano$consumo_interno,Indice_consumo,
-                  Ponderador_consumo,Indice_ponderado)
+  Indice_ponderado=((Indice_exportacion*Ponderador_expos)+(tail(Indice_consumo,tamaño)*Ponderador_consumo))/100
+  vector_banano=cbind(valor_Banano$exportaciones,Indice_exportacion,Ponderador_expos,tail(valor_Banano$consumo_interno,tamaño),tail(Indice_consumo,tamaño),
+                  Ponderador_consumo,tail(Indice_ponderado,tamaño))
   vector_banano=as.data.frame(vector_banano)
   Indice_ponderado_anterior=c(data[data$Año==(anio-3),"Indice.de.producción.ponderado"],Indice_ponderado[1:(length(Indice_ponderado)-12)])
   Expo_anterior=c(data[data$Año==(anio-3),"Banano.de.Exportación.(DANE).ktes"],valor_Banano$exportaciones[1:(length(valor_Banano$exportaciones)-12)])
@@ -233,7 +239,7 @@ ZG_Permanentes=function(directorio,mes,anio){
   for (i in seq(12, length(Indice_exportacion), by = 12)) {
     expo_anual[i] <- (sum(valor_Banano$exportaciones[(i-11):i]) / sum(Expo_anterior[(i-11):i]))*100-100  # Realiza la suma y división
   }
-  tamaño=length(valor_Banano$exportaciones)
+
   #Crear la nueva fila
   nuevos_datos <- data.frame(
     Consecutivo = c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
@@ -243,7 +249,7 @@ ZG_Permanentes=function(directorio,mes,anio){
     Banano.Kilos=vector_banano,
     indice_Variacion_Anual=Indice_ponderado/Indice_ponderado_anterior*100-100,
     exportacion_Variacion_Anual=valor_Banano$exportaciones/Expo_anterior*100-100,
-    consumo_Variacion_Anual=valor_Banano$consumo_interno/Consumo_anterior*100-100,
+    consumo_Variacion_Anual=tail(valor_Banano$consumo_interno,25)/tail(Consumo_anterior,25)*100-100,
     indice_Variacion_Anual2=Indice_ponderado/Indice_ponderado_anterior*100-100,
     Expos_trim=as.numeric(expo_trim),
     Consumo_trim=as.numeric(consumo_trim),
@@ -280,14 +286,14 @@ ZG_Permanentes=function(directorio,mes,anio){
 
   #Correr la funcion Pollos
   valor_Platano=f_Platano(directorio,mes,anio)
-  valor_Platano$consumo_interno=as.numeric(valor_Platano$consumo_interno$Platanos)
+  valor_Platano$consumo_interno=tail(as.numeric(valor_Platano$consumo_interno[,1]),25)
 
   #Crear valores necesarios
 
   Prom2015_exportaciones=7963.12480916667
   Indice_exportacion=valor_Platano$exportaciones/Prom2015_exportaciones*100
   Ponderador_expos=5.76126001657917
-  Prom2015_consumo=21334420.25
+  Prom2015_consumo=21568029.67
   Indice_consumo=valor_Platano$consumo_interno/Prom2015_consumo*100
   Ponderador_consumo=94.2387399834208
   Indice_ponderado=((Indice_exportacion*Ponderador_expos)+(Indice_consumo*Ponderador_consumo))/100

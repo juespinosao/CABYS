@@ -31,6 +31,7 @@ f_Caña_azucar<-function(directorio,mes,anio){
 # Valor_anterior ----------------------------------------------------------
 if(mes==1){
   anio_mes=(anio-1)
+
 }else{
   anio_mes=anio
 }
