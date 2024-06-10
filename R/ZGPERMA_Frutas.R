@@ -70,8 +70,34 @@ archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
 
 
 
+# IPP ---------------------------------------------------------------------
+
+  archivo=nombre_archivos[nombre_archivos$PRODUCTO=="IPP","NOMBRE"]
+
+  IPP <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Precios/",archivo),
+                       sheet = "3.1")
+
+  n_col=which(IPP == "CODIGO",arr.ind = TRUE)[, "col"]
+
+  dos_digitos=anio %% 100
+  #identificar las columna donde dice total general y peso en pie
+  #identificar las columna donde dice total general y peso en pie
+
+
+
+  columna1=max(which(grepl(paste0(nombres_siglas[1],"-",(dos_digitos-2)),IPP),arr.ind = TRUE))
+  columna2=which(grepl(paste0(nombres_siglas[mes],"-",dos_digitos),IPP),arr.ind = TRUE)
+
+  fila1=which(grepl("01310",IPP[,n_col]),arr.ind = TRUE)
+
+
+  #Tomar el valor que nos interesa
+  Valor_IPP=as.data.frame(t(IPP[c(fila1[1]),c(columna1:columna2[1])]))
+  tamaño=nrow(Valor_IPP)
+  filas=c(seq(1, tamaño, by = 2),tamaño)
+  Valor_IPP=as.numeric(Valor_IPP[filas,1])
   # Agrupar datos -----------------------------------------------------------
 
 
-  return(list(variacion = valor_exportaciones, vector = Valor_Frutas))
+  return(list(variacion = valor_exportaciones, vector = Valor_Frutas,IPP=Valor_IPP))
 }

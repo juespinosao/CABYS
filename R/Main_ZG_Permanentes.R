@@ -47,6 +47,11 @@ ZG_Permanentes=function(directorio,mes,anio){
       Estado[i] <- (sum(valor_Cafe_verde_pergamino$produccion_total_pergamino[(i-2):i]) / sum(anterior_pergamino[(i-2):i]))*100-100  # Realiza la suma y división
     }
 
+    Observaciones <-rep("",tamaño)
+
+    for (i in seq(12, tamaño, by = 12)) {
+      Observaciones[i] <- (sum(valor_Cafe_verde_pergamino$produccion_total_pergamino[(i-11):i]) / sum(anterior_pergamino[(i-11):i]))*100-100  # Realiza la suma y división
+    }
     #Crear la nueva fila
     nuevos_datos <- data.frame(
       Consecutivo = c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
@@ -56,7 +61,7 @@ ZG_Permanentes=function(directorio,mes,anio){
       valor_Cafe_verde_pergamino,
       Variacion.Anual=valor_Cafe_verde_pergamino$produccion_total_pergamino/anterior_pergamino*100-100,
       Estado=as.numeric(Estado),
-      observaciones=rep("",tamaño),
+      observaciones=as.numeric(Observaciones),
       Tipo=rep("",tamaño)
     )
 
@@ -381,6 +386,7 @@ ZG_Permanentes=function(directorio,mes,anio){
   ultima_fila=nrow(data)
   fila=which(data$Año==2013)
   fila_anio_ant=which(data$Año== (anio-1))
+  fila_2anio_ant=which(data$Año== (anio-2))
   fila_anterior=max(which(data$Mes== mes))
 
 
@@ -388,6 +394,7 @@ ZG_Permanentes=function(directorio,mes,anio){
   valor_Frutas=f_Frutas(directorio,mes,anio)
 exportaciones=valor_Frutas$variacion
 consumo_interno=valor_Frutas$vector
+IPP=valor_Frutas$IPP
 nuevos_datos=data.frame(
 consecutivo=data[ultima_fila,1]+1,
 periodo=anio,
@@ -404,7 +411,7 @@ writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("E",ultima_fila+3,"*R",ul
 writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("J",ultima_fila+3,"/J",fila_anterior+2,"*100-100") ,startCol = "M", startRow = (ultima_fila[1]+3))
 writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("K",ultima_fila+3,"/K",fila_anterior+2,"*100-100") ,startCol = "N", startRow = (ultima_fila[1]+3))
 writeData(wb, sheet = "Frutas Citricas", x = exportaciones[,5],colNames = FALSE,startCol = "P", startRow = (fila_anio_ant[1]+2))
-##Falta columna R
+writeData(wb, sheet = "Frutas Citricas", x = IPP,colNames = FALSE,startCol = "R", startRow = (fila_2anio_ant[1]+2))
 writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("P",ultima_fila+3,"/P",fila_anterior+2,"*100-100") ,startCol = "T", startRow = (ultima_fila[1]+3))
 writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("R",ultima_fila+3,"/R",fila_anterior+2,"*100-100") ,startCol = "V", startRow = (ultima_fila[1]+3))
 writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("((X3/12)/100)*(D",ultima_fila+3,"/AVERAGE(D125:D136)*100)") ,startCol = "X", startRow = (ultima_fila[1]+3))
@@ -441,6 +448,32 @@ writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Citricas'!A
   addStyle(wb, sheet = "Frutas Citricas",style=col8,rows = (ultima_fila+3),cols = c(4,5,10,11))
   addStyle(wb, sheet = "Frutas Citricas",style=col4,rows = (ultima_fila+3),cols = c(7,8,13:63))
 
+  trimestre=f_trimestre(mes)
+  if(mes %in% c(3,6,9,12)){
+    if(trimestre==1){
+      fila=which(data[,45]==(anio-1))
+      fila_f=fila+6
+    }else{
+      fila=which(data[,45]==(anio))
+      fila_f=fila+1+trimestre
+    }
+    writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AVERAGE(AG",(ultima_fila[1]-1),":AG",ultima_fila+1,")") ,startCol = "BO", startRow = (fila_f))
+    writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AVERAGE(AV",(ultima_fila[1]-1),":AV",ultima_fila+1,")") ,startCol = "BP", startRow = (fila_f))
+    writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("BO",(fila_f[1]),"/BO",(fila_f[1]-4),"*100-100") ,startCol = "BQ", startRow = (fila_f))
+    writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("BP",(fila_f[1]),"/BP",(fila_f[1]-4),"*100-100") ,startCol = "BR", startRow = (fila_f))
+  }else{
+
+  }
+
+  if(mes==12){
+    fila_anual=which(data$Anual==anio-1)
+    writeData(wb, sheet = "Frutas Citricas", x = anio,colNames = FALSE,startCol = "BX", startRow = (fila_anual[1]+3))
+
+    writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AVERAGE(AG",(ultima_fila[1]-11+3),":AG",ultima_fila+3,")") ,startCol = "BY", startRow = (fila_anual[1]+3))
+    writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("BY",(fila_anual[1]+3),"/BY",(fila_anual[1]+2),"*100-100") ,startCol = "BZ", startRow = (fila_anual[1]+3))
+  }else{
+
+  }
 
   # Otras Frutas ------------------------------------------------------------------
 
@@ -450,6 +483,7 @@ writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Citricas'!A
   ultima_fila=nrow(data)
   fila=which(data$Año==2013)
   fila_anio_ant=which(data$Año== (anio-1))
+  fila_2anio_ant=which(data$Año== (anio-2))
   fila_anterior=max(which(data$Mes== mes))
 
 
@@ -465,7 +499,7 @@ writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Citricas'!A
   writeFormula(wb, sheet ="Otras frutas." , x = paste0("J",ultima_fila+3,"/J",fila_anterior+2,"*100-100") ,startCol = "M", startRow = (ultima_fila[1]+3))
   writeFormula(wb, sheet ="Otras frutas." , x = paste0("K",ultima_fila+3,"/K",fila_anterior+2,"*100-100") ,startCol = "N", startRow = (ultima_fila[1]+3))
   writeData(wb, sheet = "Otras frutas.", x = exportaciones[,6],colNames = FALSE,startCol = "P", startRow = (fila_anio_ant[1]+2))
-  ##Falta columna R
+  writeData(wb, sheet = "Otras frutas.", x = IPP,colNames = FALSE,startCol = "R", startRow = (fila_2anio_ant[1]+2))
   writeFormula(wb, sheet ="Otras frutas." , x = paste0("P",ultima_fila+3,"/P",fila_anterior+2,"*100-100") ,startCol = "T", startRow = (ultima_fila[1]+3))
   writeFormula(wb, sheet ="Otras frutas." , x = paste0("R",ultima_fila+3,"/R",fila_anterior+2,"*100-100") ,startCol = "V", startRow = (ultima_fila[1]+3))
   writeFormula(wb, sheet ="Otras frutas." , x = paste0("((X3/12)/100)*(D",ultima_fila+3,"/AVERAGE(D125:D136)*100)") ,startCol = "X", startRow = (ultima_fila[1]+3))
@@ -502,7 +536,31 @@ writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Citricas'!A
   addStyle(wb, sheet = "Otras frutas.",style=col8,rows = (ultima_fila+3),cols = c(4,5,10,11))
   addStyle(wb, sheet = "Otras frutas.",style=col4,rows = (ultima_fila+3),cols = c(7,8,13:63))
 
+  if(mes %in% c(3,6,9,12)){
+    if(trimestre==1){
+      fila=which(data[,45]==(anio-1))
+      fila_f=fila+6
+    }else{
+      fila=which(data[,45]==(anio))
+      fila_f=fila+1+trimestre
+    }
+    writeFormula(wb, sheet ="Otras frutas." , x = paste0("AVERAGE(AG",(ultima_fila[1]-1),":AG",ultima_fila+1,")") ,startCol = "BO", startRow = (fila_f))
+    writeFormula(wb, sheet ="Otras frutas." , x = paste0("AVERAGE(AV",(ultima_fila[1]-1),":AV",ultima_fila+1,")") ,startCol = "BP", startRow = (fila_f))
+    writeFormula(wb, sheet ="Otras frutas." , x = paste0("BO",(fila_f[1]),"/BO",(fila_f[1]-4),"*100-100") ,startCol = "BQ", startRow = (fila_f))
+    writeFormula(wb, sheet ="Otras frutas." , x = paste0("BP",(fila_f[1]),"/BP",(fila_f[1]-4),"*100-100") ,startCol = "BR", startRow = (fila_f))
+  }else{
 
+  }
+
+  if(mes==12){
+    fila_anual=which(data$Anual==anio-1)
+    writeData(wb, sheet = "Otras frutas.", x = anio,colNames = FALSE,startCol = "BX", startRow = (fila_anual[1]+3))
+
+    writeFormula(wb, sheet ="Otras frutas." , x = paste0("AVERAGE(AG",(ultima_fila[1]-11+3),":AG",ultima_fila+3,")") ,startCol = "BY", startRow = (fila_anual[1]+3))
+    writeFormula(wb, sheet ="Otras frutas." , x = paste0("BY",(fila_anual[1]+3),"/BY",(fila_anual[1]+2),"*100-100") ,startCol = "BZ", startRow = (fila_anual[1]+3))
+  }else{
+
+  }
 
 # Fruto de Palma ------------------------------------------------------------------
 

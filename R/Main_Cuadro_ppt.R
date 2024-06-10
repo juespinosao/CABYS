@@ -7,7 +7,7 @@ Cuadros_ppt<-function(directorio,mes,anio){
   library(openxlsx)
   library(dplyr)
   #Crear el nombre de las carpetas del mes anterior y el actual
-  carpeta_actual=nombre_carpeta(mes,anio)
+
   if(mes==1){
     carpeta_anterior=nombre_carpeta(12,(anio-1))
     entrada=paste0(directorio,"/ISE/",anio-1,"/",carpeta_anterior,"/Results/Cuadros_Agropecuario_",nombres_meses[12],"_",(anio-1),".xlsx")
@@ -474,7 +474,226 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
   setRowHeights(wb,sheet ="Pesca",rows = c(4),heights = 0)
   }else{
 
+  }
+
+
+# Silvicultura ------------------------------------------------------------
+
+
+  if(mes %in% c(3,6,9,12)){
+    writeData(wb, sheet = "Silvicultura", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "C", startRow = 3)
+    writeData(wb, sheet = "Silvicultura", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "D", startRow = 3)
+    writeData(wb, sheet = "Silvicultura", x = paste0(anio-1),colNames = FALSE,startCol = "E", startRow = 3)
+    writeData(wb, sheet = "Silvicultura", x = paste0(anio),colNames = FALSE,startCol = "F", startRow = 3)
+
+    f_Silvicultura_complemento(directorio,mes,anio)
+
+
+    carpeta_actual=nombre_carpeta(mes,anio)
+    nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Doc/Nombres_archivos_",nombres_meses[mes],".xlsx"),sheet = "Nombres")
+    archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Silvicultura2","NOMBRE"]
+
+
+    #Dirección de entrada del archivo ZG_pecuario del mes anterior y donde se va a guardar el siguiente
+    silvicultura=paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Data/consolidado_ISE/Silvicultura/",archivo)
+    wb_sil <- loadWorkbook(silvicultura)
+    data <- read.xlsx(wb_sil, sheet = "Silvicultura producción", colNames = TRUE,startRow = 3)
+ultima_fila=nrow(data)
+fila=which(data$Año==anio-3)
+
+#troncos
+troncos=data[fila[1]:ultima_fila,"Troncos.de.madera"]
+var_anual=data[fila[1]:ultima_fila,"Troncos.de.madera"]/lag(data[fila[1]:ultima_fila,"Troncos.de.madera"],4)*100-100
+troncos_ant=lag(data[fila[1]:ultima_fila,"Troncos.de.madera"],4)
+tamaño=length(data[fila[1]:ultima_fila,"Troncos.de.madera"])
+Estado <- rep("",tamaño)
+
+for (i in seq(4, tamaño, by = 4)) {
+  Estado[i] <- (sum(troncos[(i-3):i]) / sum(troncos_ant[(i-3):i]))*100-100  # Realiza la suma y división
 }
+Estado=as.numeric(Estado)
+
+cuadro_troncos=data.frame(var_anual[c(8+trimestre)],var_anual[c(12+trimestre)],Estado[c(8+trimestre)],
+                                Estado[c(12+trimestre)])
+#leña
+leña=data[fila[1]:ultima_fila,"Leña"]
+var_anual=data[fila[1]:ultima_fila,"Leña"]/lag(data[fila[1]:ultima_fila,"Leña"],4)*100-100
+leña_ant=lag(data[fila[1]:ultima_fila,"Leña"],4)
+tamaño=length(data[fila[1]:ultima_fila,"Leña"])
+Estado <- rep("",tamaño)
+
+for (i in seq(4, tamaño, by = 4)) {
+  Estado[i] <- (sum(leña[(i-3):i]) / sum(leña_ant[(i-3):i]))*100-100  # Realiza la suma y división
+}
+Estado=as.numeric(Estado)
+
+cuadro_leña=data.frame(var_anual[c(8+trimestre)],var_anual[c(12+trimestre)],Estado[c(8+trimestre)],
+                          Estado[c(12+trimestre)])
+#forestales
+forestal=data[fila[1]:ultima_fila,"Productos.forestales"]
+var_anual=data[fila[1]:ultima_fila,"Productos.forestales"]/lag(data[fila[1]:ultima_fila,"Productos.forestales"],4)*100-100
+forestal_ant=lag(data[fila[1]:ultima_fila,"Productos.forestales"],4)
+tamaño=length(data[fila[1]:ultima_fila,"Productos.forestales"])
+Estado <- rep("",tamaño)
+
+for (i in seq(4, tamaño, by = 4)) {
+  Estado[i] <- (sum(forestal[(i-3):i]) / sum(forestal_ant[(i-3):i]))*100-100  # Realiza la suma y división
+}
+Estado=as.numeric(Estado)
+
+cuadro_forestal=data.frame(var_anual[c(8+trimestre)],var_anual[c(12+trimestre)],Estado[c(8+trimestre)],
+                       Estado[c(12+trimestre)])
+
+#total
+total=data[fila[1]:ultima_fila,"Total.produccion.silvicultura"]
+var_anual=data[fila[1]:ultima_fila,"Total.produccion.silvicultura"]/lag(data[fila[1]:ultima_fila,"Total.produccion.silvicultura"],4)*100-100
+total_ant=lag(data[fila[1]:ultima_fila,"Total.produccion.silvicultura"],4)
+tamaño=length(data[fila[1]:ultima_fila,"Total.produccion.silvicultura"])
+Estado <- rep("",tamaño)
+
+for (i in seq(4, tamaño, by = 4)) {
+  Estado[i] <- (sum(total[(i-3):i]) / sum(total_ant[(i-3):i]))*100-100  # Realiza la suma y división
+}
+Estado=as.numeric(Estado)
+
+cuadro_total=data.frame(var_anual[c(8+trimestre)],var_anual[c(12+trimestre)],Estado[c(8+trimestre)],
+                           Estado[c(12+trimestre)])
+Tabla=bind_rows(cuadro_troncos,cuadro_leña,cuadro_forestal,cuadro_total)
+writeData(wb, sheet = "Silvicultura", x = Tabla,colNames = FALSE,startCol = "C", startRow = 4)
+
+
+  }else{
+
+  }
+
+
+# Areas en desarrollo -----------------------------------------------------
+
+  writeData(wb, sheet = "Areas en desarrollo", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
+  writeData(wb, sheet = "Areas en desarrollo", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
+  writeData(wb, sheet = "Areas en desarrollo", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Areas en desarrollo", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+
+
+  data <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Results/ZG1_Permanentes_ISE_",nombres_meses[mes],"_",anio,".xlsx"), sheet = "Áreas en desarrollo", colNames = TRUE,startRow = 11)
+  fila=which(data$Año==(anio-3))
+  cuadro_areas=funcion_cuadro("Índice.promedio.ponderado")
+
+  writeData(wb, sheet = "Areas en desarrollo", x = cuadro_areas,colNames = FALSE,startCol = "D", startRow = 4)
+
+
+
+# Cambios mensual ---------------------------------------------------------
+
+if(mes==1){
+  writeData(wb, sheet = "Cambios_Mes", x = paste0("Publicación ",nombres_meses[12]),colNames = FALSE,startCol = "D", startRow = 3)
+  writeData(wb, sheet = "Cambios_Mes", x = paste0(nombres_meses[12]," publicación ",nombres_meses[mes]),colNames = FALSE,startCol = "E", startRow = 3)
+
+}else{
+  writeData(wb, sheet = "Cambios_Mes", x = paste0("Publicación ",nombres_meses[mes-1]),colNames = FALSE,startCol = "D", startRow = 3)
+  writeData(wb, sheet = "Cambios_Mes", x = paste0(nombres_meses[mes-1]," publicación ",nombres_meses[mes]),colNames = FALSE,startCol = "E", startRow = 3)
+
+}
+
+  nuevos_datos=f_Cambios_Mes(directorio,mes,anio)
+
+  writeData(wb, sheet = "Cambios_Mes", x = nuevos_datos[,2:4],colNames = FALSE,startCol = "D", startRow = 4)
+
+  # Cambios trimestre ---------------------------------------------------------
+if(mes %in% c(3,6,9,12)){
+trim_rom_act=f_trim_rom(mes)
+  if(mes==1){
+    trim_rom_ant=f_trim_rom(12)
+    writeData(wb, sheet = "Cambios_Trim", x = paste0("Publicación ",trim_rom_ant, "Trimestre ", anio-1),colNames = FALSE,startCol = "D", startRow = 3)
+    writeData(wb, sheet = "Cambios_Trim", x = paste0(trim_rom_ant," Trimestre ",anio-1," Publicación ",trim_rom," Trimestre ",anio),colNames = FALSE,startCol = "E", startRow = 3)
+
+  }else{
+    trim_rom_ant=f_trim_rom(mes-1)
+    writeData(wb, sheet = "Cambios_Trim", x = paste0("Publicación ",trim_rom_ant, "Trimestre ", anio),colNames = FALSE,startCol = "D", startRow = 3)
+    writeData(wb, sheet = "Cambios_Trim", x = paste0(trim_rom_ant," Trimestre ",anio," Publicación ",trim_rom," Trimestre ",anio),colNames = FALSE,startCol = "E", startRow = 3)
+
+  }
+
+  nuevos_datos=f_Cambios_Trim(directorio,mes,anio)
+
+  writeData(wb, sheet = "Cambios_Trim", x = nuevos_datos[,2:4],colNames = FALSE,startCol = "D", startRow = 4)
+
+}else{
+
+}
+
+  # Cambios anual ---------------------------------------------------------
+# if(mes==1){
+#   writeData(wb, sheet = "Cambios_Anual", x = paste0("Total año ",anio-1," publicación ",nombres_meses[12]," ",anio),colNames = FALSE,startCol = "D", startRow = 3)
+#   writeData(wb, sheet = "Cambios_Anual", x = paste0("Total año ",anio-1," publicación ",nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
+
+# }else{
+#   writeData(wb, sheet = "Cambios_Anual", x = paste0("Total año ",anio-1," publicación ",nombres_meses[mes-1]," ",anio),colNames = FALSE,startCol = "D", startRow = 3)
+#   writeData(wb, sheet = "Cambios_Anual", x = paste0("Total año ",anio-1," publicación ",nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
+
+# }
+
+# nuevos_datos=f_Cambios_Anual(directorio,mes,anio)
+
+# writeData(wb, sheet = "Cambios_Anual", x = nuevos_datos[,2:4],colNames = FALSE,startCol = "D", startRow = 4)
+#
+
+
+
+# Resultados Mes ----------------------------------------------------------
+
+  writeData(wb, sheet = "Resultados_Mes", x = paste0(nombres_siglas[mes]," ",anio-1," / ",nombres_siglas[mes]," ",anio-2),colNames = FALSE,startCol = "D", startRow = 3)
+  writeData(wb, sheet = "Resultados_Mes", x = paste0(nombres_siglas[mes]," ",anio," / ",nombres_siglas[mes]," ",anio-1),colNames = FALSE,startCol = "E", startRow = 3)
+  writeData(wb, sheet = "Resultados_Mes", x = paste0(nombres_siglas[mes]," ",anio," / ",nombres_siglas[mes]," ",anio-1),colNames = FALSE,startCol = "H", startRow = 3)
+
+
+
+  Valores_resultados<-matrix(c(paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!D8"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!E8"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!D7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!E7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!D7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!E7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!D7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!E7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!D7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!E7")
+
+  ),nrow=5,ncol=2,byrow = TRUE)
+
+  for (i in 1:5) {
+    for (j in 1:2) {
+      writeFormula(wb, sheet ="Resultados_Mes" , x = Valores_resultados[i,j] ,startCol = j+3, startRow = i+21)
+    }
+  }
+
+
+  # Resultados Trimestre ----------------------------------------------------------
+
+  writeData(wb, sheet = "Resultados_Trim", x = paste0(anio-1,"-",trim_rom," / ",anio-2,"-",trim_rom),colNames = FALSE,startCol = "D", startRow = 3)
+  writeData(wb, sheet = "Resultados_Trim", x = paste0(anio,"-",trim_rom," / ",anio-1,"-",trim_rom),colNames = FALSE,startCol = "E", startRow = 3)
+  writeData(wb, sheet = "Resultados_Trim", x = paste0(anio,"-",trim_rom," / ",anio-1,"-",trim_rom),colNames = FALSE,startCol = "H", startRow = 3)
+
+
+  Valores_resultados<-matrix(c(paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!H8"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!I8"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!F7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!G7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!H7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!I7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!H7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!I7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!H7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!I7")
+
+  ),nrow=5,ncol=2,byrow = TRUE)
+
+  for (i in 1:5) {
+    for (j in 1:2) {
+      writeFormula(wb, sheet ="Resultados_Trim" , x = Valores_precios[i,j] ,startCol = j+3, startRow = i+21)
+    }
+  }
+
   # Guardar el libro --------------------------------------------------------
 
 

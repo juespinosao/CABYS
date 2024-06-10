@@ -10,7 +10,11 @@ nombre_carpeta=function(mes,anio){
     carpeta=paste0(mes_0[mes],nombres_meses[mes])
 }
 
-
+vector_participaciones=data.frame(productos=c("Banano","Otras frutas","Plátano","Frutas cítricas","Flores",
+                                              "Hortalizas","Yuca","Áreas en desarrollo","Legumbres verdes y secas",
+                                              "Fruto de palma","Cacao","Caña panelera","Arroz","Papa","Caña de azúcar",
+                                              "Maíz","Café pergamino","Cafetos","Ganado porcino","Ganado bovino",
+                                              "Leche","Huevos","Aves de corral"))
 # Asignar trimestre y semestre en base al número de mes
 f_trimestre=function(mes){
 trimestre <- case_when(
