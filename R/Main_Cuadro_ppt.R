@@ -695,7 +695,7 @@ trim_rom_act=f_trim_rom(mes)
                                paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!H7"),
                                paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!I7"),
                                paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!H7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!I7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!I7")
 
 
   ),nrow=5,ncol=2,byrow = TRUE)
