@@ -648,16 +648,16 @@ trim_rom_act=f_trim_rom(mes)
 
 
 
-  Valores_resultados<-matrix(c(paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!D8"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!E8"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!D7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!E7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!D7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!E7"),
+  Valores_resultados<-matrix(c(paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!D7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!E7"),
                                paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!D7"),
                                paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!E7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!D7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!E7")
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!D7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!E7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!D8"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!E8"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!D7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!E7")
 
   ),nrow=5,ncol=2,byrow = TRUE)
 
@@ -674,17 +674,29 @@ trim_rom_act=f_trim_rom(mes)
   writeData(wb, sheet = "Resultados_Trim", x = paste0(anio,"-",trim_rom," / ",anio-1,"-",trim_rom),colNames = FALSE,startCol = "E", startRow = 3)
   writeData(wb, sheet = "Resultados_Trim", x = paste0(anio,"-",trim_rom," / ",anio-1,"-",trim_rom),colNames = FALSE,startCol = "H", startRow = 3)
 
+  carpeta_actual=nombre_carpeta(mes,anio)
 
-  Valores_resultados<-matrix(c(paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!H8"),
+  #Dirección de entrada del archivo ZG_pecuario del mes anterior y donde se va a guardar el siguiente
+  pecuario=paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Results/ZG2_Pecuario_ISE_",nombres_meses[mes],"_",anio,".xlsx")
+
+  data <- read.xlsx(pecuario, sheet = "Ovino y Caprino trimestral", colNames = TRUE,startRow = 10)
+  fila=which(data$Año== anio)
+  ultima_fila=nrow(data)
+
+  Valores_resultados<-matrix(c(paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!H7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!I7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!H8"),
                                paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!I8"),
                                paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!F7"),
                                paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!G7"),
+                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!G7"),
+                               paste0("'[ZG2_Pecuario_ISE_",nombres_meses[mes],"_",anio,".xlsx]Ovino y Caprino trimestral","'!F",(ultima_fila+10-4)),
+                               paste0("'[ZG2_Pecuario_ISE_",nombres_meses[mes],"_",anio,".xlsx]Ovino y Caprino trimestral","'!F",(ultima_fila+10)),
                                paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!H7"),
                                paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!I7"),
                                paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!H7"),
                                paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!I7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!H7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!I7")
+
 
   ),nrow=5,ncol=2,byrow = TRUE)
 
