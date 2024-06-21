@@ -702,7 +702,7 @@ trim_rom_act=f_trim_rom(mes)
 
   for (i in 1:5) {
     for (j in 1:2) {
-      writeFormula(wb, sheet ="Resultados_Trim" , x = Valores_precios[i,j] ,startCol = j+3, startRow = i+21)
+      writeFormula(wb, sheet ="Resultados_Trim" , x = Valores_resultados[i,j] ,startCol = j+3, startRow = i+21)
     }
   }
 
