@@ -78,8 +78,8 @@ Cuadros_ppt<-function(directorio,mes,anio){
 
   writeData(wb, sheet = "Café", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Café", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Café", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Café", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Café", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Café", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Café", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Café", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -118,15 +118,15 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Maiz", x = paste0(semestre_nombre," semestre ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Maiz", x = paste0(semestre_nombre," semestre ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Maiz", x = paste0(trim_rom," ",anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Maiz", x = paste0(trim_rom," ",anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Maiz", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Maiz", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Maiz", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Maiz", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
   writeData(wb, sheet = "Maiz", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 7)
   writeData(wb, sheet = "Maiz", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 7)
-  writeData(wb, sheet = "Maiz", x = paste0(trim_rom," ",anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 7)
-  writeData(wb, sheet = "Maiz", x = paste0(trim_rom," ",anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 7)
+  writeData(wb, sheet = "Maiz", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 7)
+  writeData(wb, sheet = "Maiz", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 7)
   writeData(wb, sheet = "Maiz", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 7)
   writeData(wb, sheet = "Maiz", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 7)
 
@@ -156,8 +156,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Arroz", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Arroz", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Arroz", x = paste0(trim_rom," ",anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Arroz", x = paste0(trim_rom," ",anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Arroz", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Arroz", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Arroz", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Arroz", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -179,8 +179,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Papa", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Papa", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Papa", x = paste0(trim_rom," ",anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Papa", x = paste0(trim_rom," ",anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Papa", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Papa", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Papa", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Papa", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -199,8 +199,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Hortalizas", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Hortalizas", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Hortalizas", x = paste0(trim_rom," ",anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Hortalizas", x = paste0(trim_rom," ",anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Hortalizas", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Hortalizas", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Hortalizas", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Hortalizas", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -221,8 +221,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Yuca", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Yuca", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Yuca", x = paste0(trim_rom," ",anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Yuca", x = paste0(trim_rom," ",anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Yuca", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Yuca", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Yuca", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Yuca", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -243,8 +243,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Frijol", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Frijol", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Frijol", x = paste0(trim_rom," ",anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Frijol", x = paste0(trim_rom," ",anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Frijol", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Frijol", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Frijol", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Frijol", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -264,8 +264,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Banano", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Banano", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Banano", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Banano", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Banano", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Banano", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Banano", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Banano", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -291,8 +291,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Platano", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Platano", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Platano", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Platano", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Platano", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Platano", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Platano", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Platano", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -314,8 +314,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Frutas citricas", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Frutas citricas", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Frutas citricas", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Frutas citricas", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Frutas citricas", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Frutas citricas", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Frutas citricas", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Frutas citricas", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -338,8 +338,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Otras frutas", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Otras frutas", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Otras frutas", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Otras frutas", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Otras frutas", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Otras frutas", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Otras frutas", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Otras frutas", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -360,8 +360,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Fruto de palma", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Fruto de palma", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Fruto de palma", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Fruto de palma", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Fruto de palma", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Fruto de palma", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Fruto de palma", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Fruto de palma", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -383,8 +383,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Cacao", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Cacao", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Cacao", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Cacao", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Cacao", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Cacao", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Cacao", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Cacao", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -403,8 +403,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Flores", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Flores", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Flores", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Flores", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Flores", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Flores", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Flores", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Flores", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -424,8 +424,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Caña de azucar", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Caña de azucar", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Caña de azucar", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Caña de azucar", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Caña de azucar", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Caña de azucar", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Caña de azucar", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Caña de azucar", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -444,8 +444,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
   writeData(wb, sheet = "Panela", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Panela", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Panela", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Panela", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Panela", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Panela", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
   writeData(wb, sheet = "Panela", x = paste0(anio-1),colNames = FALSE,startCol = "H", startRow = 3)
   writeData(wb, sheet = "Panela", x = paste0(anio),colNames = FALSE,startCol = "I", startRow = 3)
 
@@ -461,8 +461,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
   # Pesca -----------------------------------------------------------
 
   if(mes %in% c(3,6,9,12)){
-  writeData(wb, sheet = "Pesca", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "D", startRow = 3)
-  writeData(wb, sheet = "Pesca", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "E", startRow = 3)
+  writeData(wb, sheet = "Pesca", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "D", startRow = 3)
+  writeData(wb, sheet = "Pesca", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "E", startRow = 3)
   writeData(wb, sheet = "Pesca", x = paste0(anio-1),colNames = FALSE,startCol = "F", startRow = 3)
   writeData(wb, sheet = "Pesca", x = paste0(anio),colNames = FALSE,startCol = "G", startRow = 3)
 
@@ -481,8 +481,8 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
 
   if(mes %in% c(3,6,9,12)){
-    writeData(wb, sheet = "Silvicultura", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "C", startRow = 3)
-    writeData(wb, sheet = "Silvicultura", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "D", startRow = 3)
+    writeData(wb, sheet = "Silvicultura", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "C", startRow = 3)
+    writeData(wb, sheet = "Silvicultura", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
     writeData(wb, sheet = "Silvicultura", x = paste0(anio-1),colNames = FALSE,startCol = "E", startRow = 3)
     writeData(wb, sheet = "Silvicultura", x = paste0(anio),colNames = FALSE,startCol = "F", startRow = 3)
 
@@ -571,8 +571,8 @@ writeData(wb, sheet = "Silvicultura", x = Tabla,colNames = FALSE,startCol = "C",
 
   writeData(wb, sheet = "Areas en desarrollo", x = paste0(nombres_meses[mes]," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
   writeData(wb, sheet = "Areas en desarrollo", x = paste0(nombres_meses[mes]," ",anio),colNames = FALSE,startCol = "E", startRow = 3)
-  writeData(wb, sheet = "Areas en desarrollo", x = paste0(trim_rom,anio-1," / ",trim_rom,anio-2),colNames = FALSE,startCol = "F", startRow = 3)
-  writeData(wb, sheet = "Areas en desarrollo", x = paste0(trim_rom,anio," / ",trim_rom,anio-1),colNames = FALSE,startCol = "G", startRow = 3)
+  writeData(wb, sheet = "Areas en desarrollo", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "F", startRow = 3)
+  writeData(wb, sheet = "Areas en desarrollo", x = paste0(trim_rom,anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "G", startRow = 3)
 
 
   data <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Results/ZG1_Permanentes_ISE_",nombres_meses[mes],"_",anio,".xlsx"), sheet = "Áreas en desarrollo", colNames = TRUE,startRow = 11)
@@ -648,16 +648,16 @@ trim_rom_act=f_trim_rom(mes)
 
 
 
-  Valores_resultados<-matrix(c(paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!D7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!E7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!D7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!E7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!D7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!E7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!D8"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!E8"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!D7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!E7")
+  Valores_resultados<-matrix(c(paste0("'[",salida,"]CUADROS PORCINO","'!D7"),
+                               paste0("'[",salida,"]CUADROS PORCINO","'!E7"),
+                               paste0("'[",salida,"]CUADROS BOVINO","'!D7"),
+                               paste0("'[",salida,"]CUADROS BOVINO","'!E7"),
+                               paste0("'[",salida,"]CUADROS LECHE","'!D7"),
+                               paste0("'[",salida,"]CUADROS LECHE","'!E7"),
+                               paste0("'[",salida,"]CUADROS AVICULTURA","'!D8"),
+                               paste0("'[",salida,"]CUADROS AVICULTURA","'!E8"),
+                               paste0("'[",salida,"]CUADROS AVICULTURA","'!D7"),
+                               paste0("'[",salida,"]CUADROS AVICULTURA","'!E7")
 
   ),nrow=5,ncol=2,byrow = TRUE)
 
@@ -683,19 +683,20 @@ trim_rom_act=f_trim_rom(mes)
   fila=which(data$Año== anio)
   ultima_fila=nrow(data)
 
-  Valores_resultados<-matrix(c(paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!H7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS PORCINO","'!I7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!H8"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!I8"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!F7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!G7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS LECHE","'!G7"),
-                               paste0("'[ZG2_Pecuario_ISE_",nombres_meses[mes],"_",anio,".xlsx]Ovino y Caprino trimestral","'!F",(ultima_fila+10-4)),
-                               paste0("'[ZG2_Pecuario_ISE_",nombres_meses[mes],"_",anio,".xlsx]Ovino y Caprino trimestral","'!F",(ultima_fila+10)),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!H7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS AVICULTURA","'!I7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!H7"),
-                               paste0("'[Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx]CUADROS BOVINO","'!I7")
+
+  Valores_resultados<-matrix(c(paste0("'[",salida,"]CUADROS PORCINO","'!H7"),
+                               paste0("'[",salida,"]CUADROS PORCINO","'!I7"),
+                               paste0("'[",salida,"]CUADROS AVICULTURA","'!H8"),
+                               paste0("'[",salida,"]CUADROS AVICULTURA","'!I8"),
+                               paste0("'[",salida,"]CUADROS LECHE","'!F7"),
+                               paste0("'[",salida,"]CUADROS LECHE","'!G7"),
+                               paste0("'[",salida,"]CUADROS LECHE","'!G7"),
+                               paste0("'[",pecuario,"]Ovino y Caprino trimestral","'!F",(ultima_fila+10-4)),
+                               paste0("'[",pecuario,"]Ovino y Caprino trimestral","'!F",(ultima_fila+10)),
+                               paste0("'[",salida,"]CUADROS AVICULTURA","'!H7"),
+                               paste0("'[",salida,"]CUADROS AVICULTURA","'!I7"),
+                               paste0("'[",salida,"]CUADROS BOVINO","'!H7"),
+                               paste0("'[",salida,"]CUADROS BOVINO","'!I7")
 
 
   ),nrow=5,ncol=2,byrow = TRUE)
@@ -705,6 +706,24 @@ trim_rom_act=f_trim_rom(mes)
       writeFormula(wb, sheet ="Resultados_Trim" , x = Valores_resultados[i,j] ,startCol = j+3, startRow = i+21)
     }
   }
+
+
+
+
+
+
+  if(mes %in% c(3,6,9,12)){
+    setColWidths(wb,sheet ="CUADROS BOVINO",cols = c(8,9),widths = 8)
+    setColWidths(wb,sheet ="CUADROS LECHE",cols = c(6,7),widths = 8)
+    setColWidths(wb,sheet ="CUADROS PORCINO",cols = c(8,9),widths = 8)
+    setColWidths(wb,sheet ="CUADROS AVICULTURA",cols = c(8,9),widths = 8)
+  }else{
+    setColWidths(wb,sheet ="CUADROS BOVINO",cols = c(8,9),hidden = c(TRUE,TRUE))
+    setColWidths(wb,sheet ="CUADROS LECHE",cols = c(6,7),hidden = c(TRUE,TRUE))
+    setColWidths(wb,sheet ="CUADROS PORCINO",cols = c(8,9),hidden = c(TRUE,TRUE))
+    setColWidths(wb,sheet ="CUADROS AVICULTURA",cols = c(8,9),hidden = c(TRUE,TRUE))
+  }
+
 
   # Guardar el libro --------------------------------------------------------
 
