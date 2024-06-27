@@ -65,7 +65,7 @@ archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
   columna1=which(Frutas=="Frutas citricas retropolado",arr.ind = TRUE)[,"col"]
   columna2=which(Frutas=="Otras frutas retropolado",arr.ind = TRUE)[,"col"]
 
-  Valor_Frutas=as.data.frame(na.omit(Frutas[fila1:fila2,c(columna1[1],columna2[1])]))
+  Valor_Frutas=as.data.frame(na.omit(Frutas[fila1:(fila2+mes-1),c(columna1[1],columna2[1])]))
 
 
 

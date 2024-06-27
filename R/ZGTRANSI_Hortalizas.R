@@ -16,10 +16,11 @@ f_Hortalizas<-function(directorio,mes,anio){
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
 
   Hortalizas <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
-  fila1=which(Hortalizas==anio,arr.ind = TRUE)[,"row"]
-  fila2=which(Hortalizas==mes,arr.ind = TRUE)[,"row"]
-  fila_f=intersect(fila1,fila2)
-  Valor_Hortalizas=as.data.frame(na.omit(Hortalizas[1:fila_f,"Hortalizas"]))
+  fila1=min(which(Hortalizas[,49]==2013,arr.ind = TRUE)[,"row"])
+  fila2=min(which(Hortalizas[,49]==anio,arr.ind = TRUE)[,"row"])
+
+
+  Valor_Hortalizas=as.data.frame(na.omit(Hortalizas[fila1:(fila2+mes-1),"Hortalizas retropolado...54"]))
 
   return(as.numeric(Valor_Hortalizas$Hortalizas))
 }

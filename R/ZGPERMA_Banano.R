@@ -51,7 +51,7 @@ f_Banano<-function(directorio,mes,anio){
   fila2=min(which(Banano==anio,arr.ind = TRUE)[,"row"])
   columna1=which(Banano=="Indice de pro pon retropolado",arr.ind = TRUE)[,"col"]
 
-  Valor_interno=as.data.frame(na.omit(Banano[fila1:fila2,c(columna1[1])]))
+  Valor_interno=as.data.frame(na.omit(Banano[fila1:(fila2+mes-1),c(columna1[1])]))
 
 # Agrupar datos -----------------------------------------------------------
 

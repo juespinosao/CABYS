@@ -442,7 +442,7 @@ writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("BD",fila_anterior+2,"*AC
 writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("SUM(BH",ultima_fila+3,":BI",ultima_fila+3,")") ,startCol = "BJ", startRow = (ultima_fila[1]+3))
 writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("BJ",ultima_fila+3,"-AI",ultima_fila+3) ,startCol = "BK", startRow = (ultima_fila[1]+3))
 
-writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Citricas'!AG",ultima_fila+3) ,startCol = "F", startRow = ultima_fila+11)
+writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Citricas'!AG",ultima_fila+3) ,startCol = "G", startRow = ultima_fila+11)
 
   addStyle(wb, sheet = "Frutas Citricas",style=col1,rows = (ultima_fila+3),cols = 1:3)
   addStyle(wb, sheet = "Frutas Citricas",style=col8,rows = (ultima_fila+3),cols = c(4,5,10,11))
@@ -530,7 +530,7 @@ writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Citricas'!A
   writeFormula(wb, sheet ="Otras frutas." , x = paste0("SUM(BH",ultima_fila+3,":BI",ultima_fila+3,")") ,startCol = "BJ", startRow = (ultima_fila[1]+3))
   writeFormula(wb, sheet ="Otras frutas." , x = paste0("BJ",ultima_fila+3,"-AI",ultima_fila+3) ,startCol = "BK", startRow = (ultima_fila[1]+3))
 
-  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Otras frutas.'!AG",ultima_fila+3) ,startCol = "F", startRow = ultima_fila+11)
+  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Otras frutas.'!AG",ultima_fila+3) ,startCol = "H", startRow = ultima_fila+11)
 
   addStyle(wb, sheet = "Otras frutas.",style=col1,rows = (ultima_fila+3),cols = 1:3)
   addStyle(wb, sheet = "Otras frutas.",style=col8,rows = (ultima_fila+3),cols = c(4,5,10,11))
@@ -739,7 +739,7 @@ if((mes+24)==tamaño){
 
 
 
-  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Cacao'!E",ultima_fila+10) ,startCol = "H", startRow = ultima_fila+13)
+  writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Cacao'!E",ultima_fila+10) ,startCol = "I", startRow = ultima_fila+13)
 
   addStyle(wb, sheet = "Cacao",style=col1,rows = (ultima_fila+10),cols = 1:4)
   addStyle(wb, sheet = "Cacao",style=col7,rows = (ultima_fila+10),cols = 5)

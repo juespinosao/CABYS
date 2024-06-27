@@ -51,7 +51,7 @@ f_Platano<-function(directorio,mes,anio){
   fila2=min(which(Platano==anio,arr.ind = TRUE)[,"row"])
   columna1=which(Platano=="plátano retropolado",arr.ind = TRUE)[,"col"]
 
-  Valor_Platano=as.data.frame(na.omit(Platano[fila1:fila2,c(columna1[1])]))
+  Valor_Platano=as.data.frame(na.omit(Platano[fila1:(fila2+mes-1),c(columna1[1])]))
 
   # Agrupar datos -----------------------------------------------------------
 
