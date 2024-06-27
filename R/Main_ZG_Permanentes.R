@@ -254,7 +254,7 @@ ZG_Permanentes=function(directorio,mes,anio){
     Banano.Kilos=vector_banano,
     indice_Variacion_Anual=Indice_ponderado/Indice_ponderado_anterior*100-100,
     exportacion_Variacion_Anual=valor_Banano$exportaciones/Expo_anterior*100-100,
-    consumo_Variacion_Anual=tail(valor_Banano$consumo_interno,25)/tail(Consumo_anterior,25)*100-100,
+    consumo_Variacion_Anual=tail(valor_Banano$consumo_interno,tamaño)/tail(Consumo_anterior,tamaño)*100-100,
     indice_Variacion_Anual2=Indice_ponderado/Indice_ponderado_anterior*100-100,
     Expos_trim=as.numeric(expo_trim),
     Consumo_trim=as.numeric(consumo_trim),
@@ -291,7 +291,7 @@ ZG_Permanentes=function(directorio,mes,anio){
 
   #Correr la funcion Pollos
   valor_Platano=f_Platano(directorio,mes,anio)
-  valor_Platano$consumo_interno=tail(as.numeric(valor_Platano$consumo_interno[,1]),25)
+  valor_Platano$consumo_interno=tail(as.numeric(valor_Platano$consumo_interno[,1]),tamaño)
 
   #Crear valores necesarios
 
@@ -810,11 +810,12 @@ if((mes+24)==tamaño){
   #Correr la funcion Palma
   valor_Caña_Azucar=f_Caña_azucar(directorio,mes,anio)
   valor_actual_caña=tail(lag(data$Caña.de.Azúcar,11),1)*(1+valor_Caña_Azucar$variacion/100)
-  if(mes==length(valor_Caña_Azucar$vector)){
-    valor_Caña_Azucar$vector[10]=valor_actual_caña
-    vector_caña=valor_Caña_Azucar$vector
-  }else{
+  if(mes<length(valor_Caña_Azucar$vector)){
     vector_caña=c(valor_Caña_Azucar$vector,valor_actual_caña)
+
+  }else{
+    #valor_Caña_Azucar$vector[mes]=valor_actual_caña
+    vector_caña=valor_Caña_Azucar$vector
   }
 
 
@@ -822,12 +823,16 @@ if((mes+24)==tamaño){
 
   tamaño=length(Caña_anterior)
 
-
   Estado <- rep("",tamaño)
-
+if(tamaño>3){
   for (i in seq(3, tamaño, by = 3)) {
     Estado[i] <- (sum(vector_caña[(i-2):i]) / sum(Caña_anterior[(i-2):i]))*100-100  # Realiza la suma y división
   }
+} else{
+
+}
+
+
 
   nuevos_datos <- data.frame(
     Consecutivo = c(data[fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),

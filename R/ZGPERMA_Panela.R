@@ -29,20 +29,16 @@ archivo=nombre_archivos[nombre_archivos$PRODUCTO=="Panela","NOMBRE"]
 
 Panela<-read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/Caña de azucar y panela/Panela/",archivo),colNames = FALSE)
 
-n_fila=which(grepl("AREAS",as.data.frame(t(Panela))))
-Panela[n_fila, ] <- na.locf0(Panela[n_fila,])
+n_fila=which(grepl("TOTAL",as.data.frame(t(Panela))))
+
+n_columna=which(grepl("PRODUCCIÓN",as.data.frame(Panela)),arr.ind = TRUE)
 
 
-columna1=which(grepl((anio),Panela),arr.ind = TRUE)
-columna2=which(grepl("Produccion",Panela),arr.ind = TRUE)
-columnaf_act <- intersect(columna1, columna2)
 
-n_fila=which(Panela=="Total general",arr.ind = TRUE)[,"row"]
-
-if(is.null(nrow(columna1))){
+if(is.null(length(n_columna))){
 
 }else{
-  Valor_actual=as.numeric(Panela[n_fila[[1]],columnaf_act])
+  Valor_actual=as.numeric(Panela[n_fila[[1]],n_columna])
 }
 
 
