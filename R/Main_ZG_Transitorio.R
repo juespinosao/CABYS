@@ -155,7 +155,7 @@ ZG_Transitorio=function(directorio,mes,anio){
   #Correr la funcion Pollos
   valor_Hortalizas=f_Hortalizas(directorio,mes,anio)
   valor_Hortalizas=as.data.frame(valor_Hortalizas)
-  valor_Hortalizas$anterior=c(data[data$Año==(2012),"Hortalizas"],valor_Hortalizas[1:(nrow(valor_Hortalizas)-12),"valor_Hortalizas"])
+  valor_Hortalizas$anterior=c(data[data$Año==(2012),"Hortalizas"],valor_Hortalizas[1:(nrow(valor_Hortalizas)-12),1])
   valor_Hortalizas$variacion_anual=valor_Hortalizas$valor_Hortalizas/valor_Hortalizas$anterior*100-100
   valor_Hortalizas$Estado <- ""
 

@@ -24,13 +24,11 @@ f_Fenavi<-function(directorio,mes,anio){
   fila_tabla2=as.numeric(which(Encasetamiento_pollito == "SUBTOTAL"|Encasetamiento_pollito == "TOTAL",arr.ind = TRUE)[, "row"])
   columna=which(grepl(anio,Encasetamiento_pollito[n_fila,]),arr.ind = TRUE)
   columna <- which(grepl(paste0((anio-1), "|", (anio)), Encasetamiento_pollito[n_fila, ]), arr.ind = TRUE)
+  Tabla1=Encasetamiento_pollito[c(fila_tabla1:(fila_tabla2[2]-1)),columna[1]]
+  Tabla1=Tabla1[-c((fila_tabla2[1]-fila_tabla1[1]+1))]
+  Tabla2=Encasetamiento_pollito[fila_tabla1:(fila_tabla2[1]-1),columna[2]]
 
-  Tabla1=as.data.frame(Encasetamiento_pollito[fila_tabla1:(fila_tabla2[1]-1),columna])
-  vector1=NULL
-  for (i in 1:ncol(Tabla1)) {
-    vector1=c(vector1,as.vector(Tabla1[,i]))
-  }
-  vector1=na.omit(vector1)
+  vector1=na.omit(c(Tabla1,Tabla2))
 
   Encasetamiento_pollita <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/FENAVI/",archivo),sheet = "POLLITA")
 
@@ -38,11 +36,13 @@ f_Fenavi<-function(directorio,mes,anio){
   fila_tabla1=as.numeric(which(Encasetamiento_pollita == "ENERO",arr.ind = TRUE)[, "row"])
   fila_tabla2=as.numeric(which(Encasetamiento_pollita == "SUBTOTAL" |Encasetamiento_pollita == "TOTAL",arr.ind = TRUE)[, "row"])
   columna <- which(grepl(paste0((anio-1), "|", (anio)), Encasetamiento_pollita[n_fila, ]), arr.ind = TRUE)
-  Tabla2=as.data.frame(Encasetamiento_pollita[fila_tabla1:(fila_tabla2[1]-1),columna])
-  vector2=NULL
-  for (i in 1:ncol(Tabla2)) {
-    vector2=c(vector2,as.vector(Tabla2[,i]))
-  }
+
+  Tabla1=Encasetamiento_pollita[c(fila_tabla1:(fila_tabla2[2]-1)),columna[1]]
+  Tabla1=Tabla1[-c((fila_tabla2[1]-fila_tabla1[1]+1))]
+  Tabla2=Encasetamiento_pollita[fila_tabla1:(fila_tabla2[1]-1),columna[2]]
+
+  vector2=na.omit(c(Tabla1,Tabla2))
+
   vector2=na.omit(vector2)
 
 
@@ -95,7 +95,7 @@ f_Fenavi<-function(directorio,mes,anio){
   Impor <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
                      sheet = "PNK")
 
-  n_col1=which(Impor== paste0((anio)," 01"),arr.ind = TRUE)[,"col"]
+  n_col1=which(Impor== paste0((anio-1)," 01"),arr.ind = TRUE)[,"col"]
   n_col2=which(Impor== paste0(anio," ",mes_0[mes]),arr.ind = TRUE)[,"col"]
   n_fila1=which(Impor== "020502",arr.ind = TRUE)[,"row"]
   n_fila2=which(Impor == "020400",arr.ind = TRUE)[,"row"]
@@ -120,7 +120,7 @@ f_Fenavi<-function(directorio,mes,anio){
 
 
   n_fila1=which(Expor == "020502",arr.ind = TRUE)[,"row"]
-  n_col1=which(Expor== paste0(anio," 1"),arr.ind = TRUE)[,"col"]
+  n_col1=which(Expor== paste0(anio-1," 1"),arr.ind = TRUE)[,"col"]
   n_col2=which(Expor== paste0(anio," ",mes),arr.ind = TRUE)[,"col"]
 
   n_fila2=which(Expor == "020400",arr.ind = TRUE)[,"row"]
@@ -130,6 +130,7 @@ f_Fenavi<-function(directorio,mes,anio){
   #Tomar el valor que nos interesa
   Valor_exportaciones=as.data.frame(t(Expor[c(n_fila1,n_fila2,n_fila3),(n_col1[1]:n_col2[1])]))
   Valor_exportaciones=as.data.frame(lapply(Valor_exportaciones, as.numeric))
+valor_Fenavi=valor_Fenavi[1:nrow(Valor_exportaciones),]
 
   valor_Fenavi=cbind(valor_Fenavi,Valor_importaciones,Valor_exportaciones)
   colnames(valor_Fenavi)=c("POLLITOS","POLLITAS","AVES_POSTURA","IMPO_HUEVOS","AVES_GALLUS","CARNE_DESPOJOS","IMPO_MAIZ","RESIDUOS_GRASA","EXPO_HUEVOS","EXPO_GALLOS","EXPO_CARNE_DESPOJOS")
