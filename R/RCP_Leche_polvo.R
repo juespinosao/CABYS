@@ -82,7 +82,7 @@ f_Leche_polvo<-function(directorio,mes,anio){
   Impor <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
                      sheet = "PNK")
 
-  n_col1=which(Impor== paste0((anio)," 01"),arr.ind = TRUE)[,"col"]
+  n_col1=which(Impor== paste0((anio-1)," 01"),arr.ind = TRUE)[,"col"]
   n_col2=which(Impor== paste0(anio," ",mes_0[mes]),arr.ind = TRUE)[,"col"]
   n_fila1=which(Impor== "220201",arr.ind = TRUE)[,"row"]
 
@@ -106,7 +106,7 @@ f_Leche_polvo<-function(directorio,mes,anio){
 
 
   n_fila1=which(Expor == "220100",arr.ind = TRUE)[,"row"]
-  n_col1=which(Expor== paste0(anio," 1"),arr.ind = TRUE)[,"col"]
+  n_col1=which(Expor== paste0(anio-1," 1"),arr.ind = TRUE)[,"col"]
   n_col2=which(Expor== paste0(anio," ",mes),arr.ind = TRUE)[,"col"]
 
   n_fila2=which(Expor == "220201",arr.ind = TRUE)[,"row"]

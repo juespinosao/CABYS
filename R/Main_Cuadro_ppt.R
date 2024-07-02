@@ -646,18 +646,19 @@ trim_rom_act=f_trim_rom(mes)
   writeData(wb, sheet = "Resultados_Mes", x = paste0(nombres_siglas[mes]," ",anio," / ",nombres_siglas[mes]," ",anio-1),colNames = FALSE,startCol = "E", startRow = 3)
   writeData(wb, sheet = "Resultados_Mes", x = paste0(nombres_siglas[mes]," ",anio," / ",nombres_siglas[mes]," ",anio-1),colNames = FALSE,startCol = "H", startRow = 3)
 
+  reporte=paste0(directorio,"/ISE/",anio,"/",carpeta_actual,"/Results/Reporte Coyuntura Pecuario ISE_",nombres_meses[mes],"_",anio,".xlsx")
 
 
-  Valores_resultados<-matrix(c(paste0("'[",salida,"]CUADROS PORCINO","'!D7"),
-                               paste0("'[",salida,"]CUADROS PORCINO","'!E7"),
-                               paste0("'[",salida,"]CUADROS BOVINO","'!D7"),
-                               paste0("'[",salida,"]CUADROS BOVINO","'!E7"),
-                               paste0("'[",salida,"]CUADROS LECHE","'!D7"),
-                               paste0("'[",salida,"]CUADROS LECHE","'!E7"),
-                               paste0("'[",salida,"]CUADROS AVICULTURA","'!D8"),
-                               paste0("'[",salida,"]CUADROS AVICULTURA","'!E8"),
-                               paste0("'[",salida,"]CUADROS AVICULTURA","'!D7"),
-                               paste0("'[",salida,"]CUADROS AVICULTURA","'!E7")
+  Valores_resultados<-matrix(c(paste0("'[",reporte,"]CUADROS PORCINO","'!D7"),
+                               paste0("'[",reporte,"]CUADROS PORCINO","'!E7"),
+                               paste0("'[",reporte,"]CUADROS BOVINO","'!D7"),
+                               paste0("'[",reporte,"]CUADROS BOVINO","'!E7"),
+                               paste0("'[",reporte,"]CUADROS LECHE","'!D7"),
+                               paste0("'[",reporte,"]CUADROS LECHE","'!E7"),
+                               paste0("'[",reporte,"]CUADROS AVICULTURA","'!D8"),
+                               paste0("'[",reporte,"]CUADROS AVICULTURA","'!E8"),
+                               paste0("'[",reporte,"]CUADROS AVICULTURA","'!D7"),
+                               paste0("'[",reporte,"]CUADROS AVICULTURA","'!E7")
 
   ),nrow=5,ncol=2,byrow = TRUE)
 
@@ -684,19 +685,19 @@ trim_rom_act=f_trim_rom(mes)
   ultima_fila=nrow(data)
 
 
-  Valores_resultados<-matrix(c(paste0("'[",salida,"]CUADROS PORCINO","'!H7"),
-                               paste0("'[",salida,"]CUADROS PORCINO","'!I7"),
-                               paste0("'[",salida,"]CUADROS AVICULTURA","'!H8"),
-                               paste0("'[",salida,"]CUADROS AVICULTURA","'!I8"),
-                               paste0("'[",salida,"]CUADROS LECHE","'!F7"),
-                               paste0("'[",salida,"]CUADROS LECHE","'!G7"),
-                               paste0("'[",salida,"]CUADROS LECHE","'!G7"),
+  Valores_resultados<-matrix(c(paste0("'[",reporte,"]CUADROS PORCINO","'!H7"),
+                               paste0("'[",reporte,"]CUADROS PORCINO","'!I7"),
+                               paste0("'[",reporte,"]CUADROS AVICULTURA","'!H8"),
+                               paste0("'[",reporte,"]CUADROS AVICULTURA","'!I8"),
+                               paste0("'[",reporte,"]CUADROS LECHE","'!F7"),
+                               paste0("'[",reporte,"]CUADROS LECHE","'!G7"),
+                               paste0("'[",reporte,"]CUADROS LECHE","'!G7"),
                                paste0("'[",pecuario,"]Ovino y Caprino trimestral","'!F",(ultima_fila+10-4)),
                                paste0("'[",pecuario,"]Ovino y Caprino trimestral","'!F",(ultima_fila+10)),
-                               paste0("'[",salida,"]CUADROS AVICULTURA","'!H7"),
-                               paste0("'[",salida,"]CUADROS AVICULTURA","'!I7"),
-                               paste0("'[",salida,"]CUADROS BOVINO","'!H7"),
-                               paste0("'[",salida,"]CUADROS BOVINO","'!I7")
+                               paste0("'[",reporte,"]CUADROS AVICULTURA","'!H7"),
+                               paste0("'[",reporte,"]CUADROS AVICULTURA","'!I7"),
+                               paste0("'[",reporte,"]CUADROS BOVINO","'!H7"),
+                               paste0("'[",reporte,"]CUADROS BOVINO","'!I7")
 
 
   ),nrow=5,ncol=2,byrow = TRUE)
@@ -712,18 +713,18 @@ trim_rom_act=f_trim_rom(mes)
 
 
 
-  if(mes %in% c(3,6,9,12)){
-    setColWidths(wb,sheet ="CUADROS BOVINO",cols = c(8,9),widths = 8)
-    setColWidths(wb,sheet ="CUADROS LECHE",cols = c(6,7),widths = 8)
-    setColWidths(wb,sheet ="CUADROS PORCINO",cols = c(8,9),widths = 8)
-    setColWidths(wb,sheet ="CUADROS AVICULTURA",cols = c(8,9),widths = 8)
-  }else{
-    setColWidths(wb,sheet ="CUADROS BOVINO",cols = c(8,9),hidden = c(TRUE,TRUE))
-    setColWidths(wb,sheet ="CUADROS LECHE",cols = c(6,7),hidden = c(TRUE,TRUE))
-    setColWidths(wb,sheet ="CUADROS PORCINO",cols = c(8,9),hidden = c(TRUE,TRUE))
-    setColWidths(wb,sheet ="CUADROS AVICULTURA",cols = c(8,9),hidden = c(TRUE,TRUE))
-  }
-
+#  if(mes %in% c(3,6,9,12)){
+#    setColWidths(wb,sheet ="CUADROS BOVINO",cols = c(8,9),widths = 8)
+#    setColWidths(wb,sheet ="CUADROS LECHE",cols = c(6,7),widths = 8)
+#    setColWidths(wb,sheet ="CUADROS PORCINO",cols = c(8,9),widths = 8)
+#    setColWidths(wb,sheet ="CUADROS AVICULTURA",cols = c(8,9),widths = 8)
+#  }else{
+#    setColWidths(wb,sheet ="CUADROS BOVINO",cols = c(8,9),hidden = c(TRUE,TRUE))
+#    setColWidths(wb,sheet ="CUADROS LECHE",cols = c(6,7),hidden = c(TRUE,TRUE))
+#    setColWidths(wb,sheet ="CUADROS PORCINO",cols = c(8,9),hidden = c(TRUE,TRUE))
+#    setColWidths(wb,sheet ="CUADROS AVICULTURA",cols = c(8,9),hidden = c(TRUE,TRUE))
+#  }
+#
 
   # Guardar el libro --------------------------------------------------------
 

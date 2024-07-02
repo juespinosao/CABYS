@@ -548,26 +548,23 @@ valor_fecha=as.integer(as.Date(paste0(1,"/",mes_0[mes],"/",anio), format = "%d/%
 writeData(wb, sheet = "Leche", x = valor_fecha,colNames = FALSE,startCol = "A", startRow = (ultima_fila+6))
 writeData(wb, sheet = "Leche", x = Prod_leche,colNames = FALSE,startCol = "B", startRow = (fila_enero_ant[1]+5))
 
-if(mes==1){
-  writeData(wb, sheet = "Leche", x = Expo_impo$Importacion,colNames = FALSE,startCol = "G", startRow = (ultima_fila+6))
-  writeData(wb, sheet = "Leche", x = Expo_impo[,2:3],colNames = FALSE,startCol = "I", startRow = (ultima_fila+6))
-}else{
+
   writeData(wb, sheet = "Leche", x = Expo_impo$Importacion,colNames = FALSE,startCol = "G", startRow = (fila_enero_ant[1]+5))
   writeData(wb, sheet = "Leche", x = Expo_impo[,2:3],colNames = FALSE,startCol = "I", startRow = (fila_enero_ant[1]+5))
-}
 
-
+if(sum(is.na(Prod_leche[,2]))>0){
 for (i in 1:sum(is.na(Prod_leche[,2]))) {
 
 writeFormula(wb, sheet ="Leche" , x = paste0("AVERAGE(C",(fila_enero[1]+5),":C",ultima_fila+6-i,")") ,startCol = "C", startRow = (ultima_fila+7-i))
 
 }
-
+}else{}
+  if(sum(is.na(Prod_leche[,3]))>0){
 for (i in 1:sum(is.na(Prod_leche[,3]))) {
 
   writeFormula(wb, sheet ="Leche" , x = paste0("AVERAGE(D",(fila_enero[1]+5),":D",ultima_fila+6-i,")") ,startCol = "D", startRow = (ultima_fila+7-i))
 
-}
+}}else{}
 
 #Añadir formulas
 
