@@ -64,9 +64,9 @@ nuevos_datos <- data.frame(
   observaciones=if (mes==12) {
     c(rep("",11),sum(valor_Bovino$valor_Bovino)/sum(valor_Bovino$anterior)*100-100)
   } else {
-    rep("",mes)
+    c(data[fila[1]:ultima_fila,"observaciones"],"")
   },
-  Tipo=rep("",mes)
+  Tipo=c(data[fila[1]:ultima_fila,"Tipo"],"")
 )
 nuevos_datos$observaciones=as.numeric(nuevos_datos$observaciones)
 
@@ -171,12 +171,11 @@ nuevos_datos <- data.frame(
   observaciones=if (mes==12) {
     c(rep("",11),as.numeric(sum(valor_Porcino$valor_Porcino)/sum(valor_Porcino$anterior)*100-100))
   } else {
-    rep("",mes)
+    c(data[fila[1]:ultima_fila,"observaciones"],"")
   },
-  Tipo=rep("",mes)
+  Tipo=c(data[fila[1]:ultima_fila,"Tipo"],"")
 )
 
-nuevos_datos$observaciones=as.numeric(nuevos_datos$observaciones)
 
 
 # Escribe los datos en la hoja "Porcino"
@@ -227,12 +226,11 @@ nuevos_datos <- data.frame(
   observaciones=if (mes==12) {
     c(rep("",11),as.numeric(sum(valor_Leche$valor_Leche)/sum(valor_Leche$anterior)*100-100))
   } else {
-    rep("",mes)
+    c(data[fila[1]:ultima_fila,"observaciones"],"")
   },
-  Tipo=rep("",mes)
+  Tipo=c(data[fila[1]:ultima_fila,"Tipo"],"")
 )
 
-nuevos_datos$observaciones=as.numeric(nuevos_datos$observaciones)
 
 
 
@@ -336,8 +334,8 @@ nuevos_datos <- data.frame(
   } else {
     rep("",tamaño)
   },
-  observaciones=rep("",tamaño),
-  Tipo=rep("",tamaño)
+  observaciones=c(data[fila[1]:ultima_fila,"observaciones"],""),
+  Tipo=c(data[fila[1]:ultima_fila,"Tipo"],"")
 )
 
 nuevos_datos$Estado=as.numeric(nuevos_datos$Estado)
