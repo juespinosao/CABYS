@@ -39,8 +39,8 @@ f_Frutas<-function(directorio,mes,anio){
                       sheet = "CTES FOBPES")
   n_fila_2=which(Frutas2 == "010499" |Frutas2 == "010403",arr.ind = TRUE)[,"row"]
   n_fila_2=c(n_fila[[1]],n_fila[[2]])
-  n_col_1_2=which(Frutas2== paste0(anio," ",mes),arr.ind = TRUE)[,"col"]
-  n_col_2_2=which(Frutas2== paste0((anio-1)," ",1),arr.ind = TRUE)[,"col"]
+  n_col_1_2=which(Frutas2== paste0(anio," ",mes_0[mes]),arr.ind = TRUE)[,"col"]
+  n_col_2_2=which(Frutas2== paste0((anio-1)," 01"),arr.ind = TRUE)[,"col"]
 
   Frutas3 <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/",elementos_seleccionados,"/",archivo),
                        sheet = "IP_EXPO")

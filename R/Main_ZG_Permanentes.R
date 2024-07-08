@@ -133,7 +133,7 @@ ZG_Permanentes=function(directorio,mes,anio){
   valor_Cafetos$anterior=tail(lag(data$Cafetos,11),mes)
   valor_Cafetos$Estado <- ""
 
-  if(nrow(valor_Cafetos)>3){
+  if(nrow(valor_Cafetos)>2){
   for (i in seq(3, nrow(valor_Cafetos), by = 3)) {
     valor_Cafetos$Estado[i] <- (sum(valor_Cafetos$valor_Cafetos[(i-2):i]) / sum(valor_Cafetos$anterior[(i-2):i]))*100-100  # Realiza la suma y división
   }
@@ -141,8 +141,20 @@ ZG_Permanentes=function(directorio,mes,anio){
     valor_Cafetos$Estado <- ""
 }
 
+if(mes==1){
+  nuevos_datos <- data.frame(
+    Consecutivo = c((data[ultima_fila, "Consecutivo"] + 1)),
+    Año = c(anio),
+    Periodicidad=c(data[fila,"Periodicidad"],mes),
+    Descripcion=rep("Hectáreas Renovadas para Producción",mes),
+    Cafetos.Toneladas=valor_Cafetos$valor_Cafetos,
+    Variacion.Anual=valor_Cafetos$valor_Cafetos/valor_Cafetos$anterior*100-100,
+    Estado=as.numeric(valor_Cafetos$Estado),
+    observaciones=rep("",mes),
+    Tipo=rep("",mes)
+  )
 
-  #Crear la nueva fila
+}else{
   nuevos_datos <- data.frame(
     Consecutivo = c(data[fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
     Año = c(data[fila,"Año"],anio),
@@ -154,6 +166,9 @@ ZG_Permanentes=function(directorio,mes,anio){
     observaciones=rep("",mes),
     Tipo=rep("",mes)
   )
+
+}
+  #Crear la nueva fila
 
 
 

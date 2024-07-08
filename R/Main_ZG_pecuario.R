@@ -33,9 +33,14 @@ wb <- loadWorkbook(entrada)
 #Leer solo la hoja de Bovino
 data <- read.xlsx(entrada, sheet = "Ganado_Bovino", colNames = TRUE,startRow = 10)
 
-fila=which(data$Año==anio)
+
 ultima_fila=nrow(data)
 
+if(mes==1){
+  fila=ultima_fila
+}else{
+  fila=which(data$Año== anio)
+}
 
 
 #Correr la funcion Bovino
@@ -44,7 +49,7 @@ valor_Bovino=valor_Bovino[,1]
 valor_Bovino=as.data.frame(valor_Bovino)
 valor_Bovino$anterior=tail(lag(data$Ganado.bovino.Kilos,11),mes)
 valor_Bovino$Estado <- ""
-if(nrow(valor_Bovino)>3){
+if(nrow(valor_Bovino)>2){
 for (i in seq(3, nrow(valor_Bovino), by = 3)) {
   valor_Bovino$Estado[i] <- (sum(valor_Bovino$valor_Bovino[(i-2):i]) / sum(valor_Bovino$anterior[(i-2):i]))*100-100  # Realiza la suma y división
 }
@@ -52,22 +57,41 @@ for (i in seq(3, nrow(valor_Bovino), by = 3)) {
 valor_Bovino$Estado <- ""
 }
 
+if(mes==1){
+  nuevos_datos <- data.frame(
+    Consecutivo = c((data[ultima_fila, "Consecutivo"] + 1)),
+    Año = rep(anio,mes),
+    Periodicidad=c(1:mes),
+    Descripcion=rep("ESAG Sacrificio de ganado vacuno, peso kilo en pie",mes),
+    Ganado.bovino.Kilos=valor_Bovino$valor_Bovino,
+    Variacion.Anual=valor_Bovino$valor_Bovino/tail(lag(data$Ganado.bovino.Kilos,11),mes)*100-100,
+    Estado=as.numeric(valor_Bovino$Estado),
+    observaciones=if (mes==12) {
+      c(rep("",11),sum(valor_Bovino$valor_Bovino)/sum(valor_Bovino$anterior)*100-100)
+    } else {
+      c("")
+    },
+    Tipo=c("")
+  )
+}else{
+  nuevos_datos <- data.frame(
+    Consecutivo = c(data[fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
+    Año = rep(anio,mes),
+    Periodicidad=c(1:mes),
+    Descripcion=rep("ESAG Sacrificio de ganado vacuno, peso kilo en pie",mes),
+    Ganado.bovino.Kilos=valor_Bovino$valor_Bovino,
+    Variacion.Anual=valor_Bovino$valor_Bovino/tail(lag(data$Ganado.bovino.Kilos,11),mes)*100-100,
+    Estado=as.numeric(valor_Bovino$Estado),
+    observaciones=if (mes==12) {
+      c(rep("",11),sum(valor_Bovino$valor_Bovino)/sum(valor_Bovino$anterior)*100-100)
+    } else {
+      c(data[fila[1]:ultima_fila,"observaciones"],"")
+    },
+    Tipo=c(data[fila[1]:ultima_fila,"Tipo"],"")
+  )
+}
 #Crear la nueva fila
-nuevos_datos <- data.frame(
-  Consecutivo = c(data[fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
-  Año = rep(anio,mes),
-  Periodicidad=c(1:mes),
-  Descripcion=rep("ESAG Sacrificio de ganado vacuno, peso kilo en pie",mes),
-  Ganado.bovino.Kilos=valor_Bovino$valor_Bovino,
-  Variacion.Anual=valor_Bovino$valor_Bovino/tail(lag(data$Ganado.bovino.Kilos,11),mes)*100-100,
-  Estado=as.numeric(valor_Bovino$Estado),
-  observaciones=if (mes==12) {
-    c(rep("",11),sum(valor_Bovino$valor_Bovino)/sum(valor_Bovino$anterior)*100-100)
-  } else {
-    c(data[fila[1]:ultima_fila,"observaciones"],"")
-  },
-  Tipo=c(data[fila[1]:ultima_fila,"Tipo"],"")
-)
+
 nuevos_datos$observaciones=as.numeric(nuevos_datos$observaciones)
 
 # Escribe los datos en la hoja "Ganado_Bovino"
@@ -139,8 +163,14 @@ addStyle(wb, sheet = "Pollos",style=col4,rows = (ultima_fila+11),cols = 7:8)
 
 #Leer solo la hoja de Porcinos
 data <- read.xlsx(wb, sheet = "Porcino", colNames = TRUE,startRow = 10)
-fila=which(data$Año== anio)
+
 ultima_fila=nrow(data)
+
+if(mes==1){
+  fila=ultima_fila
+}else{
+  fila=which(data$Año== anio)
+}
 
 
 
@@ -151,30 +181,48 @@ valor_Porcino=as.data.frame(valor_Porcino)
 valor_Porcino$anterior=tail(lag(data$Porcino.Kilos,11),mes)
 valor_Porcino$Estado <- ""
 
-if(nrow(valor_Porcino)>3){
+if(nrow(valor_Porcino)>2){
 for (i in seq(3, nrow(valor_Porcino), by = 3)) {
   valor_Porcino$Estado[i] <- (sum(valor_Porcino$valor_Porcino[(i-2):i]) / sum(valor_Porcino$anterior[(i-2):i]))*100-100  # Realiza la suma y división
 }
 }else{
   valor_Porcino$Estado <- ""
 }
-
+if(mes==1){
+  nuevos_datos <- data.frame(
+    Consecutivo = c((data[ultima_fila, "Consecutivo"] + 1)),
+    Año = rep(anio,mes),
+    Periodicidad=c(1:mes),
+    Descripcion=rep("ESAG-DANE",mes),
+    Porcino.Kilos=valor_Porcino$valor_Porcino,
+    Variacion.Anual=valor_Porcino$valor_Porcino/tail(lag(data$Porcino.Kilos,11),mes)*100-100,
+    Estado=as.numeric(valor_Porcino$Estado),
+    observaciones=if (mes==12) {
+      c(rep("",11),as.numeric(sum(valor_Porcino$valor_Porcino)/sum(valor_Porcino$anterior)*100-100))
+    } else {
+      c("")
+    },
+    Tipo=c("")
+  )
+}else{
+  nuevos_datos <- data.frame(
+    Consecutivo = c(data[fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
+    Año = rep(anio,mes),
+    Periodicidad=c(1:mes),
+    Descripcion=rep("ESAG-DANE",mes),
+    Porcino.Kilos=valor_Porcino$valor_Porcino,
+    Variacion.Anual=valor_Porcino$valor_Porcino/tail(lag(data$Porcino.Kilos,11),mes)*100-100,
+    Estado=as.numeric(valor_Porcino$Estado),
+    observaciones=if (mes==12) {
+      c(rep("",11),as.numeric(sum(valor_Porcino$valor_Porcino)/sum(valor_Porcino$anterior)*100-100))
+    } else {
+      c(data[fila[1]:ultima_fila,"observaciones"],"")
+    },
+    Tipo=c(data[fila[1]:ultima_fila,"Tipo"],"")
+  )
+}
 #Crear la nueva fila
-nuevos_datos <- data.frame(
-  Consecutivo = c(data[fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
-  Año = rep(anio,mes),
-  Periodicidad=c(1:mes),
-  Descripcion=rep("ESAG-DANE",mes),
-  Porcino.Kilos=valor_Porcino$valor_Porcino,
-  Variacion.Anual=valor_Porcino$valor_Porcino/tail(lag(data$Porcino.Kilos,11),mes)*100-100,
-  Estado=as.numeric(valor_Porcino$Estado),
-  observaciones=if (mes==12) {
-    c(rep("",11),as.numeric(sum(valor_Porcino$valor_Porcino)/sum(valor_Porcino$anterior)*100-100))
-  } else {
-    c(data[fila[1]:ultima_fila,"observaciones"],"")
-  },
-  Tipo=c(data[fila[1]:ultima_fila,"Tipo"],"")
-)
+
 
 
 
@@ -206,7 +254,7 @@ valor_Leche=as.data.frame(valor_Leche)
 valor_Leche$anterior=tail(lag(data$Leche.sin.elaborar.Volumen,11),mes)
 valor_Leche$Estado <- ""
 
-if(nrow(valor_Leche)>3){
+if(nrow(valor_Leche)>2){
 for (i in seq(3, nrow(valor_Leche), by = 3)) {
   valor_Leche$Estado[i] <- (sum(valor_Leche$valor_Leche[(i-2):i]) / sum(valor_Leche$anterior[(i-2):i]))*100-100  # Realiza la suma y división
 }
@@ -214,22 +262,41 @@ for (i in seq(3, nrow(valor_Leche), by = 3)) {
   valor_Leche$Estado <- ""
 }
 
+if(mes==1){
+  nuevos_datos <- data.frame(
+    Consecutivo = c((data[ultima_fila, "Consecutivo"] + 1)),
+    Año = rep(anio,mes),
+    Periodicidad=c(1:mes),
+    Descripcion="Litros",
+    Leche.Toneladas=valor_Leche$valor_Leche,
+    Variacion.Anual=valor_Leche$valor_Leche/tail(lag(data$Leche.sin.elaborar.Volumen,11),mes)*100-100,
+    Estado=as.numeric(valor_Leche$Estado),
+    observaciones=if (mes==12) {
+      c(rep("",11),as.numeric(sum(valor_Leche$valor_Leche)/sum(valor_Leche$anterior)*100-100))
+    } else {
+      c("")
+    },
+    Tipo=c("")
+  )
+}else{
+  nuevos_datos <- data.frame(
+    Consecutivo = c(data[fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
+    Año = rep(anio,mes),
+    Periodicidad=c(1:mes),
+    Descripcion="Litros",
+    Leche.Toneladas=valor_Leche$valor_Leche,
+    Variacion.Anual=valor_Leche$valor_Leche/tail(lag(data$Leche.sin.elaborar.Volumen,11),mes)*100-100,
+    Estado=as.numeric(valor_Leche$Estado),
+    observaciones=if (mes==12) {
+      c(rep("",11),as.numeric(sum(valor_Leche$valor_Leche)/sum(valor_Leche$anterior)*100-100))
+    } else {
+      c(data[fila[1]:ultima_fila,"observaciones"],"")
+    },
+    Tipo=c(data[fila[1]:ultima_fila,"Tipo"],"")
+  )
+}
 #Crear la nueva fila
-nuevos_datos <- data.frame(
-  Consecutivo = c(data[fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
-  Año = rep(anio,mes),
-  Periodicidad=c(1:mes),
-  Descripcion="Litros",
-  Leche.Toneladas=valor_Leche$valor_Leche,
-  Variacion.Anual=valor_Leche$valor_Leche/tail(lag(data$Leche.sin.elaborar.Volumen,11),mes)*100-100,
-  Estado=as.numeric(valor_Leche$Estado),
-  observaciones=if (mes==12) {
-    c(rep("",11),as.numeric(sum(valor_Leche$valor_Leche)/sum(valor_Leche$anterior)*100-100))
-  } else {
-    c(data[fila[1]:ultima_fila,"observaciones"],"")
-  },
-  Tipo=c(data[fila[1]:ultima_fila,"Tipo"],"")
-)
+
 
 
 
@@ -307,10 +374,14 @@ if (mes %in% c(3, 6, 9, 12)){
 
 #Leer solo la hoja de Huevos
 data <- read.xlsx(entrada, sheet = "Ovino y Caprino trimestral", colNames = TRUE,startRow = 10)
-fila=which(data$Año== anio)
+
 ultima_fila=nrow(data)
 
-
+if(mes==3){
+  fila=ultima_fila
+}else{
+  fila=which(data$Año== anio)
+}
 
 #Correr la funcion Ovino_Caprino
 valor_trimestre=f_Ovino_Caprino(directorio,mes,anio)
@@ -319,24 +390,43 @@ tamaño=nrow(valor_trimestre)
 valor_trimestre$anterior=tail(lag(data$Ovino.y.Caprino,3),tamaño)
 #Identificar el numero de trimestre
 trimestre=f_trimestre(mes)
-
+if(mes==3){
+  nuevos_datos <- data.frame(
+    Consecutivo = c((data[ultima_fila, "Consecutivo"] + 1)),
+    Año = rep(anio,tamaño),
+    Periodicidad=c(trimestre),
+    Descripcion=rep("Toneladas",tamaño),
+    Ovino_caprino=valor_trimestre$valor_trimestre,
+    Variacion.Anual=valor_trimestre$valor_trimestre/tail(lag(data$Ovino.y.Caprino,3),tamaño)*100-100,
+    Estado=if (trimestre==4) {
+      c(rep("",3),(sum(valor_trimestre$valor_trimestre))/
+          (sum(tail(lag(data$Ovino.y.Caprino,3),4)))*100-100 )
+    } else {
+      rep("",tamaño)
+    },
+    observaciones=c(""),
+    Tipo=c("")
+  )
+}else{
+  nuevos_datos <- data.frame(
+    Consecutivo = c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
+    Año = rep(anio,tamaño),
+    Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],trimestre),
+    Descripcion=rep("Toneladas",tamaño),
+    Ovino_caprino=valor_trimestre$valor_trimestre,
+    Variacion.Anual=valor_trimestre$valor_trimestre/tail(lag(data$Ovino.y.Caprino,3),tamaño)*100-100,
+    Estado=if (trimestre==4) {
+      c(rep("",3),(sum(valor_trimestre$valor_trimestre))/
+          (sum(tail(lag(data$Ovino.y.Caprino,3),4)))*100-100 )
+    } else {
+      rep("",tamaño)
+    },
+    observaciones=c(data[fila[1]:ultima_fila,"observaciones"],""),
+    Tipo=c(data[fila[1]:ultima_fila,"Tipo"],"")
+  )
+}
 #Crear la nueva fila
-nuevos_datos <- data.frame(
-  Consecutivo = c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
-  Año = rep(anio,tamaño),
-  Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],trimestre),
-  Descripcion=rep("Toneladas",tamaño),
-  Ovino_caprino=valor_trimestre$valor_trimestre,
-  Variacion.Anual=valor_trimestre$valor_trimestre/tail(lag(data$Ovino.y.Caprino,3),tamaño)*100-100,
-  Estado=if (trimestre==4) {
-    c(rep("",3),(sum(valor_trimestre$valor_trimestre))/
-      (sum(tail(lag(data$Ovino.y.Caprino,3),4)))*100-100 )
-  } else {
-    rep("",tamaño)
-  },
-  observaciones=c(data[fila[1]:ultima_fila,"observaciones"],""),
-  Tipo=c(data[fila[1]:ultima_fila,"Tipo"],"")
-)
+
 
 nuevos_datos$Estado=as.numeric(nuevos_datos$Estado)
 
@@ -362,10 +452,5 @@ if (!file.exists(salida)) {
 } else {
   saveWorkbook(wb, file = salida,overwrite= TRUE)
 }
-
-
-
-
-
 
 }
