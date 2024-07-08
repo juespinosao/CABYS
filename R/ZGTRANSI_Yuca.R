@@ -17,11 +17,11 @@ f_Yuca<-function(directorio,mes,anio){
 
   Yuca <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
 
-  fila1=min(which(Yuca[,82]==2013,arr.ind = TRUE)[,"row"])
-  fila2=min(which(Yuca[,82]==anio,arr.ind = TRUE)[,"row"])
+  fila1=min(which(Yuca[,78]==2013,arr.ind = TRUE)[,"row"])
+  fila2=min(which(Yuca[,78]==anio,arr.ind = TRUE)[,"row"])
 
 
-  Valor_Yuca=as.data.frame(na.omit(Yuca[fila1:(fila2+mes-1),"Yuca retropolado...87"]))
+  Valor_Yuca=as.data.frame(na.omit(Yuca[fila1:(fila2+mes-1),"Yuca retropolado...83"]))
 
 
   return(as.numeric(Valor_Yuca$Yuca))
