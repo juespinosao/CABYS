@@ -825,7 +825,7 @@ if((mes+24)==tamaño){
   #Correr la funcion Palma
   valor_Caña_Azucar=f_Caña_azucar(directorio,mes,anio)
   valor_actual_caña=tail(lag(data$Caña.de.Azúcar,11),1)*(1+valor_Caña_Azucar$variacion/100)
-  if(mes<length(valor_Caña_Azucar$vector)){
+  if(mes>length(valor_Caña_Azucar$vector)){
     vector_caña=c(valor_Caña_Azucar$vector,valor_actual_caña)
 
   }else{
