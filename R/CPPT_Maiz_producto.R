@@ -20,7 +20,7 @@ f_producto_maiz<-function(directorio,mes,anio){
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="FENALCE","NOMBRE"]
 
   Maiz <- read.xlsx(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/consolidado_ISE/FENALCE/",archivo),
-                    sheet = "Historico APR",startRow = 5)
+                    sheet = "Historico APR",startRow = 2)
 
   Maiz_tabla <- Maiz %>%
     mutate(PRODUCTO = tolower(PRODUCTO)) %>%

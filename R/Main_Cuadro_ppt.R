@@ -479,7 +479,7 @@ writeData(wb, sheet = "Café", x = nuevos_datos,colNames = FALSE,startCol = "D",
 
 # Silvicultura ------------------------------------------------------------
 
-
+trimestre=f_trimestre(mes)
   if(mes %in% c(3,6,9,12)){
     writeData(wb, sheet = "Silvicultura", x = paste0(trim_rom," ",anio-1," / ",trim_rom," ",anio-2),colNames = FALSE,startCol = "C", startRow = 3)
     writeData(wb, sheet = "Silvicultura", x = paste0(trim_rom," ",anio," / ",trim_rom," ",anio-1),colNames = FALSE,startCol = "D", startRow = 3)
@@ -691,7 +691,6 @@ trim_rom_act=f_trim_rom(mes)
                                paste0("'[",reporte,"]CUADROS AVICULTURA","'!I8"),
                                paste0("'[",reporte,"]CUADROS LECHE","'!F7"),
                                paste0("'[",reporte,"]CUADROS LECHE","'!G7"),
-                               paste0("'[",reporte,"]CUADROS LECHE","'!G7"),
                                paste0("'[",pecuario,"]Ovino y Caprino trimestral","'!F",(ultima_fila+10-4)),
                                paste0("'[",pecuario,"]Ovino y Caprino trimestral","'!F",(ultima_fila+10)),
                                paste0("'[",reporte,"]CUADROS AVICULTURA","'!H7"),
@@ -700,7 +699,7 @@ trim_rom_act=f_trim_rom(mes)
                                paste0("'[",reporte,"]CUADROS BOVINO","'!I7")
 
 
-  ),nrow=5,ncol=2,byrow = TRUE)
+  ),nrow=6,ncol=2,byrow = TRUE)
 
   for (i in 1:5) {
     for (j in 1:2) {

@@ -243,8 +243,8 @@ f_Cambios_Trim<-function(directorio,mes,anio){
 
   #Madera
 
-
-
+anio=anio_ori
+mes=mes_ori
   if(mes==3){
     nombre_archivos=read.xlsx(paste0(directorio,"/ISE/",anio-1,"/",carpeta_anterior,"/Doc/Nombres_archivos_",nombres_meses[12],".xlsx"),sheet = "Nombres")
     archivo_ant=nombre_archivos[nombre_archivos$PRODUCTO=="EMMET","NOMBRE"]
@@ -296,6 +296,13 @@ f_Cambios_Trim<-function(directorio,mes,anio){
 
   data_ant <- read.xlsx(wb_sil_ant, sheet ="Silvicultura producción", colNames = TRUE,startRow = 3)
   data_act <- read.xlsx(wb_sil_act, sheet ="Silvicultura producción", colNames = TRUE,startRow = 3)
+
+  if(mes==3){
+    anio=(anio-1)
+    trimestre=5
+  }else{
+
+  }
   fila=which(data_ant$Año==anio & data_ant$Trimestre==(trimestre-1))
 
   tabla=rbind(tabla,c("Madera",data_ant[fila,6],data_act[fila,6]))

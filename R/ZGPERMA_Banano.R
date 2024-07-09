@@ -47,7 +47,7 @@ f_Banano<-function(directorio,mes,anio){
 
   Banano <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
 
-  fila1=min(which(Banano==2013,arr.ind = TRUE)[,"row"])
+  fila1=min(which(Banano==(anio-2),arr.ind = TRUE)[,"row"])
   fila2=min(which(Banano==anio,arr.ind = TRUE)[,"row"])
   columna1=which(Banano=="Indice de pro pon retropolado",arr.ind = TRUE)[,"col"]
 

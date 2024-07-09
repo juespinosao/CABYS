@@ -196,11 +196,11 @@ if(mes==1){
   fila_2015=which(data$Año== 2015)
 
   #Correr la funcion Pollos
+  tamaño=length(valor_Banano$exportaciones)
   valor_Banano=f_Banano(directorio,mes,anio)
-  valor_Banano$consumo_interno=as.numeric(valor_Banano$consumo_interno[,1])
+  valor_Banano$consumo_interno=tail(as.numeric(valor_Banano$consumo_interno[,1]),tamaño)
 
   #Crear valores necesarios
-  tamaño=length(valor_Banano$exportaciones)
   Prom2015_exportaciones=mean(data[fila_2015,"Banano.de.Exportación.(DANE).ktes"])
   Indice_exportacion=valor_Banano$exportaciones/Prom2015_exportaciones*100
   Ponderador_expos=74.0461933276304
@@ -472,8 +472,8 @@ writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Citricas'!A
       fila=which(data[,45]==(anio))
       fila_f=fila+1+trimestre
     }
-    writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AVERAGE(AG",(ultima_fila[1]-1),":AG",ultima_fila+1,")") ,startCol = "BO", startRow = (fila_f))
-    writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AVERAGE(AV",(ultima_fila[1]-1),":AV",ultima_fila+1,")") ,startCol = "BP", startRow = (fila_f))
+    writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AVERAGE(AG",(ultima_fila[1]+1),":AG",ultima_fila+3,")") ,startCol = "BO", startRow = (fila_f))
+    writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("AVERAGE(AV",(ultima_fila[1]+1),":AV",ultima_fila+3,")") ,startCol = "BP", startRow = (fila_f))
     writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("BO",(fila_f[1]),"/BO",(fila_f[1]-4),"*100-100") ,startCol = "BQ", startRow = (fila_f))
     writeFormula(wb, sheet ="Frutas Citricas" , x = paste0("BP",(fila_f[1]),"/BP",(fila_f[1]-4),"*100-100") ,startCol = "BR", startRow = (fila_f))
   }else{
@@ -559,8 +559,8 @@ writeFormula(wb, sheet ="Áreas en desarrollo" , x = paste0("'Frutas Citricas'!A
       fila=which(data[,45]==(anio))
       fila_f=fila+1+trimestre
     }
-    writeFormula(wb, sheet ="Otras frutas." , x = paste0("AVERAGE(AG",(ultima_fila[1]-1),":AG",ultima_fila+1,")") ,startCol = "BO", startRow = (fila_f))
-    writeFormula(wb, sheet ="Otras frutas." , x = paste0("AVERAGE(AV",(ultima_fila[1]-1),":AV",ultima_fila+1,")") ,startCol = "BP", startRow = (fila_f))
+    writeFormula(wb, sheet ="Otras frutas." , x = paste0("AVERAGE(AG",(ultima_fila[1]+1),":AG",ultima_fila+3,")") ,startCol = "BO", startRow = (fila_f))
+    writeFormula(wb, sheet ="Otras frutas." , x = paste0("AVERAGE(AV",(ultima_fila[1]+1),":AV",ultima_fila+3,")") ,startCol = "BP", startRow = (fila_f))
     writeFormula(wb, sheet ="Otras frutas." , x = paste0("BO",(fila_f[1]),"/BO",(fila_f[1]-4),"*100-100") ,startCol = "BQ", startRow = (fila_f))
     writeFormula(wb, sheet ="Otras frutas." , x = paste0("BP",(fila_f[1]),"/BP",(fila_f[1]-4),"*100-100") ,startCol = "BR", startRow = (fila_f))
   }else{
@@ -839,7 +839,7 @@ if((mes+24)==tamaño){
   tamaño=length(Caña_anterior)
 
   Estado <- rep("",tamaño)
-if(tamaño>3){
+if(tamaño>2){
   for (i in seq(3, tamaño, by = 3)) {
     Estado[i] <- (sum(vector_caña[(i-2):i]) / sum(Caña_anterior[(i-2):i]))*100-100  # Realiza la suma y división
   }

@@ -47,7 +47,7 @@ f_Platano<-function(directorio,mes,anio){
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
 
   Platano <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
-  fila1=min(which(Platano==2013,arr.ind = TRUE)[,"row"])
+  fila1=min(which(Platano==(anio-2),arr.ind = TRUE)[,"row"])
   fila2=min(which(Platano==anio,arr.ind = TRUE)[,"row"])
   columna1=which(Platano=="plátano retropolado",arr.ind = TRUE)[,"col"]
 
