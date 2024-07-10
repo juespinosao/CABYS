@@ -196,8 +196,9 @@ if(mes==1){
   fila_2015=which(data$Año== 2015)
 
   #Correr la funcion Pollos
-  tamaño=length(valor_Banano$exportaciones)
+
   valor_Banano=f_Banano(directorio,mes,anio)
+  tamaño=length(valor_Banano$exportaciones)
   valor_Banano$consumo_interno=tail(as.numeric(valor_Banano$consumo_interno[,1]),tamaño)
 
   #Crear valores necesarios
