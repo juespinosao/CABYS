@@ -486,7 +486,6 @@ trimestre=f_trimestre(mes)
     writeData(wb, sheet = "Silvicultura", x = paste0(anio-1),colNames = FALSE,startCol = "E", startRow = 3)
     writeData(wb, sheet = "Silvicultura", x = paste0(anio),colNames = FALSE,startCol = "F", startRow = 3)
 
-    f_Silvicultura_complemento(directorio,mes,anio)
 
 
     carpeta_actual=nombre_carpeta(mes,anio)
@@ -602,7 +601,7 @@ if(mes==1){
   # Cambios trimestre ---------------------------------------------------------
 if(mes %in% c(3,6,9,12)){
 trim_rom_act=f_trim_rom(mes)
-  if(mes==1){
+  if(mes==3){
     trim_rom_ant=f_trim_rom(12)
     writeData(wb, sheet = "Cambios_Trim", x = paste0("Publicación ",trim_rom_ant, "Trimestre ", anio-1),colNames = FALSE,startCol = "D", startRow = 3)
     writeData(wb, sheet = "Cambios_Trim", x = paste0(trim_rom_ant," Trimestre ",anio-1," Publicación ",trim_rom," Trimestre ",anio),colNames = FALSE,startCol = "E", startRow = 3)

@@ -354,5 +354,8 @@ mes=mes_ori
   tabla$Anterior=as.numeric(tabla$Anterior)
   tabla$Actual=as.numeric(tabla$Actual)
   tabla$Diferencia=tabla[,"Actual"]-tabla[,"Anterior"]
+
+  mes=mes_ori
+  anio=anio_ori
 return(tabla)
 }
