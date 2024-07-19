@@ -174,7 +174,7 @@ if(mes==1){
 
 
   # Escribe los datos en la hoja "Cafetos"
-  if(is.null(nrow(fila))){
+  if(is.null(length(fila))){
     writeData(wb, sheet = "Cafetos", x = nuevos_datos,colNames = FALSE,startCol = "A", startRow = (ultima_fila+10))
 
   }else{

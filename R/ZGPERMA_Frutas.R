@@ -60,10 +60,12 @@ f_Frutas<-function(directorio,mes,anio){
 archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
   Frutas <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
 
-  fila1=min(which(Frutas==2013,arr.ind = TRUE)[,"row"])
-  fila2=min(which(Frutas==anio,arr.ind = TRUE)[,"row"])
-  columna1=which(Frutas=="Frutas citricas retropolado",arr.ind = TRUE)[,"col"]
-  columna2=which(Frutas=="Otras frutas retropolado",arr.ind = TRUE)[,"col"]
+  columna_fila=which(grepl("Frutas citricas con exclusion plazas",Banano),arr.ind = TRUE)
+  columna1=which(grepl("Frutas citricas retropolado",Frutas),arr.ind = TRUE)
+  columna2=which(grepl("Otras frutas retropolado",Frutas),arr.ind = TRUE)
+  fila1=min(which(Banano[,columna_fila[1]-3]==2013,arr.ind = TRUE)[,"row"])
+  fila2=min(which(Banano[,columna_fila[1]-3]==anio,arr.ind = TRUE)[,"row"])
+
 
   Valor_Frutas=as.data.frame(na.omit(Frutas[fila1:(fila2+mes-1),c(columna1[1],columna2[1])]))
 

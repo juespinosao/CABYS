@@ -16,13 +16,15 @@ f_Yuca<-function(directorio,mes,anio){
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
 
   Yuca <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
-
-  fila1=min(which(Yuca[,78]==2013,arr.ind = TRUE)[,"row"])
-  fila2=min(which(Yuca[,78]==anio,arr.ind = TRUE)[,"row"])
-
-
-  Valor_Yuca=as.data.frame(na.omit(Yuca[fila1:(fila2+mes-1),"Yuca retropolado...83"]))
+  columna_fila=which(grepl("Yuca con exclusion plazas",Hortalizas),arr.ind = TRUE)
+  columna=which(grepl("Yuca retropolado",Hortalizas),arr.ind = TRUE)
+  fila1=min(which(Yuca[,columna_fila[1]-3]==2013,arr.ind = TRUE)[,"row"])
+  fila2=min(which(Yuca[,columna_fila[1]-3]==anio,arr.ind = TRUE)[,"row"])
 
 
-  return(as.numeric(Valor_Yuca$Yuca))
+
+  Valor_Yuca=as.data.frame(na.omit(Yuca[fila1:(fila2+mes-1),columna[1]]))
+
+
+  return(as.numeric(Valor_Yuca[,1]))
 }

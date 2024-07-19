@@ -19,9 +19,9 @@ f_Arroz<-function(directorio,mes,anio){
 
 
   columna=which(grepl("No. Tn",Arroz),arr.ind = TRUE)
-  filas=which(Arroz== (anio-1) | Arroz== anio,arr.ind = TRUE)[,"row"]
+  filas=which(Arroz==(anio-1) | Arroz== anio,arr.ind = TRUE)[,"row"]
 
   Valor_Arroz=as.data.frame(Arroz[filas,columna])
 
-  return(as.numeric(Valor_Arroz$...3))
+  return(as.numeric(Valor_Arroz[,1]))
 }
