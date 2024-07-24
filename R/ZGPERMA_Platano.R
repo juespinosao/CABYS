@@ -46,13 +46,12 @@ f_Platano<-function(directorio,mes,anio){
   # Consumo interno ---------------------------------------------------------
   archivo=nombre_archivos[nombre_archivos$PRODUCTO=="SIPSA","NOMBRE"]
 
-  Platano <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/",archivo))
-  columna_fila=which(grepl("Plátano con exclusion plazas",Platano),arr.ind = TRUE)
-  columna=which(grepl("Plátano retropolado",Platano),arr.ind = TRUE)
-  fila1=min(which(Platano[,columna_fila[1]-3]==2013,arr.ind = TRUE)[,"row"])
-  fila2=min(which(Platano[,columna_fila[1]-3]==anio,arr.ind = TRUE)[,"row"])
+  Platano <- read_excel(paste0(directorio,"/ISE/",anio,"/",carpeta,"/Data/Datos_SIPSA/Microdatos desde 2013/",archivo))
+  fila1=min(which(Platano[,"year"]==(anio-2),arr.ind = TRUE)[,"row"])
+  fila2=min(which(Platano[,"year"]==anio,arr.ind = TRUE)[,"row"])
 
-  Valor_Platano=as.data.frame(na.omit(Platano[fila1:(fila2+mes-1),c(columna[1])]))
+
+  Valor_Platano=as.data.frame(na.omit(Platano[fila1:(fila2+mes-1),"Platanos"]))
 
   # Agrupar datos -----------------------------------------------------------
 

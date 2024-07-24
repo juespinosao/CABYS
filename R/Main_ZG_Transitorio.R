@@ -149,13 +149,13 @@ ZG_Transitorio=function(directorio,mes,anio){
   data <- read.xlsx(wb, sheet = "Hortalizas", colNames = TRUE,startRow = 10)
 
   ultima_fila=nrow(data)
-  fila=which(data$Año==2013)
+  fila=which(data$Año==(anio-2))
 
 
   #Correr la funcion Pollos
   valor_Hortalizas=f_Hortalizas(directorio,mes,anio)
   valor_Hortalizas=as.data.frame(valor_Hortalizas)
-  valor_Hortalizas$anterior=c(data[data$Año==(2012),"Hortalizas"],valor_Hortalizas[1:(nrow(valor_Hortalizas)-12),1])
+  valor_Hortalizas$anterior=c(data[data$Año==(anio-3),"Hortalizas"],valor_Hortalizas[1:(nrow(valor_Hortalizas)-12),1])
   valor_Hortalizas$variacion_anual=valor_Hortalizas$valor_Hortalizas/valor_Hortalizas$anterior*100-100
   valor_Hortalizas$Estado <- ""
 
@@ -202,13 +202,13 @@ ZG_Transitorio=function(directorio,mes,anio){
   data <- read.xlsx(wb, sheet = "Yuca", colNames = TRUE,startRow = 10)
 
   ultima_fila=nrow(data)
-  fila=which(data$Año==2013)
+  fila=which(data$Año==(anio-2))
 
 
   #Correr la funcion Yuca
   valor_Yuca=f_Yuca(directorio,mes,anio)
   valor_Yuca=as.data.frame(valor_Yuca)
-  valor_Yuca$anterior=c(data[data$Año==(2012),"Yuca"],valor_Yuca[1:(nrow(valor_Yuca)-12),"valor_Yuca"])
+  valor_Yuca$anterior=c(data[data$Año==(anio-3),"Yuca"],valor_Yuca[1:(nrow(valor_Yuca)-12),"valor_Yuca"])
   valor_Yuca$variacion_anual=valor_Yuca$valor_Yuca/valor_Yuca$anterior*100-100
   valor_Yuca$Estado <- ""
 
@@ -230,7 +230,7 @@ ZG_Transitorio=function(directorio,mes,anio){
     Consecutivo =c(data[fila[1]:ultima_fila,"Consecutivo"],(data[ultima_fila, "Consecutivo"] + 1)),
     Año = c(data[fila[1]:ultima_fila,"Año"],anio),
     Periodicidad=c(data[fila[1]:ultima_fila,"Periodicidad"],mes),
-    Descripcion=c(data[fila[1]:ultima_fila,"Descripción"],"Toneladas"),
+    Descripcion=c(data[fila[1]:ultima_fila,"Descripcion"],"Toneladas"),
     Hortalizas.Kilos=valor_Yuca$valor_Yuca,
     Variacion.Anual=valor_Yuca$variacion_anual,
     Estado=as.numeric(valor_Yuca$Estado),
